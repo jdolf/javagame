@@ -1,0 +1,107 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package placeholder.sprite.entity.bodypart;
+
+import java.awt.Dimension;
+import java.awt.Point;
+import javafx.scene.image.Image;
+import placeholder.input.Direction;
+import placeholder.screen.animation.Animation;
+import placeholder.screen.animation.DirectionAnimation;
+import placeholder.screen.animation.DefaultAnimation;
+import placeholder.screen.overlay.ScreenItem;
+import placeholder.screen.render.Renderable;
+import placeholder.screen.render.Renderer;
+import placeholder.sprite.entity.Entity;
+import placeholder.sprite.entity.player.Player;
+
+/**
+ *
+ * @author jdolf
+ */
+public abstract class BodyPart implements Renderable {
+
+    /**
+     * Coordinates relative to the top left of the Entity. Positive y = down
+     * Positive x = right
+     */
+    protected Point offsetCoordinates;
+    protected Dimension dimension;
+    protected Animation animation;
+    protected Player player;
+    protected int zIndex = 1;
+
+    public BodyPart(
+            Point offsetCoordinates,
+            Dimension dimension,
+            Player player, 
+            Animation animation) {
+        this.offsetCoordinates = offsetCoordinates;
+        this.dimension = dimension;
+        this.player = player;
+        this.animation = animation;
+    }
+
+    public Animation getAnimation() {
+        return this.animation;
+    }
+
+    public Dimension getDimension() {
+        return this.dimension;
+    }
+
+    public Entity getPlayer() {
+        return this.player;
+    }
+
+    public void render(Renderer renderer) {
+        renderer.renderAnimation(
+                animation,
+                new ScreenItem(
+                        new Point(
+                                player.getPosition().x + offsetCoordinates.x,
+                                player.getPosition().y + offsetCoordinates.y
+                        ),
+                        new Dimension(
+                                dimension.width,
+                                dimension.height
+                        )
+                )
+        );
+    }
+
+    public void update() {
+        this.animation.update();
+        
+        // Update z-Index
+        if (player.getDirection() == Direction.DOWN) {
+            this.zIndex = getDownZIndex();
+        } else if (player.getDirection() == Direction.UP) {
+            this.zIndex = getUpZIndex();
+        } else if (player.getDirection() == Direction.LEFT) {
+            this.zIndex = getLeftZIndex();
+        } else if (player.getDirection() == Direction.RIGHT) {
+            this.zIndex = getRightZIndex();
+        }
+    }
+
+    public int getZIndex() {
+        return this.zIndex;
+    }
+
+    public Point getOffsetCoordinates() {
+        return this.offsetCoordinates;
+    }
+    
+    public abstract int getDownZIndex();
+    
+    public abstract int getUpZIndex();
+    
+    public abstract int getLeftZIndex();
+    
+    public abstract int getRightZIndex();
+
+}
