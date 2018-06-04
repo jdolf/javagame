@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import javafx.scene.image.Image;
 import placeholder.screen.ImageContainer;
+import placeholder.skill.util.SkillExperienceChangedListener;
 
 /**
  *
@@ -35,59 +36,60 @@ public abstract class Skill {
     
     static {
         LEVEL_UP_TABLE = new HashMap<>();
-        LEVEL_UP_TABLE.put(1, 83);
-        LEVEL_UP_TABLE.put(2, 178);
-        LEVEL_UP_TABLE.put(3, 287);
-        LEVEL_UP_TABLE.put(4, 412);
-        LEVEL_UP_TABLE.put(5, 555);
-        LEVEL_UP_TABLE.put(6, 719);
-        LEVEL_UP_TABLE.put(7, 907);
-        LEVEL_UP_TABLE.put(8, 1123);
-        LEVEL_UP_TABLE.put(9, 1371);
-        LEVEL_UP_TABLE.put(10, 1656);
-        LEVEL_UP_TABLE.put(11, 1983);
-        LEVEL_UP_TABLE.put(12, 2359);
-        LEVEL_UP_TABLE.put(13, 2791);
-        LEVEL_UP_TABLE.put(14, 3287);
-        LEVEL_UP_TABLE.put(15, 3857);
+        LEVEL_UP_TABLE.put(1, 0);
+        LEVEL_UP_TABLE.put(2, 83);
+        LEVEL_UP_TABLE.put(3, 192);
+        LEVEL_UP_TABLE.put(4, 317);
+        LEVEL_UP_TABLE.put(5, 461);
+        LEVEL_UP_TABLE.put(6, 627);
+        LEVEL_UP_TABLE.put(7, 818);
+        LEVEL_UP_TABLE.put(8, 1038);
+        LEVEL_UP_TABLE.put(9, 1291);
+        LEVEL_UP_TABLE.put(10, 1582);
+        LEVEL_UP_TABLE.put(11, 1917);
+        LEVEL_UP_TABLE.put(12, 2302);
+        LEVEL_UP_TABLE.put(13, 2745);
+        LEVEL_UP_TABLE.put(14, 3254);
+        LEVEL_UP_TABLE.put(15, 3839);
         LEVEL_UP_TABLE.put(16, 4512);
-        LEVEL_UP_TABLE.put(17, 5265);
-        LEVEL_UP_TABLE.put(18, 6130);
-        LEVEL_UP_TABLE.put(19, 7124);
-        LEVEL_UP_TABLE.put(20, 8267);
-        LEVEL_UP_TABLE.put(21, 9581);
-        LEVEL_UP_TABLE.put(22, 11092);
-        LEVEL_UP_TABLE.put(23, 12829);
-        LEVEL_UP_TABLE.put(24, 14826);
-        LEVEL_UP_TABLE.put(25, 17122);
-        LEVEL_UP_TABLE.put(26, 19762);
-        LEVEL_UP_TABLE.put(27, 22798);
-        LEVEL_UP_TABLE.put(28, 26289);
-        LEVEL_UP_TABLE.put(29, 30303);
-        LEVEL_UP_TABLE.put(30, 34919);
-        LEVEL_UP_TABLE.put(31, 40227);
-        LEVEL_UP_TABLE.put(32, 46331);
-        LEVEL_UP_TABLE.put(33, 53350);
-        LEVEL_UP_TABLE.put(34, 61421);
-        LEVEL_UP_TABLE.put(35, 70702);
-        LEVEL_UP_TABLE.put(36, 81375);
-        LEVEL_UP_TABLE.put(37, 93648);
-        LEVEL_UP_TABLE.put(38, 107761);
-        LEVEL_UP_TABLE.put(39, 123990);
-        LEVEL_UP_TABLE.put(40, 142653);
-        LEVEL_UP_TABLE.put(41, 164115);
-        LEVEL_UP_TABLE.put(42, 188796);
-        LEVEL_UP_TABLE.put(43, 217179);
-        LEVEL_UP_TABLE.put(44, 249819);
-        LEVEL_UP_TABLE.put(45, 287355);
-        LEVEL_UP_TABLE.put(46, 330521);
-        LEVEL_UP_TABLE.put(47, 380161);
-        LEVEL_UP_TABLE.put(48, 437247);
-        LEVEL_UP_TABLE.put(49, 502895);
-        LEVEL_UP_TABLE.put(50, 578390);
+        LEVEL_UP_TABLE.put(17, 5286);
+        LEVEL_UP_TABLE.put(18, 6176);
+        LEVEL_UP_TABLE.put(19, 7200);
+        LEVEL_UP_TABLE.put(20, 8378);
+        LEVEL_UP_TABLE.put(21, 9733);
+        LEVEL_UP_TABLE.put(22, 11291);
+        LEVEL_UP_TABLE.put(23, 13083);
+        LEVEL_UP_TABLE.put(24, 15144);
+        LEVEL_UP_TABLE.put(25, 17514);
+        LEVEL_UP_TABLE.put(26, 20240);
+        LEVEL_UP_TABLE.put(27, 23375);
+        LEVEL_UP_TABLE.put(28, 26980);
+        LEVEL_UP_TABLE.put(29, 31126);
+        LEVEL_UP_TABLE.put(30, 35894);
+        LEVEL_UP_TABLE.put(31, 41377);
+        LEVEL_UP_TABLE.put(32, 47682);
+        LEVEL_UP_TABLE.put(33, 54933);
+        LEVEL_UP_TABLE.put(34, 63272);
+        LEVEL_UP_TABLE.put(35, 72862);
+        LEVEL_UP_TABLE.put(36, 83891);
+        LEVEL_UP_TABLE.put(37, 96574);
+        LEVEL_UP_TABLE.put(38, 111159);
+        LEVEL_UP_TABLE.put(39, 127932);
+        LEVEL_UP_TABLE.put(40, 147221);
+        LEVEL_UP_TABLE.put(41, 169403);
+        LEVEL_UP_TABLE.put(42, 194912);
+        LEVEL_UP_TABLE.put(43, 224247);
+        LEVEL_UP_TABLE.put(44, 257982);
+        LEVEL_UP_TABLE.put(45, 296777);
+        LEVEL_UP_TABLE.put(46, 341391);
+        LEVEL_UP_TABLE.put(47, 392697);
+        LEVEL_UP_TABLE.put(48, 451699);
+        LEVEL_UP_TABLE.put(49, 519551);
+        LEVEL_UP_TABLE.put(50, 597581);
     }
     
-    protected List<SkillLevelChangedListener> listener = new ArrayList();
+    protected List<SkillLevelChangedListener> levelListener = new ArrayList();
+    protected List<SkillExperienceChangedListener> experienceListener = new ArrayList();
     /**
      * Some statistics improve as the skill level gets higher. This property
      * saves by how much it gets better. The impact is calculated by a formula
@@ -102,12 +104,14 @@ public abstract class Skill {
     public Skill(String displayName, String iconPath) {
         this.displayName = displayName;
         this.icon = ImageContainer.getInstance().getImage(iconPath);
+        calculateExperienceToNextLevel();
     }
     
     public void addExperience(int experience) {
         this.experience += experience;
         calculateLevel();
         calculateExperienceToNextLevel();
+        notifySkillExperienceChangedListeners();
     }
     
     private void calculateLevel() {
@@ -119,7 +123,7 @@ public abstract class Skill {
     
     protected void levelUp() {
         level += 1;
-        String message = String.format("Well done! Your % level is now %", this.displayName, this.level);
+        String message = String.format("Well done! Your %s level is now %d", this.displayName, this.level);
         System.out.println(message);
         // Recursion in case multiple level ups happen at the same frame
         calculateLevel();
@@ -142,17 +146,27 @@ public abstract class Skill {
         return this.experienceToNextLevel;
     }
     
-    private void calculateExperienceToNextLevel() {
+    private final void calculateExperienceToNextLevel() {
         experienceToNextLevel = LEVEL_UP_TABLE.get(level + 1) - experience;
     }
     
     public void addSkillLevelChangedListener(SkillLevelChangedListener listener) {
-        this.listener.add(listener);
+        this.levelListener.add(listener);
     }
     
     private void notifySkillLevelChangedListeners() {
-        this.listener.forEach((listener) -> {
+        this.levelListener.forEach((listener) -> {
             listener.onSkillLevelChanged();
+        });
+    }
+    
+    public void addSkillExperienceChangedListener(SkillExperienceChangedListener listener) {
+        this.experienceListener.add(listener);
+    }
+    
+    private void notifySkillExperienceChangedListeners() {
+        this.experienceListener.forEach((listener) -> {
+            listener.onExperienceChanged();
         });
     }
     

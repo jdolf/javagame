@@ -19,6 +19,7 @@ import placeholder.sprite.collision.CollisionCheck;
 import placeholder.sprite.collision.CollisionDetector;
 import placeholder.sprite.collision.DefaultCollisionDetector;
 import placeholder.sprite.entity.Entity;
+import placeholder.sprite.entity.player.Player;
 
 /**
  *
@@ -30,7 +31,8 @@ public abstract class Attack extends ScreenItem implements TickUpdatable, Render
     private boolean initialized = false;
     private AttackType type;
     protected int baseDamage;
-    private int damage;
+    protected int damage;
+    Random random = new Random();
     /**
      * How long the attack should stay active for. Mainly used by animation.
      */
@@ -78,6 +80,10 @@ public abstract class Attack extends ScreenItem implements TickUpdatable, Render
         this.invincibilityStun = invincibilityStun;
         cd = new DefaultCollisionDetector(this, attacker.getMap().getSpriteReceiver());
     }
+    
+    protected void supplyXp(Player player) {
+        player.getSkillManager().getHitpoints().addExperience(damage * 2);
+    }
 
     @Override
     public final void tickUpdate() {
@@ -89,7 +95,10 @@ public abstract class Attack extends ScreenItem implements TickUpdatable, Render
                     for (Sprite sprite : collisionCheck.getCollisionPartners()) {
 
                         if (sprite instanceof Hittable) {
-                            this.hitVictim((Hittable) sprite);
+                            
+                            if (!attackInvincibilities.keySet().contains(sprite)) {
+                                this.hitVictim((Hittable) sprite);
+                            }
                         }
                     }
                 }
@@ -108,7 +117,6 @@ public abstract class Attack extends ScreenItem implements TickUpdatable, Render
         });
         
         initialized = true;
-        
     }
 
     @Override
@@ -121,16 +129,24 @@ public abstract class Attack extends ScreenItem implements TickUpdatable, Render
     }
     
     public void hitVictim(Hittable hittable) {
-        if (!attackInvincibilities.keySet().contains(hittable)) {
-            calculateDamage();
-            hittable.hit(this);
-            this.attackInvincibilities.put(hittable, invincibilityStun);
+        calculateDamage(hittable);
+        hittable.hit(this);
+        if (hittable.isEmittingXp() && attacker instanceof Player) {
+            this.supplyXp((Player) attacker);
         }
+        this.attackInvincibilities.put(hittable, invincibilityStun);
     }
     
-    private void calculateDamage() {
-        this.damage = baseDamage;
+    private final void calculateDamage(Hittable hittable) {
+        // Calculate damage from defense
+        int damage = calculateDamageImpl(hittable);
+        // Make it random, at least half of max hit
+        damage = damage - random.nextInt(damage / 2 + 1);
+        if (damage < 1) damage = 1;
+        this.damage = damage;
     }
+    
+    protected abstract int calculateDamageImpl(Hittable hittable);
     
     public AttackType getType() {
         return type;

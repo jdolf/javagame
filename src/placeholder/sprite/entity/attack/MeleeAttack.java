@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Point;
 import placeholder.input.Direction;
 import placeholder.sprite.SpriteReceiver;
+import placeholder.sprite.entity.player.Player;
 
 /**
  * A close combat attack. Depends on the attack source's stats "MeleeAccuracy",
@@ -69,5 +70,22 @@ public class MeleeAttack extends Attack {
         }
         return hitbox;
     }
+
+    @Override
+    protected void supplyXp(Player player) {
+        super.supplyXp(player);
+        player.getSkillManager().getMelee().addExperience(damage * 6);
+    }
+
+    @Override
+    protected int calculateDamageImpl(Hittable hittable) {
+        return this.baseDamage - (hittable.getMeleeDefense() / 4);
+    }
+    
+    
+    
+    
+    
+    
     
 }

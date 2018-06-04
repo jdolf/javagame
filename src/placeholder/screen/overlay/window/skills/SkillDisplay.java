@@ -14,6 +14,7 @@ import placeholder.screen.overlay.util.TextDisplay;
 import placeholder.screen.render.Renderable;
 import placeholder.screen.render.Renderer;
 import placeholder.skill.Skill;
+import placeholder.skill.util.SkillExperienceChangedListener;
 import placeholder.skill.util.SkillLevelChangedListener;
 import placeholder.sprite.entity.player.Player;
 
@@ -21,7 +22,7 @@ import placeholder.sprite.entity.player.Player;
  *
  * @author jdolf
  */
-public class SkillDisplay extends Display<Skill> implements SkillLevelChangedListener {
+public class SkillDisplay extends Display<Skill> implements SkillExperienceChangedListener {
     
     public static final Dimension DEFAULT_DIMENSION = new Dimension(100, 90);
     public static final Paint DEFAULT_TEXT_PAINT = Color.BLACK;
@@ -62,6 +63,7 @@ public class SkillDisplay extends Display<Skill> implements SkillLevelChangedLis
     public SkillDisplay(Skill skill) {
         super(DEFAULT_DIMENSION);
         this.data = skill;
+        skill.addSkillExperienceChangedListener(this);
     }
 
     @Override
@@ -104,7 +106,7 @@ public class SkillDisplay extends Display<Skill> implements SkillLevelChangedLis
                 SMALL_INFO_DIMENSION
         );
         xp = new TextDisplay(
-                Integer.toString(43252),
+                Integer.toString(this.data.getExperience()),
                 TextAlignment.RIGHT,
                 SMALL_INFO_PAINT,
                 SMALL_INFO_FONT,
@@ -125,6 +127,12 @@ public class SkillDisplay extends Display<Skill> implements SkillLevelChangedLis
                 ICON_DIMENSION
         );
     }
+    
+    private void updateDisplays() {
+        xp.setData(Integer.toString(this.data.getExperience()));
+        level.setData(Integer.toString(this.data.getLevel()));
+        xpForLevelUp.setData(Integer.toString(this.data.getExperienceToNextLevel()));
+    }
 
     @Override
     public void render(Renderer renderer) {
@@ -139,8 +147,10 @@ public class SkillDisplay extends Display<Skill> implements SkillLevelChangedLis
     }
 
     @Override
-    public void onSkillLevelChanged() {
-        level.setData(Integer.toString(this.data.getLevel()));
+    public void onExperienceChanged() {
+        updateDisplays();
     }
+    
+    
     
 }

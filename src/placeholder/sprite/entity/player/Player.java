@@ -78,11 +78,13 @@ public abstract class Player extends Entity implements EquipmentChangedListener,
         inventory.insertItem(new BronzeSword(null));
         inventory.insertItem(new WoodArrow(null, 10));
         inventory.insertItem(new WoodBow(null));
-        this.meleeStrength = 5;
         
         // Listener
         skillManager.addSkillLevelChangedListener(this);
         equipmentManager.addEquipmentChangedListener(this);
+        
+        // Other
+        updateStats();
     }
 
     @Override

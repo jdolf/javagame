@@ -26,6 +26,8 @@ public class Dummy extends AnimatedEntity {
                 DIMENSION,
                 location,
                 new BrainlessAttackManager());
+        this.emitsXp = true;
+        this.initHealth = 400;
     }
     
 }

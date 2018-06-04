@@ -37,6 +37,7 @@ import placeholder.util.Amount;
  */
 public abstract class Entity extends Sprite implements AttackClient, Hittable, DirectionDependent {
     
+    protected boolean emitsXp = true;
     protected placeholder.map.Map map;
     protected boolean moving = false;
     protected AttackManager attackManager;
@@ -73,6 +74,11 @@ public abstract class Entity extends Sprite implements AttackClient, Hittable, D
     @Override
     public void hit(Attack attack) {
         this.health.remove(attack.getDamage());
+    }
+
+    @Override
+    public boolean isEmittingXp() {
+        return this.emitsXp;
     }
 
     @Override

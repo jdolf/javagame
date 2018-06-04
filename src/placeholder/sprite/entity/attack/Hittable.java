@@ -6,4 +6,8 @@ package placeholder.sprite.entity.attack;
  */
 public interface Hittable {
     void hit(Attack attack);
+    boolean isEmittingXp();
+    int getMeleeDefense();
+    int getRangeDefense();
+    int getMagicDefense();
 }
