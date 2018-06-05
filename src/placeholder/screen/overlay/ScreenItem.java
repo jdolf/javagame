@@ -32,6 +32,10 @@ public class ScreenItem {
         this.dimension = dimension;
     }
     
+    public ScreenItem(Point position) {
+        this.position = position;
+    }
+    
     public ScreenItem() {}
 
     public void setDimension(Dimension dimension) {

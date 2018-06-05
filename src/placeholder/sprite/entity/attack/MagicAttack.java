@@ -21,7 +21,7 @@ public class MagicAttack extends Attack {
 
     @Override
     protected int calculateDamageImpl(Hittable hittable) {
-        return this.baseDamage - (hittable.getMagicDefense()/ 4);
+        return 3 + this.baseDamage - (hittable.getMagicDefense()/ 4);
     }
     
     

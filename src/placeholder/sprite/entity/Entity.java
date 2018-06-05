@@ -29,6 +29,7 @@ import placeholder.sprite.entity.attack.AttackClient;
 import placeholder.sprite.entity.attack.AttackType;
 import placeholder.sprite.entity.attack.Hittable;
 import placeholder.sprite.entity.attack.MeleeAttack;
+import placeholder.sprite.entity.hitsplat.HitsplatDisplayer;
 import placeholder.util.Amount;
 
 /**
@@ -45,6 +46,7 @@ public abstract class Entity extends Sprite implements AttackClient, Hittable, D
     protected Direction direction = Direction.DOWN;
     protected Health health;
     protected HealthBar healthbar;
+    protected HitsplatDisplayer hitsplatDisplayer;
     private boolean initialized = false;
     protected int walkSpeed = 1;
     protected int initHealth = 30;
@@ -88,8 +90,10 @@ public abstract class Entity extends Sprite implements AttackClient, Hittable, D
             attackManager.registerSource(this);
             health = new Health(initHealth);
             this.healthbar = new HealthBar(health, this);
+            hitsplatDisplayer = new HitsplatDisplayer(health, this);
         } else {
             attackManager.tickUpdate();
+            hitsplatDisplayer.tickUpdate();
             this.moving = false;
         }
     }
@@ -112,6 +116,7 @@ public abstract class Entity extends Sprite implements AttackClient, Hittable, D
     public void render(Renderer renderer) {
         if (initialized) {
             healthbar.render(renderer);
+            hitsplatDisplayer.render(renderer);
         }
         attackManager.render(renderer);
     }

@@ -79,7 +79,7 @@ public class MeleeAttack extends Attack {
 
     @Override
     protected int calculateDamageImpl(Hittable hittable) {
-        return this.baseDamage - (hittable.getMeleeDefense() / 4);
+        return 3 + this.baseDamage - (hittable.getMeleeDefense() / 4);
     }
     
     

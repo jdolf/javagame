@@ -60,7 +60,7 @@ public class HealthBar extends ScreenItem implements HealthChangedListener, Posi
     }
 
     @Override
-    public void onHealthChanged() {
+    public void onHealthChanged(int amount) {
         calculateInnerRect();
     }
 

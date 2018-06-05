@@ -20,24 +20,26 @@ public class Health extends Amount {
 
     @Override
     public void remove(int amount) {
+        int previous = this.getAmount();
         super.remove(amount);
         System.out.println("Removed " + amount + " HP");
-        notifyListener();
+        notifyListener(previous);
     }
 
     @Override
     public void add(int amount) {
+        int previous = this.getAmount();
         super.add(amount);
-        notifyListener();
+        notifyListener(previous);
     }
     
     public void addHealthChangedListener(HealthChangedListener listener) {
         this.listener.add(listener);
     }
     
-    private void notifyListener() {
+    private void notifyListener(int previousAmount) {
         listener.forEach((listener) -> {
-            listener.onHealthChanged();
+            listener.onHealthChanged(this.getAmount() - previousAmount);
         });
     }
     

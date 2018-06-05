@@ -5,5 +5,5 @@ package placeholder.sprite.entity;
  * @author jdolf
  */
 public interface HealthChangedListener {
-    void onHealthChanged();
+    void onHealthChanged(int amount);
 }

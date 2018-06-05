@@ -75,7 +75,7 @@ public class SkillDisplay extends Display<Skill> implements SkillExperienceChang
     private void setDisplays() {
         title = new TextDisplay(
                 this.data.getDisplayName(),
-                TextAlignment.RIGHT,
+                TextAlignment.LEFT,
                 TITLE_PAINT,
                 TITLE_FONT,
                 ScreenItem.merge(TITLE_MARGIN, this.getPosition()),
@@ -83,7 +83,7 @@ public class SkillDisplay extends Display<Skill> implements SkillExperienceChang
         );
         level = new TextDisplay(
                 Integer.toString(this.data.getLevel()),
-                TextAlignment.LEFT,
+                TextAlignment.RIGHT,
                 DEFAULT_TEXT_PAINT, 
                 DEFAULT_FONT,
                 ScreenItem.merge(LEVEL_MARGIN, this.getPosition()),

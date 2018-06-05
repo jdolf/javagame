@@ -22,7 +22,7 @@ public class RangeAttack extends Attack {
 
     @Override
     protected int calculateDamageImpl(Hittable hittable) {
-        return this.baseDamage - (hittable.getRangeDefense() / 4);
+        return 3 + this.baseDamage - (hittable.getRangeDefense() / 4);
     }
     
     

@@ -86,14 +86,15 @@ public class DefaultRenderer implements Renderer {
 
     @Override
     public void renderText(Paint paint, Font font, String text, ScreenItem screenItem, TextAlignment ta) {
+        int height = screenItem.getPosition().y;
         gc.setFont(font);
         gc.setFill(paint);
+        gc.setTextAlign(ta);
         gc.fillText(
                 text,
                 screenItem.getPosition().x,
-                screenItem.getPosition().y + gc.getFont().getSize()
+                height + gc.getFont().getSize()
         );
-        gc.setTextAlign(ta);
     }
 
     @Override
