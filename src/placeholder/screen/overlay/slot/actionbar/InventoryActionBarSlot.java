@@ -34,7 +34,7 @@ public class InventoryActionBarSlot extends ActionBarSlot {
         super(
                 new InventoryWindow(windowManager, contextManager, inputHandler, gameDimension, barDimension, inventory),
                 inputHandler,
-                inputHandler.getKey(KeyCode.R),
+                inputHandler.getKey(KeyCode.E),
                 ImageContainer.getInstance().getImage(ICON_NAME)
         );
         

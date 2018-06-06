@@ -12,6 +12,7 @@ import placeholder.screen.ImageContainer;
 import placeholder.screen.render.Renderer;
 import placeholder.item.Item;
 import placeholder.screen.overlay.ScreenItem;
+import placeholder.screen.overlay.contextmenu.ContextMenu;
 import placeholder.screen.overlay.slot.SelectableSlot;
 
 /**
@@ -21,13 +22,25 @@ import placeholder.screen.overlay.slot.SelectableSlot;
 public abstract class ItemSlot<T extends Item> extends SelectableSlot {
     
     public static final Dimension DEFAULT_ITEM_MARGIN = new Dimension(8, 8);
+    public static final Dimension DEFAULT_DIMENSION = new Dimension(48, 48);
 
     private T item;
     protected Dimension itemMargin;
 
-    public ItemSlot(Dimension dimension) {
-        super(dimension);
+    public ItemSlot() {
+        super(DEFAULT_DIMENSION);
         this.itemMargin = DEFAULT_ITEM_MARGIN;
+    }
+    
+    protected abstract ContextMenu createContextMenu();
+
+    @Override
+    public void executeCommand() {
+        ContextMenu menu = createContextMenu();
+        
+        if (menu != null) {
+            menu.open();
+        }
     }
 
     public void setItem(T t) {

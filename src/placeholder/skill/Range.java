@@ -21,7 +21,7 @@ public class Range extends Skill {
     }
 
     public int calculateRangeStrengthImpact() {
-        return this.level * 2;
+        return this.level / 2;
     }
     
     public int calculateRangeDefenseImpact() {

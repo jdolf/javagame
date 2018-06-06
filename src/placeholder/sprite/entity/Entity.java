@@ -39,6 +39,8 @@ import placeholder.util.Amount;
 public abstract class Entity extends Sprite implements AttackClient, Hittable, DirectionDependent {
     
     protected boolean emitsXp = true;
+    protected boolean dead = false;
+    protected int deathDuration = 30;
     protected placeholder.map.Map map;
     protected boolean moving = false;
     protected AttackManager attackManager;
@@ -76,6 +78,11 @@ public abstract class Entity extends Sprite implements AttackClient, Hittable, D
     @Override
     public void hit(Attack attack) {
         this.health.remove(attack.getDamage());
+        if (this.health.getAmount() <= 0) dead = true;
+    }
+    
+    public void die() {
+        map.removeSprite(this);
     }
 
     @Override
@@ -95,6 +102,8 @@ public abstract class Entity extends Sprite implements AttackClient, Hittable, D
             attackManager.tickUpdate();
             hitsplatDisplayer.tickUpdate();
             this.moving = false;
+            if (this.dead && deathDuration > 0) deathDuration -= 1;
+            if (deathDuration == 0) die();
         }
     }
 
@@ -183,7 +192,9 @@ public abstract class Entity extends Sprite implements AttackClient, Hittable, D
     public int getMagicDefense() {
         return magicDefense;
     }
-    
-    
+
+    public boolean isDead() {
+        return dead;
+    }
     
 }

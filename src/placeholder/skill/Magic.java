@@ -19,7 +19,7 @@ public class Magic extends Skill {
     }
     
     public int calculateMagicStrengthImpact() {
-        return this.level * 3;
+        return this.level / 2;
     }
     
     public int calculateMagicDefenseImpact() {

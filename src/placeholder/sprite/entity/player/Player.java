@@ -63,7 +63,7 @@ public abstract class Player extends Entity implements EquipmentChangedListener,
     
     protected InputHandler input;
     protected Inventory inventory;
-    protected PlayerEquipmentManager equipmentManager = new PlayerEquipmentManager(this);
+    protected PlayerEquipmentManager equipmentManager;
     protected SkillManager skillManager = new SkillManager();
     protected WindowManager windowManager;
     protected BodyPartContainer bodyPartContainer = new BodyPartContainer(generateBodyParts(), this);
@@ -78,6 +78,7 @@ public abstract class Player extends Entity implements EquipmentChangedListener,
         inventory.insertItem(new BronzeSword(null));
         inventory.insertItem(new WoodArrow(null, 10));
         inventory.insertItem(new WoodBow(null));
+        equipmentManager = new PlayerEquipmentManager(contextManager, this);
         
         // Listener
         skillManager.addSkillLevelChangedListener(this);
@@ -140,7 +141,7 @@ public abstract class Player extends Entity implements EquipmentChangedListener,
             if (input.getKey(KeyCode.RIGHT).isBeingPressed()) {
                 tryMove(Direction.RIGHT);
             }
-            if (input.getKey(KeyCode.SPACE).isActivatedByPress()) {
+            if (input.getKey(KeyCode.SPACE).isBeingPressed()) {
                 attack();
             }
         }

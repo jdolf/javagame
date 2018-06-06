@@ -29,6 +29,7 @@ public class PlayerAttackManager extends AttackManager<Player> {
     @Override
     public void attack() {
         WeaponEquipmentSlot weaponEquipmentSlot = source.getPlayerEquipmentManager().getWeaponEquipmentSlot();
+        this.attacking = true;
         
         if (!weaponEquipmentSlot.isEmpty()) {
             weaponEquipmentSlot.getItem().attackInit();
@@ -37,6 +38,7 @@ public class PlayerAttackManager extends AttackManager<Player> {
         } else {
             initAttack = true;
             startUpTime = DEFAULT_ATTACK_STARTUPTIME;
+            this.registerAttackCooldown(DEFAULT_ATTACK_COOLDOWN);
         }
         
     }

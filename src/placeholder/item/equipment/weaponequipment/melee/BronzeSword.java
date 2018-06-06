@@ -25,7 +25,7 @@ public class BronzeSword extends MeleeWeapon {
                 ImageContainer.getInstance().getImage(ANIMATION_NAME),
                 HITBOX
         );
-        this.attackSpeed = 45;
+        this.cooldown = 50;
         this.meleeStrength = 6;
     }
     

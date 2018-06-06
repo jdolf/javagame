@@ -45,7 +45,9 @@ public class Grid<T extends ScreenItem & Renderable> extends ScreenItem implemen
     @Override
     public void render(Renderer renderer) {
         items.forEach((item) -> {
-            item.render(renderer);
+            if (item != null) {
+                item.render(renderer);
+            }
         });
     }
     

@@ -5,11 +5,17 @@
  */
 package placeholder.screen.overlay.slot.item.equipment;
 
-import java.awt.Dimension;
+import java.rmi.UnexpectedException;
+import java.util.ArrayList;
+import java.util.List;
 import placeholder.screen.overlay.slot.item.ItemSlot;
 import placeholder.item.equipment.Equipment;
 import placeholder.screen.TickUpdatable;
-import placeholder.sprite.entity.Entity;
+import placeholder.screen.overlay.contextmenu.ContextMenu;
+import placeholder.screen.overlay.contextmenu.ContextMenuManager;
+import placeholder.screen.overlay.contextmenu.StandardContextMenu;
+import placeholder.screen.overlay.contextmenu.entry.ContextMenuEntry;
+import placeholder.screen.overlay.contextmenu.entry.UnequipEntry;
 import placeholder.sprite.entity.player.Player;
 
 /**
@@ -19,15 +25,14 @@ import placeholder.sprite.entity.player.Player;
  */
 public abstract class EquipmentSlot<T extends Equipment> extends ItemSlot<T> implements TickUpdatable {
     
-    public static final Dimension DEFAULT_DIMENSION = new Dimension(32, 32);
-    
+    private ContextMenuManager manager;
     protected Class equipmentClass;
     protected Player player;
 
-    public EquipmentSlot(Class equipmentClass, Player player) {
-        super(DEFAULT_DIMENSION);
+    public EquipmentSlot(ContextMenuManager manager, Class equipmentClass, Player player) {
         this.equipmentClass = equipmentClass;
         this.player = player;
+        this.manager = manager;
     }
 
     @Override
@@ -48,13 +53,8 @@ public abstract class EquipmentSlot<T extends Equipment> extends ItemSlot<T> imp
     }
 
     @Override
-    public void executeCommand() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public void choose() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (!this.isEmpty()) executeCommand();
     }
 
     @Override
@@ -64,6 +64,19 @@ public abstract class EquipmentSlot<T extends Equipment> extends ItemSlot<T> imp
     
     public Class getRequiredEquipmentClass() {
         return this.equipmentClass;
+    }
+
+    @Override
+    protected ContextMenu createContextMenu() {
+        Equipment item = getItem();
+        List<ContextMenuEntry> contextMenuEntries = new ArrayList();
+        contextMenuEntries.add(new UnequipEntry(player, item));
+        
+        if (item != null) {
+            return new StandardContextMenu(manager, contextMenuEntries, this.getPosition());
+        } else {
+            return null;
+        }
     }
     
     

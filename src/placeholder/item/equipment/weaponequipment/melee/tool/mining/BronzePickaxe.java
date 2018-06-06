@@ -31,7 +31,7 @@ public class BronzePickaxe extends Pickaxe {
                 HITBOX);
         
         this.meleeStrength = 2;
-        this.attackSpeed = 60;
+        this.cooldown = 60;
         this.efficiency = 5;
     }
 

@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Point;
 import placeholder.screen.animation.Animation;
 import placeholder.screen.animation.DirectionAnimation;
+import placeholder.screen.animation.EntityAnimation;
 import placeholder.screen.render.Renderer;
 import placeholder.sprite.AnimatedSprite;
 import placeholder.sprite.entity.attack.manager.AttackManager;
@@ -17,13 +18,14 @@ public class AnimatedEntity extends Entity {
     protected Animation animation;
     
     public AnimatedEntity(
-            DirectionAnimation animation,
+            EntityAnimation animation,
             Dimension dimension,
             Point location,
             AttackManager attackManager) {
         super(dimension, location, attackManager);
         this.animation = animation;
         animation.setDirectionDependent(this);
+        animation.setEntity(this);
     }
     
     @Override

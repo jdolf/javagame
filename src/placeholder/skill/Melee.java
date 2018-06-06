@@ -21,8 +21,8 @@ public class Melee extends Skill {
     }
 
     public int calculateMeleeStrengthImpact() {
-        // Every level yields 1 melee strength
-        return this.level;
+        // Every second level yields 1 melee strength
+        return this.level / 2;
     }
     
     public int calculateMeleeDefenseImpact() {

@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import placeholder.item.equipment.headequipment.HeadEquipment;
+import placeholder.screen.overlay.contextmenu.ContextMenuManager;
 import placeholder.screen.overlay.slot.item.equipment.BodyEquipmentSlot;
 import placeholder.screen.overlay.slot.item.equipment.EquipmentSlot;
 import placeholder.screen.overlay.slot.item.equipment.HeadEquipmentSlot;
@@ -34,13 +35,13 @@ public class PlayerEquipmentManager extends EquipmentManager<Player> {
     private WeaponEquipmentSlot weaponEquipmentSlot;
     private ShieldEquipmentSlot shieldEquipmentSlot;
     
-    public PlayerEquipmentManager(Player player) {
+    public PlayerEquipmentManager(ContextMenuManager cm, Player player) {
         super(player);
-        headEquipmentSlot = new HeadEquipmentSlot(player);
-        bodyEquipmentSlot = new BodyEquipmentSlot(player);
-        legsEquipmentSlot = new LegsEquipmentSlot(player);
-        weaponEquipmentSlot = new WeaponEquipmentSlot(player);
-        shieldEquipmentSlot = new ShieldEquipmentSlot(player);
+        headEquipmentSlot = new HeadEquipmentSlot(cm, player);
+        bodyEquipmentSlot = new BodyEquipmentSlot(cm, player);
+        legsEquipmentSlot = new LegsEquipmentSlot(cm, player);
+        weaponEquipmentSlot = new WeaponEquipmentSlot(cm, player);
+        shieldEquipmentSlot = new ShieldEquipmentSlot(cm, player);
         equipmentSlots.add(headEquipmentSlot);
         equipmentSlots.add(bodyEquipmentSlot);
         equipmentSlots.add(legsEquipmentSlot);
@@ -64,6 +65,16 @@ public class PlayerEquipmentManager extends EquipmentManager<Player> {
         } else {
             super.tryEquip(targetEquipment);
             inventory.removeItem(targetEquipment);
+        }
+    }
+    
+    public void tryUnequip(Equipment targetEquipment) {
+        EquipmentSlot slot = getEquipmentSlot(targetEquipment.getClass());
+        Inventory inventory = targetEquipment.getInventory();
+        
+        if (!slot.isEmpty() && !inventory.isFull()) {
+            Equipment removedSlotEquipment = slot.getItem();
+            inventory.insertItem(removedSlotEquipment);
         }
     }
 

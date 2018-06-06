@@ -28,6 +28,9 @@ public class RangeWeapon extends WeaponEquipment {
         super(position, icon, animationImage, new RangeWeaponAnimation());
         leftArmAnimationColumns = BOWPULL_LEFT_ARM_COLUMNS;
         rightArmAnimationColumns = BOWPULL_RIGHT_ARM_COLUMNS;
+        this.cooldown = 45;
+        this.defaultStartUpTime = 24;
+        this.defaultDuration = 1;
     }
 
     @Override

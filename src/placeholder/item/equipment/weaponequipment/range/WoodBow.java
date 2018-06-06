@@ -17,7 +17,6 @@ public class WoodBow extends RangeWeapon {
         super(position,
                 ImageContainer.getInstance().getImage(ICON_NAME),
                 ImageContainer.getInstance().getImage(ANIMATION_NAME));
-        this.attackSpeed = 25;
         this.rangeStrength = 3;
     }
 

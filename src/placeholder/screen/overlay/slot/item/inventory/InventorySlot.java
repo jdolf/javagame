@@ -20,14 +20,11 @@ import placeholder.sprite.entity.player.inventory.Inventory;
  */
 public class InventorySlot extends ItemSlot {
     
-    public static final Dimension DEFAULT_DIMENSION = new Dimension(48, 48);
-    
     private Dimension slotPadding;
     private ContextMenuManager manager;
     private Inventory inventory;
 
     public InventorySlot(ContextMenuManager manager, Inventory inventory) {
-        super(DEFAULT_DIMENSION);
         int paddingX = (this.dimension.width - Item.DEFAULT_DIMENSION.width) / 2;
         int paddingY = (this.dimension.height - Item.DEFAULT_DIMENSION.height) / 2;
         this.slotPadding = new Dimension(paddingX, paddingY);
@@ -40,16 +37,7 @@ public class InventorySlot extends ItemSlot {
         t.setInventory(inventory);
         super.setItem(t);
     }
-
-    @Override
-    public void executeCommand() {
-        ContextMenu menu = createContextMenu();
-        
-        if (menu != null) {
-            menu.open();
-        }
-    }
-
+    
     public ContextMenu createContextMenu() {
         Item item = getItem();
         

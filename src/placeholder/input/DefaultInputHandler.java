@@ -22,7 +22,9 @@ public class DefaultInputHandler implements InputHandler {
         new DefaultKey(KeyCode.R),
         new DefaultKey(KeyCode.ESCAPE),
         new DefaultKey(KeyCode.SPACE),
-        new DefaultKey(KeyCode.T)
+        new DefaultKey(KeyCode.T),
+        new DefaultKey(KeyCode.E),
+        new DefaultKey(KeyCode.F)
     };
 
     @Override

@@ -41,7 +41,6 @@ public abstract class ActionBarSlot extends Slot {
     @Override
     public void executeCommand() {
         if (this.window.isOpened()) {
-            System.out.println("close window");
             this.window.close();
         } else {
             this.window.open();

@@ -25,7 +25,7 @@ import placeholder.sprite.entity.player.inventory.Inventory;
 public abstract class EquipmentManager<T extends Entity> implements TickUpdatable {
     
     private T target;
-    protected Collection<EquipmentSlot> equipmentSlots = new ArrayList();
+    protected List<EquipmentSlot> equipmentSlots = new ArrayList();
     private List<EquipmentChangedListener> listener = new ArrayList();
     
     
@@ -63,8 +63,8 @@ public abstract class EquipmentManager<T extends Entity> implements TickUpdatabl
         return list;
     }
     
-    protected void unequip(Class equipmentClass) {
-        EquipmentSlot slot = getEquipmentSlot(equipmentClass);
+    protected void unequip(Equipment equipment) {
+        EquipmentSlot slot = getEquipmentSlot(equipment.getClass());
         slot.removeItem();
         notifyEquipmentChangedListeners();
     }
@@ -126,4 +126,10 @@ public abstract class EquipmentManager<T extends Entity> implements TickUpdatabl
         }
         return value.intValue();
     }
+
+    public List<EquipmentSlot> getEquipmentSlots() {
+        return equipmentSlots;
+    }
+    
+    
 }

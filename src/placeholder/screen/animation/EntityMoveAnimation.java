@@ -21,9 +21,7 @@ public class EntityMoveAnimation extends DirectionAnimation<Entity> {
 
     @Override
     public int calculateColumn() {
-        if (this.data.getAttackManager().isAttacking()) {
-            // TODO Attack animation
-        } else if (this.data.isMoving()) {
+        if (this.data.isMoving()) {
             if (moveCounter >= DEFAULT_CYCLE_TIME) {
                 moveCounter = 0;
                 if (this.currentColumn < DEFAULT_NUM_COLUMNS - 1) {

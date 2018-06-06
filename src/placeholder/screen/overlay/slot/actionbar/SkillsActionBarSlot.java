@@ -27,7 +27,7 @@ public class SkillsActionBarSlot extends ActionBarSlot {
             Dimension barDimension) {
         super(new SkillsWindow(sm, wm, inputHandler, gameDimension, barDimension),
                 inputHandler,
-                inputHandler.getKey(KeyCode.T),
+                inputHandler.getKey(KeyCode.R),
                 ImageContainer.getInstance().getImage(ICON_NAME));
     }
     

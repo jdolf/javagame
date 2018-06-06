@@ -16,7 +16,9 @@ import placeholder.sprite.collision.DefaultCollisionDetector;
 import placeholder.sprite.DefaultSpriteReceiver;
 import placeholder.sprite.Sprite;
 import placeholder.sprite.SpriteReceiver;
+import placeholder.sprite.entity.Entity;
 import placeholder.sprite.entity.player.Player;
+import placeholder.util.Unregisterable;
 
 /**
  *
@@ -36,6 +38,7 @@ public abstract class Map implements Renderable, TickUpdatable {
     public Map(MapCode mapCode) {
         this.sprites = createSprites();
         this.mapCode = mapCode;
+        enrichSprites();
     }
     
     @Override
@@ -77,10 +80,18 @@ public abstract class Map implements Renderable, TickUpdatable {
         return testMapCode.equals(this.mapCode);
     }
 
-    public void enrichPlayer(Player player) {
+    public final void enrichPlayer(Player player) {
         player.setCollisionDetector(new DefaultCollisionDetector(player, spriteReceiver));
         player.setPosition(DEFAULT_START_LOCATION);
         player.setMap(this);
+    }
+    
+    private final void enrichSprites() {
+        for (Sprite sprite : sprites) {
+            if (sprite instanceof Entity) {
+                ((Entity) sprite).setMap(this);
+            }
+        }
     }
     
     public SpriteReceiver getSpriteReceiver() {

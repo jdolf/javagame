@@ -39,7 +39,7 @@ public abstract class ContextMenu extends ScreenItem implements Renderable, Tick
         this.contextManager = contextManager;
         setEntriesPosition(entries, this.getPosition());
     }
-    
+        
     public static Dimension calculateDimension(List<ContextMenuEntry> entries) {
         Dimension newDimension = new Dimension(0, 0);
         

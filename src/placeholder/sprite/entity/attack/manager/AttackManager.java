@@ -24,7 +24,7 @@ public abstract class AttackManager<T> implements TickUpdatable, Renderable {
      * The target this attack manager belongs to
      */
     protected T source;
-    private boolean attacking = false;
+    protected boolean attacking = false;
     private int attackCooldown = 0;
     protected MeleeAttack meleeAttack;
     protected WeaponEquipment usedWeapon = null;
@@ -92,7 +92,6 @@ public abstract class AttackManager<T> implements TickUpdatable, Renderable {
 
     public void registerAttackCooldown(int attackCooldown) {
         this.attackCooldown = attackCooldown;
-        this.attacking = true;
     }
     
     @Override

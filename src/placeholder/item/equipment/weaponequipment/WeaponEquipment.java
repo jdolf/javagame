@@ -36,7 +36,7 @@ public abstract class WeaponEquipment extends Equipment {
     }
     
     private boolean used;
-    protected int attackSpeed = 60;
+    protected int cooldown = 60;
     protected int invincibilityStun = 15;
     protected int defaultStartUpTime = 30;
     protected int defaultDuration = 15;
@@ -110,7 +110,7 @@ public abstract class WeaponEquipment extends Equipment {
     }
 
     public int getAttackSpeed() {
-        return attackSpeed;
+        return cooldown;
     }
 
     public int getStartUpTime() {

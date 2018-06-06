@@ -120,13 +120,7 @@ public abstract class Attack extends ScreenItem implements TickUpdatable, Render
     }
 
     @Override
-    public void render(Renderer renderer) {
-        if (startUpTime == 0) {
-            renderer.renderRect(Color.RED, this);
-        } else {
-            renderer.renderRect(Color.BLACK, this);
-        }
-    }
+    public void render(Renderer renderer) {}
     
     public void hitVictim(Hittable hittable) {
         calculateDamage(hittable);

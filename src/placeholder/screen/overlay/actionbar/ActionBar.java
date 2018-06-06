@@ -19,6 +19,7 @@ import placeholder.screen.overlay.slot.actionbar.InventoryActionBarSlot;
 import placeholder.screen.overlay.window.WindowManager;
 import placeholder.screen.render.Renderer;
 import placeholder.input.InputHandler;
+import placeholder.screen.overlay.slot.actionbar.EquipmentActionBarSlot;
 import placeholder.screen.overlay.slot.actionbar.SkillsActionBarSlot;
 import placeholder.sprite.entity.player.Player;
 
@@ -49,6 +50,7 @@ public class ActionBar extends Overlay {
         List<ActionBarSlot> slots = new ArrayList<>();
         slots.add(new InventoryActionBarSlot(inputHandler, contextManager, windowManager, gameDimension, this.dimension, player.getInventory()));
         slots.add(new SkillsActionBarSlot(player.getSkillManager(), windowManager, inputHandler, gameDimension, this.dimension));
+        slots.add(new EquipmentActionBarSlot(inputHandler, contextManager, windowManager, gameDimension, this.dimension, player.getPlayerEquipmentManager()));
         slotManager = new CallableSlotManager(slots, this.getPosition(), this.dimension, inputHandler);
     }
 

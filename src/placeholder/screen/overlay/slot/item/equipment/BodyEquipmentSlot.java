@@ -6,6 +6,7 @@
 package placeholder.screen.overlay.slot.item.equipment;
 
 import placeholder.item.equipment.bodyequipment.BodyEquipment;
+import placeholder.screen.overlay.contextmenu.ContextMenuManager;
 import placeholder.sprite.entity.Entity;
 import placeholder.sprite.entity.player.Player;
 
@@ -15,13 +16,8 @@ import placeholder.sprite.entity.player.Player;
  */
 public class BodyEquipmentSlot extends EquipmentSlot {
 
-    public BodyEquipmentSlot(Player player) {
-        super(BodyEquipment.class, player);
-    }
-
-    @Override
-    public void executeCommand() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public BodyEquipmentSlot(ContextMenuManager cm, Player player) {
+        super(cm, BodyEquipment.class, player);
     }
     
 }
