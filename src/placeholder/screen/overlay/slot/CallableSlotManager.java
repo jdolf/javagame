@@ -6,7 +6,7 @@
 package placeholder.screen.overlay.slot;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import placeholder.screen.overlay.slot.actionbar.ActionBarSlot;
 import java.util.List;
 import placeholder.screen.overlay.ScreenItem;
@@ -22,7 +22,7 @@ public class CallableSlotManager extends DefaultSlotManager<ActionBarSlot> imple
     public static final Dimension DEFAULT_SLOT_MARGIN = new Dimension(20, 10);
     protected InputHandler input;
     
-    public CallableSlotManager(List<ActionBarSlot> slots, Point gridPosition, Dimension gridDimension, InputHandler input) {
+    public CallableSlotManager(List<ActionBarSlot> slots, Point2D gridPosition, Dimension gridDimension, InputHandler input) {
         super(slots, gridPosition, gridDimension, DEFAULT_SLOT_MARGIN);
         this.input = input;
     }

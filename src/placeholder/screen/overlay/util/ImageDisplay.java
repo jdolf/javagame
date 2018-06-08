@@ -1,7 +1,7 @@
 package placeholder.screen.overlay.util;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import javafx.scene.image.Image;
 import placeholder.screen.render.Renderer;
 
@@ -11,7 +11,7 @@ import placeholder.screen.render.Renderer;
  */
 public class ImageDisplay extends Display<Image> {
 
-    public ImageDisplay(Image image, Point screenPosition, Dimension dimension) {
+    public ImageDisplay(Image image, Point2D screenPosition, Dimension dimension) {
         super(screenPosition, dimension);
         
         this.data = image;

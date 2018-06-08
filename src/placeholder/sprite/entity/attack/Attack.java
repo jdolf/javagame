@@ -1,7 +1,7 @@
 package placeholder.sprite.entity.attack;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -67,7 +67,7 @@ public abstract class Attack extends ScreenItem implements TickUpdatable, Render
     
     public Attack(AttackType type,
             AttackClient attacker,
-            Point position,
+            Point2D position,
             Dimension hitbox,
             int baseDamage,
             int duration,

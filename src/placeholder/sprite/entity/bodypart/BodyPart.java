@@ -6,7 +6,7 @@
 package placeholder.sprite.entity.bodypart;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import javafx.scene.image.Image;
 import placeholder.input.Direction;
 import placeholder.screen.animation.Animation;
@@ -28,14 +28,14 @@ public abstract class BodyPart implements Renderable {
      * Coordinates relative to the top left of the Entity. Positive y = down
      * Positive x = right
      */
-    protected Point offsetCoordinates;
+    protected Point2D offsetCoordinates;
     protected Dimension dimension;
     protected Animation animation;
     protected Player player;
     protected int zIndex = 1;
 
     public BodyPart(
-            Point offsetCoordinates,
+            Point2D offsetCoordinates,
             Dimension dimension,
             Player player, 
             Animation animation) {
@@ -58,12 +58,11 @@ public abstract class BodyPart implements Renderable {
     }
 
     public void render(Renderer renderer) {
-        renderer.renderAnimation(
-                animation,
+        renderer.renderAnimation(animation,
                 new ScreenItem(
-                        new Point(
-                                player.getPosition().x + offsetCoordinates.x,
-                                player.getPosition().y + offsetCoordinates.y
+                        new Point2D.Double(
+                                player.getPosition().getX() + offsetCoordinates.getX(),
+                                player.getPosition().getY() + offsetCoordinates.getY()
                         ),
                         new Dimension(
                                 dimension.width,
@@ -92,7 +91,7 @@ public abstract class BodyPart implements Renderable {
         return this.zIndex;
     }
 
-    public Point getOffsetCoordinates() {
+    public Point2D getOffsetCoordinates() {
         return this.offsetCoordinates;
     }
     

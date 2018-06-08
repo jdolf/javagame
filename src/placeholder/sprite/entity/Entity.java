@@ -7,7 +7,7 @@ package placeholder.sprite.entity;
 
 import placeholder.sprite.entity.attack.manager.AttackManager;
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -50,7 +50,7 @@ public abstract class Entity extends Sprite implements AttackClient, Hittable, D
     protected HealthBar healthbar;
     protected HitsplatDisplayer hitsplatDisplayer;
     private boolean initialized = false;
-    protected int walkSpeed = 1;
+    protected double walkSpeed = 1.0;
     protected int initHealth = 30;
     protected int meleeStrength = 0;
     protected int meleeDefense = 0;
@@ -58,11 +58,10 @@ public abstract class Entity extends Sprite implements AttackClient, Hittable, D
     protected int rangeDefense = 0;
     protected int magicStrength = 0;
     protected int magicDefense = 0;
-    protected int attackSpeed = 60;
     
     public Entity(
             Dimension dimension,
-            Point location,
+            Point2D location,
             AttackManager attackManager) {
         super(dimension, location);
         this.attackManager = attackManager;
@@ -132,15 +131,15 @@ public abstract class Entity extends Sprite implements AttackClient, Hittable, D
 
     public void tryMove(Direction direction) {
         setDirection(direction);
-        Point offset = direction.calculateOffsetChanges(walkSpeed);
-        Point testLocation = ScreenItem.mergePoints(offset, this.getPosition());
+        Point2D offset = direction.calculateOffsetChanges(walkSpeed);
+        Point2D testLocation = ScreenItem.mergePoints(offset, this.getPosition());
         
         if (!cd.collidesAt(testLocation).hasCollisionOccurrence()) {
             this.move(testLocation);
         }
     }
     
-    public void move(Point target) {
+    public void move(Point2D target) {
         moving = true;
         this.setPosition(target);
     }
@@ -165,7 +164,7 @@ public abstract class Entity extends Sprite implements AttackClient, Hittable, D
         return this.attackManager;
     }
 
-    public int getWalkSpeed() {
+    public double getWalkSpeed() {
         return walkSpeed;
     }
 

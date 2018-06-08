@@ -6,7 +6,7 @@
 package placeholder.screen.overlay.window;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -43,16 +43,16 @@ public abstract class Window extends ScreenItem implements Renderable, TickUpdat
         return new Dimension(windowWidth, windowHeight);
     }
     
-    private static Point calculateScreenPosition(Dimension gameDimension, Dimension barDimension, int widthPercentage, int heightPercentage) {
+    private static Point2D calculateScreenPosition(Dimension gameDimension, Dimension barDimension, int widthPercentage, int heightPercentage) {
         int windowX = gameDimension.width * (100 - widthPercentage) / 2 / 100;
         int windowY = (gameDimension.height - barDimension.height) * (100 - heightPercentage) / 2 / 100;
-        return new Point(windowX, windowY);
+        return new Point2D.Double(windowX, windowY);
     }
     
-    private static Point calculateScreenPosition(Dimension gameDimension, Dimension barDimension, Dimension screenDimension) {
+    private static Point2D calculateScreenPosition(Dimension gameDimension, Dimension barDimension, Dimension screenDimension) {
         int windowX = (gameDimension.width - screenDimension.width) / 2;
         int windowY = ((gameDimension.height - barDimension.height) - screenDimension.height) / 2;
-        return new Point(windowX, windowY);
+        return new Point2D.Double(windowX, windowY);
     }
     
     public Window(WindowManager manager, InputHandler input, Dimension gameDimension, Dimension barDimension) {

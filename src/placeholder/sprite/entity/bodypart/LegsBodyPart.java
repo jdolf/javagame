@@ -6,7 +6,7 @@
 package placeholder.sprite.entity.bodypart;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import javafx.scene.image.Image;
 import placeholder.screen.animation.EntityMoveAnimation;
 import placeholder.sprite.entity.Entity;
@@ -18,7 +18,7 @@ import placeholder.sprite.entity.player.Player;
  */
 public class LegsBodyPart extends BodyPart {
 
-    public LegsBodyPart(Image image, Point offsetCoordinates, Dimension dimension, Player player) {
+    public LegsBodyPart(Image image, Point2D offsetCoordinates, Dimension dimension, Player player) {
         super(offsetCoordinates, dimension, player, new EntityMoveAnimation(player, image, dimension));
     }
 

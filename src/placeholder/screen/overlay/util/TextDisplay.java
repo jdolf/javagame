@@ -1,7 +1,7 @@
 package placeholder.screen.overlay.util;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
@@ -21,7 +21,7 @@ public class TextDisplay extends Display<String> implements Renderable {
     private Font font;
     private TextAlignment ta;
     
-    public TextDisplay(String text, TextAlignment ta, Paint paint, Font font, Point screenPosition, Dimension dimension) {
+    public TextDisplay(String text, TextAlignment ta, Paint paint, Font font, Point2D screenPosition, Dimension dimension) {
         super(screenPosition, dimension);
         this.data = text;
         this.paint = paint;
@@ -35,7 +35,7 @@ public class TextDisplay extends Display<String> implements Renderable {
     }
 
     @Override
-    public void setPosition(Point position) {
+    public void setPosition(Point2D position) {
         super.setPosition(position);
     }
 

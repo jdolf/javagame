@@ -6,7 +6,7 @@
 package placeholder.sprite.resource.mining;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import javafx.scene.image.Image;
 import placeholder.screen.ImageContainer;
 
@@ -22,7 +22,7 @@ public class StoneRock extends Rock {
     public final static int STABILITY = 500;
     public final static int REQUIRED_LEVEL = 1;
     
-    public StoneRock(Point location) {
+    public StoneRock(Point2D location) {
         super(ImageContainer.getInstance().getImage(IMAGE),
                 location, REPLENISH_TIME, STABILITY, REQUIRED_LEVEL);
     }

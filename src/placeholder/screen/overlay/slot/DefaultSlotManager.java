@@ -6,7 +6,7 @@
 package placeholder.screen.overlay.slot;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.util.List;
 import placeholder.screen.overlay.ScreenItem;
 import placeholder.screen.render.Renderable;
@@ -24,22 +24,22 @@ public abstract class DefaultSlotManager<T extends Slot> implements Renderable {
     protected Grid<T> grid;
     protected Dimension slotMargin;
     
-    public DefaultSlotManager(List<T> slots, Point gridPosition, Dimension gridDimension) {
+    public DefaultSlotManager(List<T> slots, Point2D gridPosition, Dimension gridDimension) {
         this.slotMargin = DEFAULT_SLOT_MARGIN;
         this.grid = new Grid<>(slots, slotMargin, gridPosition, gridDimension);
     }
     
-    public DefaultSlotManager(List<T> slots, Point gridPosition, Dimension gridDimension, int rows, int columns) {
+    public DefaultSlotManager(List<T> slots, Point2D gridPosition, Dimension gridDimension, int rows, int columns) {
         this.slotMargin = DEFAULT_SLOT_MARGIN;
         this.grid = new Grid<>(slots, rows, columns, slotMargin, gridPosition, gridDimension);
     }
     
-    public DefaultSlotManager(List<T> slots, Point gridPosition, Dimension gridDimension, Dimension slotMargin) {
+    public DefaultSlotManager(List<T> slots, Point2D gridPosition, Dimension gridDimension, Dimension slotMargin) {
         this.slotMargin = slotMargin;
         this.grid = new Grid<>(slots, slotMargin, gridPosition, gridDimension);
     }
     
-    public DefaultSlotManager(List<T> slots, Point gridPosition, Dimension gridDimension, int rows, int columns, Dimension slotMargin) {
+    public DefaultSlotManager(List<T> slots, Point2D gridPosition, Dimension gridDimension, int rows, int columns, Dimension slotMargin) {
         this.slotMargin = slotMargin;
         this.grid = new Grid<>(slots, rows, columns, slotMargin, gridPosition, gridDimension);
     }

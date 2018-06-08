@@ -6,7 +6,7 @@
 package placeholder.screen.overlay.window.inventory;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 import placeholder.screen.overlay.contextmenu.ContextMenuManager;
@@ -45,7 +45,7 @@ public class InventoryWindow extends ImageBackgroundWindow {
         this.contextManager = contextManager;
         slotManager = new ItemSlotManager(
                 inventory.getSlots(),
-                new Point(this.getPosition().x + INVENTORY_SLOT_INIT_MARGIN.width, this.getPosition().y + INVENTORY_SLOT_INIT_MARGIN.height),
+                new Point2D.Double(this.getPosition().getX() + INVENTORY_SLOT_INIT_MARGIN.width, this.getPosition().getY() + INVENTORY_SLOT_INIT_MARGIN.height),
                 this.dimension,
                 input
         );

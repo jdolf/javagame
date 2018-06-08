@@ -5,7 +5,7 @@
  */
 package placeholder.map;
 
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 import placeholder.screen.TickUpdatable;
@@ -26,7 +26,7 @@ import placeholder.util.Unregisterable;
  */
 public abstract class Map implements Renderable, TickUpdatable {
     
-    public static final Point DEFAULT_START_LOCATION = new Point(20, 20);
+    public static final Point2D DEFAULT_START_LOCATION = new Point2D.Double(20, 20);
     
     // Additional sprite lists used to circumvent ConcurrentModificationException
     private List<Sprite> spritesToAdd = new ArrayList();

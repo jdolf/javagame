@@ -6,7 +6,7 @@
 package placeholder.sprite.entity.bodypart;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.util.concurrent.atomic.AtomicReference;
 import javafx.scene.image.Image;
 import placeholder.input.Direction;
@@ -21,20 +21,20 @@ import placeholder.sprite.entity.player.Player;
  */
 public class RightArmBodyPart extends BodyPart {
 
-    public RightArmBodyPart(Image image, Point offsetCoordinates, Dimension dimension, Player player) {
+    public RightArmBodyPart(Image image, Point2D offsetCoordinates, Dimension dimension, Player player) {
         super(offsetCoordinates, dimension, player, new RightArmAnimation(player, image, dimension));
     }
     
     @Override
     public void update() {
         if (player.getDirection() == Direction.DOWN) {
-            offsetCoordinates.x = 6;
+            offsetCoordinates.setLocation(6, offsetCoordinates.getY());
         } else if (player.getDirection() == Direction.UP) {
-            offsetCoordinates.x = -6;
+            offsetCoordinates.setLocation(-6, offsetCoordinates.getY());
         } else if (player.getDirection() == Direction.LEFT) {
-            offsetCoordinates.x = 0;
+            offsetCoordinates.setLocation(0, offsetCoordinates.getY());
         } else if (player.getDirection() == Direction.RIGHT) {
-            offsetCoordinates.x = 0;
+            offsetCoordinates.setLocation(0, offsetCoordinates.getY());
         }
         
         super.update();

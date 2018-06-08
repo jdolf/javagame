@@ -1,7 +1,7 @@
 package placeholder.sprite.entity.attack;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import placeholder.input.Direction;
 import placeholder.map.Map;
 import placeholder.sprite.collision.CollisionDetector;
@@ -13,7 +13,7 @@ import placeholder.sprite.entity.attack.Hittable;
  */
 public interface AttackClient {
     void attack();
-    Point getPosition();
+    Point2D getPosition();
     Dimension getDimension();
     Direction getDirection();
     Map getMap();

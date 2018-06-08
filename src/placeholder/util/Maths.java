@@ -6,7 +6,7 @@
 package placeholder.util;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 
 /**
  *
@@ -15,14 +15,14 @@ import java.awt.Point;
 public class Maths {
     
     public static boolean inside (
-            Point testPoint,
-            Point targetPoint,
+            Point2D testPoint,
+            Point2D targetPoint,
             Dimension targetDimension) {
         
-        if (testPoint.x >= targetPoint.x &&
-                testPoint.x <= targetPoint.x + targetDimension.width &&
-                testPoint.y >= targetPoint.y &&
-                testPoint.y <= targetPoint.y + targetDimension.height) {
+        if (testPoint.getX() >= targetPoint.getX() &&
+                testPoint.getX() <= targetPoint.getX() + targetDimension.width &&
+                testPoint.getY() >= targetPoint.getY() &&
+                testPoint.getY() <= targetPoint.getY() + targetDimension.height) {
             
             return true;
             
@@ -32,16 +32,16 @@ public class Maths {
     }
     
     public static boolean overlapping (
-            Point testPoint,
+            Point2D testPoint,
             Dimension testDimension,
-            Point targetPoint,
+            Point2D targetPoint,
             Dimension targetDimension) {
         
         // Test if they are NOT overlapping (Simplest way)
-        if (testPoint.y > targetPoint.y + targetDimension.height ||
-                testPoint.y + testDimension.height < targetPoint.y ||
-                testPoint.x > targetPoint.x + targetDimension.width ||
-                testPoint.x + testDimension.width < targetPoint.x) {
+        if (testPoint.getY() > targetPoint.getY() + targetDimension.height ||
+                testPoint.getY() + testDimension.height < targetPoint.getY() ||
+                testPoint.getX() > targetPoint.getX() + targetDimension.width ||
+                testPoint.getX() + testDimension.width < targetPoint.getX()) {
             
             return false;
             

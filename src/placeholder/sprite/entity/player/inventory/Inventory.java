@@ -36,7 +36,7 @@ public abstract class Inventory implements InventoryChangedSubject {
         boolean success = false;
         
         for (InventorySlot slot : slots) {
-            if (!slots.isEmpty()) {
+            if (!slot.isEmpty()) {
                 success = itemClass.isAssignableFrom(slot.getItem().getClass());
                 
                 if (success) break;

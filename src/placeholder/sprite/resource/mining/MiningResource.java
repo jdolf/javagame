@@ -6,7 +6,7 @@
 package placeholder.sprite.resource.mining;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import javafx.scene.image.Image;
 import placeholder.item.equipment.weaponequipment.melee.tool.mining.MiningTool;
 import placeholder.sprite.entity.player.inventory.Inventory;
@@ -20,7 +20,7 @@ public abstract class MiningResource extends Resource implements Mineable {
     
     public MiningResource(
             Image animationImage,
-            Point location,
+            Point2D location,
             Dimension dimension,
             int replenishTime,
             int stability,

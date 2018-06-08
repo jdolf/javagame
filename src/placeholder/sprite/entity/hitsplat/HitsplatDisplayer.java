@@ -1,7 +1,7 @@
 package placeholder.sprite.entity.hitsplat;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Collection;
 import javafx.scene.paint.Color;
@@ -36,11 +36,11 @@ public class HitsplatDisplayer implements HealthChangedListener, Renderable, Tic
     public void onHealthChanged(int amount) {
         int newDimensionWidth = parent.getDimension().width / 2;
         int newDimensionHeight = parent.getDimension().height;
-        int newPositionX = parent.getPosition().x;
-        int newPositionY = parent.getPosition().y - parent.getDimension().height;
+        double newPositionX = parent.getPosition().getX();
+        double newPositionY = parent.getPosition().getY() - parent.getDimension().height;
         hitsplats.add(new Hitsplat(
                 this,
-                ScreenItem.merge(new Dimension(newDimensionWidth, newDimensionHeight), new Point(newPositionX, newPositionY)),
+                ScreenItem.merge(new Dimension(newDimensionWidth, newDimensionHeight), new Point2D.Double(newPositionX, newPositionY)),
                 amount)
         );
     }

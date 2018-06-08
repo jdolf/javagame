@@ -6,12 +6,13 @@
 package placeholder.screen.overlay;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
+import java.awt.geom.Point2D;
 
 /**
  *
@@ -20,10 +21,10 @@ import java.util.List;
 public class ScreenItem {
     
     private List<PositionChangeListener> listener = new ArrayList();
-    private Point position;
+    private Point2D position;
     protected Dimension dimension;
     
-    public ScreenItem(Point screenPosition, Dimension dimension) {
+    public ScreenItem(Point2D screenPosition, Dimension dimension) {
         this.position = screenPosition;
         this.dimension = dimension;
     }
@@ -32,7 +33,7 @@ public class ScreenItem {
         this.dimension = dimension;
     }
     
-    public ScreenItem(Point position) {
+    public ScreenItem(Point2D position) {
         this.position = position;
     }
     
@@ -47,11 +48,11 @@ public class ScreenItem {
         return this.dimension;
     }
 
-    public Point getPosition() {
+    public Point2D getPosition() {
         return this.position;
     }
 
-    public void setPosition(Point position) {
+    public void setPosition(Point2D position) {
         this.position = position;
         notifyPositionChangedListener();
     }
@@ -70,12 +71,12 @@ public class ScreenItem {
         return new Dimension(d1.width + d2.width, d1.height + d2.height);
     }
     
-    public static Point mergePoints(Point p1, Point p2) {
-        return new Point(p1.x + p2.x, p1.y + p2.y);
+    public static Point2D mergePoints(Point2D p1, Point2D p2) {
+        return new Point2D.Double(p1.getX() + p2.getX(), p1.getY() + p2.getY());
     }
     
-    public static Point merge(Dimension d, Point p) {
-        return new Point(p.x + d.width, p.y + d.height);
+    public static Point2D merge(Dimension d, Point2D p) {
+        return new Point2D.Double(p.getX() + d.width, p.getY() + d.height);
     }
     
     public boolean hasPositionAndDimension() {

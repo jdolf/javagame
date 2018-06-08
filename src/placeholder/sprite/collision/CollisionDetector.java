@@ -5,7 +5,7 @@
  */
 package placeholder.sprite.collision;
 
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.util.Collection;
 import java.util.List;
 import placeholder.sprite.entity.attack.Hittable;
@@ -15,6 +15,6 @@ import placeholder.sprite.entity.attack.Hittable;
  * @author jdolf
  */
 public interface CollisionDetector {
-    CollisionCheck collidesAt(Point targetLocation);
-    CollisionCheck collidesAt(Point targetLocation, Collection<Object> exceptions);
+    CollisionCheck collidesAt(Point2D targetLocation);
+    CollisionCheck collidesAt(Point2D targetLocation, Collection<Object> exceptions);
 }

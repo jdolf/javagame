@@ -6,7 +6,7 @@
 package placeholder.sprite;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 import placeholder.map.Map;
@@ -25,12 +25,12 @@ public class DefaultSpriteReceiver implements SpriteReceiver {
     }
 
     @Override
-    public List<Sprite> getSpritesAt(Point point, Dimension area) {
+    public List<Sprite> getSpritesAt(Point2D Point2D, Dimension area) {
         
         List<Sprite> sprites = new ArrayList();
         
         for (Sprite sprite : this.getSprites()) {
-            if (Maths.overlapping(point, area, sprite.getPosition(), sprite.getDimension())) {
+            if (Maths.overlapping(Point2D, area, sprite.getPosition(), sprite.getDimension())) {
                 sprites.add(sprite);
             }
         }
@@ -44,12 +44,12 @@ public class DefaultSpriteReceiver implements SpriteReceiver {
     }
 
     @Override
-    public <T> List<T> getSpritesAt(Class<T> conditionClass, Point point, Dimension area) {
+    public <T> List<T> getSpritesAt(Class<T> conditionClass, Point2D Point2D, Dimension area) {
         List<T> sprites = new ArrayList();
         
         for (Sprite sprite : this.getSprites()) {
             if (conditionClass.isAssignableFrom(sprite.getClass())) {
-                if (Maths.overlapping(point, area, sprite.getPosition(), sprite.getDimension())) {
+                if (Maths.overlapping(Point2D, area, sprite.getPosition(), sprite.getDimension())) {
                     sprites.add((T) sprite);
                 }
             }

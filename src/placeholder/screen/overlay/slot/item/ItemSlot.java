@@ -6,8 +6,9 @@
 package placeholder.screen.overlay.slot.item;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import javafx.scene.image.Image;
+import javafx.scene.text.TextAlignment;
 import placeholder.screen.ImageContainer;
 import placeholder.screen.render.Renderer;
 import placeholder.item.Item;
@@ -26,6 +27,7 @@ public abstract class ItemSlot<T extends Item> extends SelectableSlot {
 
     private T item;
     protected Dimension itemMargin;
+    private Point2D amountTextPosition;
 
     public ItemSlot() {
         super(DEFAULT_DIMENSION);
@@ -80,20 +82,32 @@ public abstract class ItemSlot<T extends Item> extends SelectableSlot {
         
         if (getItem() != null) {
             getItem().render(renderer);
+            if (getItem().isStackable()) {
+                renderer.renderText(Item.AMOUNT_PAINT,
+                        Item.AMOUNT_FONT,
+                        String.valueOf(getItem().getAmount()),
+                        new ScreenItem(amountTextPosition, this.dimension),
+                        TextAlignment.RIGHT);
+            }
         }
     }
 
     @Override
-    public void setPosition(Point position) {
+    public void setPosition(Point2D position) {
         super.setPosition(position);
         // Update item position if an item exists in this slot
         if (!this.isEmpty()) {
             setItemPosition();
+            calculateAmountTextPosition();
         }
     }
     
     private void setItemPosition() {
         item.setPosition(ScreenItem.merge(itemMargin, this.getPosition()));
+    }
+    
+    private void calculateAmountTextPosition() {
+        this.amountTextPosition = new Point2D.Double(dimension.width + this.getPosition().getX() - 2, this.getPosition().getY() + 2);
     }
     
 }

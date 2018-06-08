@@ -6,7 +6,7 @@
 package placeholder.screen.overlay.slot;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.util.List;
 import javafx.scene.input.KeyCode;
 import placeholder.screen.TickUpdatable;
@@ -26,18 +26,18 @@ public class SelectableSlotManager<T extends SelectableSlot> extends DefaultSlot
     protected InputHandler input;
     protected WindowManager manager;
 
-    public SelectableSlotManager(List<T> slots, Point gridPosition, Dimension gridDimension, InputHandler input) {
+    public SelectableSlotManager(List<T> slots, Point2D gridPosition, Dimension gridDimension, InputHandler input) {
         super(slots, gridPosition, gridDimension);
         chooser = new MatrixSelectionChooser(grid.getItems(), grid.getColumns(), grid.getRows());
         this.input = input;
     }
     
-    public SelectableSlotManager(List<T> slots, Point gridPosition, Dimension gridDimension) {
+    public SelectableSlotManager(List<T> slots, Point2D gridPosition, Dimension gridDimension) {
         super(slots, gridPosition, gridDimension);
         chooser = new MatrixSelectionChooser(grid.getItems(), grid.getColumns(), grid.getRows());
     }
     
-    public SelectableSlotManager(List<T> slots, Point gridPosition, Dimension gridDimension, int rows, int columns) {
+    public SelectableSlotManager(List<T> slots, Point2D gridPosition, Dimension gridDimension, int rows, int columns) {
         super(slots, gridPosition, gridDimension, rows, columns);
         chooser = new MatrixSelectionChooser(grid.getItems(), grid.getColumns(), grid.getRows());
     }

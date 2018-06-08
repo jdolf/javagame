@@ -6,7 +6,7 @@
 package placeholder.sprite.entity.player;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -51,15 +51,17 @@ public abstract class Player extends Entity implements EquipmentChangedListener,
     
     public static final Dimension DEFAULT_DIMENSION = new Dimension(20, 32);
     public static final Dimension DEFAULT_HEAD_DIMENSION = new Dimension(20, 13);
-    public static final Point DEFAULT_HEAD_OFFSET = new Point(0, 0);
+    public static final Point2D DEFAULT_HEAD_OFFSET = new Point2D.Double(0, 0);
     public static final Dimension DEFAULT_BODY_DIMENSION = new Dimension(20, 10);
-    public static final Point DEFAULT_BODY_OFFSET = new Point(0, 13);
+    public static final Point2D DEFAULT_BODY_OFFSET = new Point2D.Double(0, 13);
     public static final Dimension DEFAULT_LEGS_DIMENSION = new Dimension(20, 9);
-    public static final Point DEFAULT_LEGS_OFFSET = new Point(0, 23);
+    public static final Point2D DEFAULT_LEGS_OFFSET = new Point2D.Double(0, 23);
     public static final Dimension DEFAULT_LEFT_ARM_DIMENSION = new Dimension(20, 16);
-    public static final Point DEFAULT_LEFT_ARM_OFFSET = new Point(-6, 10);
+    public static final Point2D DEFAULT_LEFT_ARM_OFFSET = new Point2D.Double(-6, 10);
     public static final Dimension DEFAULT_RIGHT_ARM_DIMENSION = new Dimension(20, 16);
-    public static final Point DEFAULT_RIGHT_ARM_OFFSET = new Point(6, 10);
+    public static final Point2D DEFAULT_RIGHT_ARM_OFFSET = new Point2D.Double(6, 10);
+    
+    public static final double BASE_WALK_SPEED = 1.9;
     
     protected InputHandler input;
     protected Inventory inventory;
@@ -99,12 +101,14 @@ public abstract class Player extends Entity implements EquipmentChangedListener,
     }
     
     private void updateStats() {
+        System.out.println("updating stats");
         this.meleeStrength = skillManager.getMelee().calculateMeleeStrengthImpact() + equipmentManager.calculateMeleeStrengthImpact();
         this.meleeDefense = skillManager.getMelee().calculateMeleeDefenseImpact() + equipmentManager.calculateMeleeDefenseImpact();
         this.rangeStrength = skillManager.getRange().calculateRangeStrengthImpact() + equipmentManager.calculateRangeStrengthImpact();
         this.rangeDefense = skillManager.getRange().calculateRangeDefenseImpact() + equipmentManager.calculateRangeDefenseImpact();
         this.magicStrength = skillManager.getMagic().calculateMagicStrengthImpact() + equipmentManager.calculateMagicStrengthImpact();
         this.magicDefense = skillManager.getMagic().calculateMagicDefenseImpact() + equipmentManager.calculateMagicDefenseImpact();
+        this.walkSpeed = BASE_WALK_SPEED + BASE_WALK_SPEED * equipmentManager.calculateSpeedPercentage() / 100 ;
     }
 
     protected List<BodyPart> generateBodyParts() {

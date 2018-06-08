@@ -6,7 +6,7 @@
 package placeholder.sprite;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import javafx.scene.image.Image;
 import placeholder.screen.animation.Animation;
 import placeholder.screen.render.Renderer;
@@ -19,7 +19,7 @@ public abstract class AnimatedSprite extends Sprite {
 
     protected Animation animation;
 
-    public AnimatedSprite(Animation animation, Dimension dimension, Point location) {
+    public AnimatedSprite(Animation animation, Dimension dimension, Point2D location) {
         super(dimension, location);
         this.animation = animation;
     }

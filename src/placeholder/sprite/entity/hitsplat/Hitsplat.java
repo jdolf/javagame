@@ -1,7 +1,7 @@
 package placeholder.sprite.entity.hitsplat;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
@@ -31,7 +31,7 @@ public class Hitsplat extends ScreenItem implements TickUpdatable, Renderable {
     private Color color;
     private int duration = HITSPLAT_TIME;
 
-    public Hitsplat(Unregisterable unregisterable, Point position, int amount) {
+    public Hitsplat(Unregisterable unregisterable, Point2D position, int amount) {
         super(position);
         if (amount < 0) {
             font = DAMAGE_FONT;
@@ -51,7 +51,7 @@ public class Hitsplat extends ScreenItem implements TickUpdatable, Renderable {
         duration -= 1;
         
         if (duration >= HITSPLAT_TIME / 4 * 3) {
-            this.getPosition().y -= VELOCITY;
+            this.getPosition().setLocation(getPosition().getX(), getPosition().getY() - VELOCITY);;
         }
         
         if (duration <= 0) {

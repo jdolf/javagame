@@ -6,7 +6,7 @@
 package placeholder.item.equipment.bodyequipment;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.util.Map;
 import javafx.scene.image.Image;
 import placeholder.item.equipment.Equipment;
@@ -20,7 +20,7 @@ import placeholder.sprite.entity.player.Player;
  */
 public abstract class BodyEquipment extends Equipment {
 
-    public BodyEquipment(Point position, Image icon, Image animationImage) {
+    public BodyEquipment(Point2D position, Image icon, Image animationImage) {
         super(position, icon, animationImage, new EquipmentAnimation());
     }
 

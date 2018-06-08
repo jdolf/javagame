@@ -5,7 +5,7 @@
  */
 package placeholder.map;
 
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 import placeholder.sprite.Sprite;
@@ -27,8 +27,8 @@ public class NewbieLandMap extends Map {
     @Override
     protected List<Sprite> createSprites() {
         List<Sprite> sprites = new ArrayList();
-        sprites.add(new StoneRock(new Point(100, 80)));
-        sprites.add(new Dummy(new Point(200, 120)));
+        sprites.add(new StoneRock(new Point2D.Double(100, 80)));
+        sprites.add(new Dummy(new Point2D.Double(200, 120)));
         return sprites;
     }
     

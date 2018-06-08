@@ -6,7 +6,7 @@
 package placeholder.sprite;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import placeholder.screen.TickUpdatable;
 import placeholder.screen.overlay.ScreenItem;
 import placeholder.screen.render.Renderable;
@@ -19,7 +19,7 @@ public abstract class Sprite extends ScreenItem implements Renderable, TickUpdat
     
     protected boolean solid = true;
     
-    public Sprite(Dimension dimension, Point location) {
+    public Sprite(Dimension dimension, Point2D location) {
         super(location, dimension);
     }
     

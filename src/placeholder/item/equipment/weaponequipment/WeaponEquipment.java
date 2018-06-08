@@ -6,10 +6,11 @@
 package placeholder.item.equipment.weaponequipment;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.awt.geom.Point2D;
 import javafx.scene.image.Image;
 import placeholder.input.Direction;
 import placeholder.item.equipment.Equipment;
@@ -46,7 +47,7 @@ public abstract class WeaponEquipment extends Equipment {
     protected Integer[][] rightArmAnimationColumns;
 
     public WeaponEquipment(
-            Point position,
+            Point2D position,
             Image icon,
             Image animationImage,
             WeaponAnimation weaponAnimation) {
@@ -66,9 +67,9 @@ public abstract class WeaponEquipment extends Equipment {
     public void render(Renderer renderer, BodyPart bodyPart) {
         Dimension offset = WEAPON_OFFSETS.get(player.getDirection());
         renderer.renderAnimation(animation, new ScreenItem(
-                new Point(
-                    player.getPosition().x + bodyPart.getOffsetCoordinates().x + offset.width,
-                    player.getPosition().y + bodyPart.getOffsetCoordinates().y + offset.height
+                new Point2D.Double(
+                    player.getPosition().getX() + bodyPart.getOffsetCoordinates().getX() + offset.width,
+                    player.getPosition().getY() + bodyPart.getOffsetCoordinates().getY() + offset.height
                 ),
                 new Dimension(
                     DEFAULT_DIMENSION.width,

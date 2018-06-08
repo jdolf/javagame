@@ -5,7 +5,7 @@
  */
 package placeholder.input;
 
-import java.awt.Point;
+import java.awt.geom.Point2D;
 
 /**
  *
@@ -17,12 +17,13 @@ public enum Direction {
     DOWN,
     LEFT;
     
-    public Point calculateOffsetChanges(int offset) {
-        Point position = new Point(0, 0);
-        if (DOWN == this) position.y += offset;
-        if (UP == this) position.y -= offset;
-        if (LEFT == this) position.x -= offset;
-        if (RIGHT == this) position.x += offset;
-        return position;
+    public Point2D calculateOffsetChanges(double offset) {
+        double x = 0;
+        double y = 0;
+        if (DOWN == this) y += offset;
+        if (UP == this) y -= offset;
+        if (LEFT == this) x -= offset;
+        if (RIGHT == this) x += offset;
+        return new Point2D.Double(x, y);
     }
 }

@@ -1,7 +1,7 @@
 package placeholder.sprite.entity.attack;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.util.Arrays;
 import placeholder.input.Direction;
 import placeholder.map.Map;
@@ -35,11 +35,11 @@ public abstract class Projectile extends AnimatedSprite implements DirectionDepe
             DirectionAnimation animation,
             Attack attack,
             Dimension dimension,
-            Point location,
+            Point2D location,
             AttackClient attacker,
             int strength
     ) {
-        super(animation, dimension, new Point(location));
+        super(animation, dimension, new Point2D.Double(location.getX(), location.getY()));
         this.attacker = attacker;
         this.map = attacker.getMap();
         this.attack = attack;
@@ -60,11 +60,11 @@ public abstract class Projectile extends AnimatedSprite implements DirectionDepe
                     attack.getCollisionCheck().hasCollisionOccurrence()) {
                 map.removeSprite(this);
             } else {
-                Point directionOffset = this.direction.calculateOffsetChanges(
+                Point2D directionOffset = this.direction.calculateOffsetChanges(
                     this.velocity
                 );
 
-                this.getPosition().translate(directionOffset.x, directionOffset.y);
+                this.getPosition().setLocation(getPosition().getX() + directionOffset.getX(), getPosition().getY() + directionOffset.getY());
             }
 
             if (attack.getDuration() == 0) {

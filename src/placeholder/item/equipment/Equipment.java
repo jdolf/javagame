@@ -6,9 +6,10 @@
 package placeholder.item.equipment;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.util.List;
 import java.util.Map;
+import java.awt.geom.Point2D;
 import javafx.scene.image.Image;
 import placeholder.screen.animation.Animation;
 import placeholder.screen.overlay.ScreenItem;
@@ -32,6 +33,10 @@ public abstract class Equipment extends Item implements TickUpdatable {
 
     protected Player player;
     protected EquipmentAnimation animation;
+    /**
+     * The speed percentage bonus. Ratio: 1 = 1%
+     */
+    protected int speedPercentage = 0;
     protected int meleeDefense = 0;
     protected int rangeDefense = 0;
     protected int magicDefense = 0;
@@ -39,7 +44,7 @@ public abstract class Equipment extends Item implements TickUpdatable {
     protected int rangeStrength = 0;
     protected int magicStrength = 0;
     
-    public Equipment(Point position, Image icon, Image animationImage, EquipmentAnimation animation) {
+    public Equipment(Point2D position, Image icon, Image animationImage, EquipmentAnimation animation) {
         super(position, icon, MAX_STACK);
         animation.setEquipment(this);
         animation.setImage(animationImage);
@@ -57,9 +62,9 @@ public abstract class Equipment extends Item implements TickUpdatable {
 
     public void render(Renderer renderer, BodyPart bodyPart) {
         renderer.renderAnimation(animation, new ScreenItem(
-                new Point(
-                    player.getPosition().x + bodyPart.getOffsetCoordinates().x,
-                    player.getPosition().y + bodyPart.getOffsetCoordinates().y
+                new Point2D.Double(
+                    player.getPosition().getX() + bodyPart.getOffsetCoordinates().getX(),
+                    player.getPosition().getY() + bodyPart.getOffsetCoordinates().getY()
                 ),
                 new Dimension(
                     bodyPart.getDimension().width,
@@ -80,7 +85,6 @@ public abstract class Equipment extends Item implements TickUpdatable {
     
     public void disattachFromPlayer(Player player) {
         this.player = null;
-        animation = null;
     }
 
     @Override
@@ -118,6 +122,10 @@ public abstract class Equipment extends Item implements TickUpdatable {
 
     public int getMagicStrength() {
         return magicStrength;
+    }
+    
+    public int getSpeedPercentage() {
+        return speedPercentage;
     }
 
     

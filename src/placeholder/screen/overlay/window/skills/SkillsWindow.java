@@ -1,7 +1,7 @@
 package placeholder.screen.overlay.window.skills;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;

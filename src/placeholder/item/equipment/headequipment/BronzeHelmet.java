@@ -5,7 +5,7 @@
  */
 package placeholder.item.equipment.headequipment;
 
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.EnumMap;
@@ -24,7 +24,7 @@ public class BronzeHelmet extends HeadEquipment {
     public static final String ANIMATION_NAME = "bronze_helmet.png";
 
     
-    public BronzeHelmet(Point position) {
+    public BronzeHelmet(Point2D position) {
         super(
                 position,
                 ImageContainer.getInstance().getImage(ICON_NAME),

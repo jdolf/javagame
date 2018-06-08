@@ -1,7 +1,7 @@
 package placeholder.sprite.entity.attack;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import placeholder.input.Direction;
 import placeholder.sprite.SpriteReceiver;
 import placeholder.sprite.entity.player.Player;
@@ -25,33 +25,34 @@ public class MeleeAttack extends Attack {
         attacker.setMeleeAttack(this);
     }
     
-    private static Point calculateInitPosition(Dimension hitboxDown, AttackClient attacker) {
-        Point newPosition = new Point(attacker.getPosition());
+    private static Point2D calculateInitPosition(Dimension hitboxDown, AttackClient attacker) {
+        double x = attacker.getPosition().getX();
+        double y = attacker.getPosition().getY();
         if (null != attacker.getDirection()) switch (attacker.getDirection()) {
             case UP:
-                newPosition.y = attacker.getPosition().y - hitboxDown.height + attacker.getDimension().height;
-                newPosition.x = attacker.getPosition().x - (hitboxDown.width - attacker.getDimension().width) / 2;
+                y = attacker.getPosition().getY() - hitboxDown.height + attacker.getDimension().height;
+                x = attacker.getPosition().getX() - (hitboxDown.width - attacker.getDimension().width) / 2;
                 break;
             case LEFT:
                 if (hitboxDown.width > attacker.getDimension().height) {
-                    newPosition.y = attacker.getPosition().y - (hitboxDown.height - attacker.getDimension().height) / 2;
-                    newPosition.x = attacker.getPosition().x + attacker.getDimension().width - hitboxDown.width;
+                    y = attacker.getPosition().getY() - (hitboxDown.height - attacker.getDimension().height) / 2;
+                    x = attacker.getPosition().getX() + attacker.getDimension().width - hitboxDown.width;
                 } else {
-                    newPosition.x = attacker.getPosition().x - hitboxDown.width;
+                    x = attacker.getPosition().getX() - hitboxDown.width;
                 }
                 break;
             case DOWN:
-                newPosition.x = attacker.getPosition().x - (hitboxDown.width - attacker.getDimension().width) / 2;
+                x = attacker.getPosition().getX() - (hitboxDown.width - attacker.getDimension().width) / 2;
                 break;
             case RIGHT:
                 if (hitboxDown.width > attacker.getDimension().height) {
-                    newPosition.y = attacker.getPosition().y - (hitboxDown.height - attacker.getDimension().height) / 2;
+                    y = attacker.getPosition().getY() - (hitboxDown.height - attacker.getDimension().height) / 2;
                 }
                 break;
             default:
                 break;
         }
-        return newPosition;
+        return new Point2D.Double(x, y);
     }
     
     private static Dimension calculateInitHitbox(Dimension hitboxDown, Direction direction) {

@@ -1,7 +1,7 @@
 package placeholder.screen.overlay.window.equipment;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import placeholder.input.InputHandler;
 import placeholder.item.equipment.EquipmentManager;
 import placeholder.screen.overlay.contextmenu.ContextMenuManager;
@@ -37,7 +37,7 @@ public class EquipmentWindow extends ImageBackgroundWindow {
         this.equipmentManager = equipmentManager;
         this.slotManager = new SelectableSlotManager<EquipmentSlot>(
                 equipmentManager.getEquipmentSlots(),
-                new Point(this.getPosition().x + DISPLAY_INIT_MARGIN.width, this.getPosition().y + DISPLAY_INIT_MARGIN.height),
+                new Point2D.Double(this.getPosition().getX() + DISPLAY_INIT_MARGIN.width, this.getPosition().getY() + DISPLAY_INIT_MARGIN.height),
                 this.dimension
         );
         this.cm = cm;

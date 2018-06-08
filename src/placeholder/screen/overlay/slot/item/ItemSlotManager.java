@@ -6,7 +6,7 @@
 package placeholder.screen.overlay.slot.item;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.util.List;
 import placeholder.screen.overlay.ScreenItem;
 import placeholder.input.InputHandler;
@@ -18,11 +18,11 @@ import placeholder.screen.overlay.slot.SelectableSlotManager;
  */
 public class ItemSlotManager<T extends ItemSlot> extends SelectableSlotManager<T> {
     
-    public ItemSlotManager(List<T> slots, Point gridPosition, Dimension gridDimension, InputHandler input) {
+    public ItemSlotManager(List<T> slots, Point2D gridPosition, Dimension gridDimension, InputHandler input) {
         super(slots, gridPosition, gridDimension, input);
     }
     
-    public ItemSlotManager(List<T> slots, Point gridPosition, Dimension gridDimension) {
+    public ItemSlotManager(List<T> slots, Point2D gridPosition, Dimension gridDimension) {
         super(slots, gridPosition, gridDimension);
     }
     

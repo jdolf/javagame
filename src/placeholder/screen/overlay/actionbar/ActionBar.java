@@ -6,7 +6,7 @@
 package placeholder.screen.overlay.actionbar;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.paint.Color;
@@ -42,7 +42,7 @@ public class ActionBar extends Overlay {
             ContextMenuManager contextManager,
             InputHandler inputHandler,
             Dimension gameDimension,
-            Point gamePosition,
+            Point2D gamePosition,
             Player player) {
         super(calculatePosition(gameDimension, gamePosition, DEFAULT_HEIGHT), new Dimension(gameDimension.width, DEFAULT_HEIGHT));
         this.inputHandler = inputHandler;
@@ -60,10 +60,10 @@ public class ActionBar extends Overlay {
         slotManager.render(renderer);
     }
     
-    public static Point calculatePosition(Dimension gameDimension, Point gamePosition, int barHeight) {
-        int x = gamePosition.x;
-        int y = gamePosition.y + (gameDimension.height - barHeight);
-        return new Point(x, y);
+    public static Point2D calculatePosition(Dimension gameDimension, Point2D gamePosition, int barHeight) {
+        double x = gamePosition.getX();
+        double y = gamePosition.getY() + (gameDimension.height - barHeight);
+        return new Point2D.Double(x, y);
     }
 
     @Override

@@ -27,7 +27,7 @@ public class EquipmentActionBarSlot extends ActionBarSlot {
             EquipmentManager equipmentManager) {
         super(new EquipmentWindow(contextManager, windowManager, inputHandler, gameDimension, barDimension, equipmentManager),
                 inputHandler,
-                inputHandler.getKey(KeyCode.F),
+                inputHandler.getKey(KeyCode.R),
                 ImageContainer.getInstance().getImage(ICON_NAME)
         );
     }

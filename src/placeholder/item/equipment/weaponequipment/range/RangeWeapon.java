@@ -1,6 +1,6 @@
 package placeholder.item.equipment.weaponequipment.range;
 
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.util.List;
 import java.util.Map;
 import javafx.scene.image.Image;
@@ -24,7 +24,7 @@ public class RangeWeapon extends WeaponEquipment {
         {1}, {0, 0}
     };
 
-    public RangeWeapon(Point position, Image icon, Image animationImage) {
+    public RangeWeapon(Point2D position, Image icon, Image animationImage) {
         super(position, icon, animationImage, new RangeWeaponAnimation());
         leftArmAnimationColumns = BOWPULL_LEFT_ARM_COLUMNS;
         rightArmAnimationColumns = BOWPULL_RIGHT_ARM_COLUMNS;
@@ -32,13 +32,17 @@ public class RangeWeapon extends WeaponEquipment {
         this.defaultStartUpTime = 24;
         this.defaultDuration = 1;
     }
+    
+    
 
     @Override
     public void attack() {
         Inventory inventory = this.player.getInventory();
         if (inventory.hasItemClass(Ammo.class)) {
             Ammo ammo = inventory.getFirstItem(Ammo.class);
-            ammo.createProjectile(player, defaultDuration, invincibilityStun);
+            if (ammo != null) {
+                ammo.createProjectile(player, defaultDuration, invincibilityStun);
+            }
         }
         
     }

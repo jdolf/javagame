@@ -6,7 +6,7 @@
 package placeholder.item.equipment.weaponequipment.melee.tool.mining;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.util.Map;
 import javafx.scene.image.Image;
 import placeholder.item.equipment.weaponequipment.melee.tool.Tool;
@@ -19,7 +19,7 @@ import placeholder.sprite.resource.mining.Mineable;
  */
 public abstract class MiningTool extends Tool {
 
-    public MiningTool(Point position, Image icon, Image animationImage, Dimension hitbox) {
+    public MiningTool(Point2D position, Image icon, Image animationImage, Dimension hitbox) {
         super(position, icon, animationImage, hitbox);
     }
 

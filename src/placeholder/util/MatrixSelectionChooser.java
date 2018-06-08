@@ -6,6 +6,7 @@
 package placeholder.util;
 
 import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.util.List;
 import placeholder.screen.overlay.slot.Selectable;
 

@@ -6,7 +6,7 @@
 package placeholder.sprite;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.util.List;
 
 /**
@@ -14,7 +14,7 @@ import java.util.List;
  * @author jdolf
  */
 public interface SpriteReceiver {
-    <T> List<T> getSpritesAt(Class<T> conditionClass, Point point, Dimension area);
-    List<Sprite> getSpritesAt(Point point, Dimension area);
+    <T> List<T> getSpritesAt(Class<T> conditionClass, Point2D Point2D, Dimension area);
+    List<Sprite> getSpritesAt(Point2D Point2D, Dimension area);
     List<Sprite> getSprites();
 }

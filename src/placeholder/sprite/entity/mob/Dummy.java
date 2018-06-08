@@ -1,7 +1,7 @@
 package placeholder.sprite.entity.mob;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.util.EnumMap;
 import java.util.Map;
 import placeholder.screen.ImageContainer;
@@ -22,7 +22,7 @@ public class Dummy extends AnimatedEntity {
     public static final Dimension DIMENSION = new Dimension(32, 32);
     public static final String ANIMATION_NAME = "dummy.png";
 
-    public Dummy(Point location) {
+    public Dummy(Point2D location) {
         super(new EntityAnimation(ImageContainer.getInstance().getImage(ANIMATION_NAME), DIMENSION),
                 DIMENSION,
                 location,

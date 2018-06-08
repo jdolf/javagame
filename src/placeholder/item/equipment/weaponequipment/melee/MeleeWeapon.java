@@ -1,7 +1,7 @@
 package placeholder.item.equipment.weaponequipment.melee;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.util.Arrays;
 import java.util.Map;
 import javafx.scene.image.Image;
@@ -30,7 +30,7 @@ public class MeleeWeapon extends WeaponEquipment {
      */
     private Dimension hitbox;
 
-    public MeleeWeapon(Point position, Image icon, Image animationImage, Dimension hitbox) {
+    public MeleeWeapon(Point2D position, Image icon, Image animationImage, Dimension hitbox) {
         super(position, icon, animationImage, new MeleeWeaponAnimation());
         this.hitbox = hitbox;
         leftArmAnimationColumns = SWING_LEFT_ARM_COLUMNS;

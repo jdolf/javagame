@@ -6,11 +6,16 @@
 package placeholder.item;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.awt.geom.Point2D;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 import placeholder.screen.overlay.ScreenItem;
 import placeholder.screen.overlay.contextmenu.entry.ContextMenuEntry;
 import placeholder.screen.overlay.contextmenu.entry.ContextMenuEntryCreator;
@@ -26,45 +31,38 @@ public abstract class Item extends ScreenItem implements ContextMenuEntryCreator
     
     public static final int DEFAULT_AMOUNT = 1;
     public static final Dimension DEFAULT_DIMENSION = new Dimension(32, 32);
+    public static final Font AMOUNT_FONT = new Font(8);
+    public static final Paint AMOUNT_PAINT = Color.BLACK;
     
     protected Image icon;
     protected int amount;
     protected int maxStack;
+    private boolean stackable;
     /**
      * The Inventory this item may reside in.
      */
     protected Inventory inventory;
     
-    public Item(Point position, Image icon, int maxStack) {
+    public Item(Point2D position, Image icon, int maxStack) {
         super(position, DEFAULT_DIMENSION);
         this.icon = icon;
         this.maxStack = maxStack;
         this.amount = DEFAULT_AMOUNT;
-        
         validateMaxStack(maxStack);
+        if (maxStack > 1) this.stackable = true;
     }
     
-    public Item(Point position, Image icon, int maxStack, int amount) {
+    public Item(Point2D position, Image icon, int maxStack, int amount) {
         super(position, DEFAULT_DIMENSION);
         this.icon = icon;
         this.maxStack = maxStack;
         this.amount = amount;
-        
-        if (amount <= 0) throw new IllegalArgumentException("amount has to be "
-                + "at least 1");
-        
         validateMaxStack(maxStack);
-        
-        if (amount > maxStack) throw new IllegalArgumentException("amount "
-                + "can't be greater than maxStack");
+        if (maxStack > 1) this.stackable = true;
     }
     
     public boolean isStackable() {
-        if (amount > 1) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.stackable;
     }
     
     /**
@@ -93,11 +91,12 @@ public abstract class Item extends ScreenItem implements ContextMenuEntryCreator
     }
     
     public void addAmount(int amount) {
-        amount += amount;
+        this.amount += amount;
     }
     
     public void removeAmount(int amount) {
-        amount -= amount;
+        this.amount -= amount;
+        if (this.amount <= 0) inventory.removeItem(this);
     }
     
     public int getAmount() {
@@ -119,6 +118,8 @@ public abstract class Item extends ScreenItem implements ContextMenuEntryCreator
             throw new IllegalArgumentException("maxStack has "
                     + "to be at least 1");
         }
+        if (amount > maxStack) throw new IllegalArgumentException("amount "
+                + "can't be greater than maxStack");
     }
 
     public void render(Renderer renderer) {

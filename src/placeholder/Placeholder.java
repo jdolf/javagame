@@ -6,7 +6,7 @@
 package placeholder;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -38,7 +38,7 @@ public class Placeholder extends Application {
     
     public final static int WIDTH = 700;
     public final static int HEIGHT = 500;
-    public static final Point DEFAULT_POSITION = new Point(0, 0);
+    public static final Point2D DEFAULT_POSITION = new Point2D.Double(0, 0);
     public static final Dimension DEFAULT_DIMENSION = new Dimension(700, 500);
     
     private Player player;

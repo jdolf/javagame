@@ -1,7 +1,7 @@
 package placeholder.util;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.util.List;
 import placeholder.screen.overlay.ScreenItem;
 import placeholder.screen.render.Renderable;
@@ -18,14 +18,14 @@ public class Grid<T extends ScreenItem & Renderable> extends ScreenItem implemen
     private List<T> items;
     private Dimension itemMargin;
     
-    public Grid(List<T> items, Dimension itemMargin, Point screenPosition, Dimension dimension) {
+    public Grid(List<T> items, Dimension itemMargin, Point2D screenPosition, Dimension dimension) {
         super(screenPosition, dimension);
         this.items = items;
         this.itemMargin = itemMargin;
         initialize(true);
     }
     
-    public Grid(List<T> items, int rows, int columns, Dimension itemMargin, Point screenPosition, Dimension dimension) {
+    public Grid(List<T> items, int rows, int columns, Dimension itemMargin, Point2D screenPosition, Dimension dimension) {
         super(screenPosition, dimension);
         this.items = items;
         this.itemMargin = itemMargin;
@@ -82,10 +82,10 @@ public class Grid<T extends ScreenItem & Renderable> extends ScreenItem implemen
         int currentRow = 1;
         
         for (T item : items) {
-            int itemX = (currentColumn - 1) * (item.getDimension().width + itemMargin.width) + itemMargin.width + this.getPosition().x;
-            int itemY = (currentRow - 1) * (item.getDimension().height + itemMargin.height) + itemMargin.height + this.getPosition().y;
+            double itemX = (currentColumn - 1) * (item.getDimension().width + itemMargin.width) + itemMargin.width + this.getPosition().getX();
+            double itemY = (currentRow - 1) * (item.getDimension().height + itemMargin.height) + itemMargin.height + this.getPosition().getY();
 
-            item.setPosition(new Point(itemX, itemY));
+            item.setPosition(new Point2D.Double(itemX, itemY));
             
             if (currentColumn >= columns) {
                 currentColumn = 1;

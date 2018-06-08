@@ -113,6 +113,10 @@ public abstract class EquipmentManager<T extends Entity> implements TickUpdatabl
         return calculateImpact(Equipment::getMagicStrength);
     }
     
+    public int calculateSpeedPercentage() {
+        return calculateImpact(Equipment::getSpeedPercentage);
+    }
+    
     public int calculateMagicDefenseImpact() {
         return calculateImpact(Equipment::getMagicDefense);
     }

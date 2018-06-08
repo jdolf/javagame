@@ -1,7 +1,7 @@
 package placeholder.sprite.entity;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import placeholder.screen.animation.Animation;
 import placeholder.screen.animation.DirectionAnimation;
 import placeholder.screen.animation.EntityAnimation;
@@ -20,7 +20,7 @@ public class AnimatedEntity extends Entity {
     public AnimatedEntity(
             EntityAnimation animation,
             Dimension dimension,
-            Point location,
+            Point2D location,
             AttackManager attackManager) {
         super(dimension, location, attackManager);
         this.animation = animation;

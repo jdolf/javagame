@@ -5,7 +5,7 @@
  */
 package placeholder.sprite.collision;
 
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -34,7 +34,7 @@ public class DefaultCollisionDetector implements CollisionDetector {
      * @return The collision check results.
      */
     @Override
-    public CollisionCheck collidesAt(Point targetLocation) {
+    public CollisionCheck collidesAt(Point2D targetLocation) {
         
         List<Sprite> sprites = spriteReceiver.getSpritesAt(targetLocation, owner.getDimension());
         return new CollisionCheck(filterCollision(sprites)); 
@@ -54,7 +54,7 @@ public class DefaultCollisionDetector implements CollisionDetector {
     }
 
     @Override
-    public CollisionCheck collidesAt(Point targetLocation, Collection<Object> exceptions) {
+    public CollisionCheck collidesAt(Point2D targetLocation, Collection<Object> exceptions) {
         List<Sprite> sprites = spriteReceiver.getSpritesAt(targetLocation, owner.getDimension());
         sprites.removeAll(exceptions);
         return new CollisionCheck(filterCollision(sprites)); 

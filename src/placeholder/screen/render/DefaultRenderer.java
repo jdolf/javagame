@@ -33,6 +33,16 @@ public class DefaultRenderer implements Renderer {
         // Clear Image
         gc.clearRect(0, 0, gameDimension.width, gameDimension.height);
     }
+    
+    /**
+     * JavaFx Canvas allows for double coordinates. These appear blurry if the end
+     * product is not an integer. This method makes it an integer.
+     * @param coord
+     * @return 
+     */
+    private double sharpen(double coord) {
+        return (int) coord;
+    }
 
     @Override
     public void renderAnimation(Animation animation, ScreenItem screenItem) {
@@ -42,8 +52,8 @@ public class DefaultRenderer implements Renderer {
                 animation.getSourceY(),
                 animation.getSourceWidth(),
                 animation.getSourceHeight(),
-                screenItem.getPosition().x,
-                screenItem.getPosition().y,
+                sharpen(screenItem.getPosition().getX()),
+                sharpen(screenItem.getPosition().getY()),
                 screenItem.getDimension().width,
                 screenItem.getDimension().height
         );
@@ -53,8 +63,8 @@ public class DefaultRenderer implements Renderer {
     public void renderImage(Image image, ScreenItem screenItem) {
         gc.drawImage(
             image,
-            screenItem.getPosition().x,
-            screenItem.getPosition().y,
+            sharpen(screenItem.getPosition().getX()),
+            sharpen(screenItem.getPosition().getY()),
             screenItem.getDimension().width,
             screenItem.getDimension().height
         );
@@ -65,8 +75,8 @@ public class DefaultRenderer implements Renderer {
     public void renderRect(Paint paint, ScreenItem screenItem) {
         gc.setFill(paint);
         gc.fillRect(
-                screenItem.getPosition().x,
-                screenItem.getPosition().y,
+                sharpen(screenItem.getPosition().getX()),
+                sharpen(screenItem.getPosition().getY()),
                 screenItem.getDimension().width,
                 screenItem.getDimension().height
         );
@@ -77,8 +87,8 @@ public class DefaultRenderer implements Renderer {
         gc.setStroke(paint);
         gc.setLineWidth(lineWidth);
         gc.strokeRect(
-                screenItem.getPosition().x,
-                screenItem.getPosition().y,
+                sharpen(screenItem.getPosition().getX()),
+                sharpen(screenItem.getPosition().getY()),
                 screenItem.getDimension().width,
                 screenItem.getDimension().height
         );
@@ -86,13 +96,13 @@ public class DefaultRenderer implements Renderer {
 
     @Override
     public void renderText(Paint paint, Font font, String text, ScreenItem screenItem, TextAlignment ta) {
-        int height = screenItem.getPosition().y;
+        double height = screenItem.getPosition().getY();
         gc.setFont(font);
         gc.setFill(paint);
         gc.setTextAlign(ta);
         gc.fillText(
                 text,
-                screenItem.getPosition().x,
+                sharpen(screenItem.getPosition().getX()),
                 height + gc.getFont().getSize()
         );
     }
@@ -101,8 +111,8 @@ public class DefaultRenderer implements Renderer {
     public void renderRoundRect(Paint paint, Dimension arcDimension, ScreenItem screenItem) {
         gc.setFill(paint);
         gc.fillRoundRect(
-                screenItem.getPosition().x,
-                screenItem.getPosition().y,
+                sharpen(screenItem.getPosition().getX()),
+                sharpen(screenItem.getPosition().getY()),
                 screenItem.getDimension().width,
                 screenItem.getDimension().height,
                 arcDimension.width,
@@ -115,8 +125,8 @@ public class DefaultRenderer implements Renderer {
         gc.setStroke(paint);
         gc.setLineWidth(lineWidth);
         gc.strokeRoundRect(
-                screenItem.getPosition().x,
-                screenItem.getPosition().y,
+                sharpen(screenItem.getPosition().getX()),
+                sharpen(screenItem.getPosition().getY()),
                 screenItem.getDimension().width,
                 screenItem.getDimension().height,
                 arcDimension.width,

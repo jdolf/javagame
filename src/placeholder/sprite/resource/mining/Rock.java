@@ -6,7 +6,7 @@
 package placeholder.sprite.resource.mining;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import javafx.scene.image.Image;
 
 /**
@@ -19,7 +19,7 @@ public abstract class Rock extends MiningResource {
 
     public Rock(
             Image animationImage,
-            Point location,
+            Point2D location,
             Dimension dimension,
             int replenishTime,
             int stability,
@@ -31,7 +31,7 @@ public abstract class Rock extends MiningResource {
     
      public Rock(
              Image animationImage,
-             Point location,
+             Point2D location,
              int replenishTime,
              int stability,
              int requiredLevel) {

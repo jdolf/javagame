@@ -1,7 +1,7 @@
 package placeholder.sprite.entity;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.beans.PropertyChangeEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -65,7 +65,7 @@ public class HealthBar extends ScreenItem implements HealthChangedListener, Posi
     }
 
     /**
-     * If parent receives a new position (point) adjust the position of this item too.
+     * If parent receives a new position (Point2D) adjust the position of this item too.
      */
     @Override
     public void onPositionChanged() {

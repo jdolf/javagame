@@ -75,6 +75,7 @@ public class PlayerEquipmentManager extends EquipmentManager<Player> {
         if (!slot.isEmpty() && !inventory.isFull()) {
             Equipment removedSlotEquipment = slot.getItem();
             inventory.insertItem(removedSlotEquipment);
+            super.unequip(targetEquipment);
         }
     }
 

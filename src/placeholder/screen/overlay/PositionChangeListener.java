@@ -1,6 +1,6 @@
 package placeholder.screen.overlay;
 
-import java.awt.Point;
+import java.awt.geom.Point2D;
 
 /**
  *

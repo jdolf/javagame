@@ -6,7 +6,7 @@
 package placeholder.sprite.resource;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import javafx.scene.image.Image;
 import placeholder.screen.animation.Animation;
 import placeholder.screen.animation.ResourceAnimation;
@@ -27,7 +27,7 @@ public abstract class Resource extends AnimatedSprite {
     
     public Resource(
             Image animationImage,
-            Point location,
+            Point2D location,
             Dimension dimension,
             int replenishTime,
             int stability,
