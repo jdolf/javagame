@@ -7,9 +7,14 @@ package placeholder.item.equipment.weaponequipment.melee.tool.mining;
 
 import java.awt.Dimension;
 import java.awt.geom.Point2D;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Map;
 import javafx.scene.image.Image;
 import placeholder.item.equipment.weaponequipment.melee.tool.Tool;
+import placeholder.sprite.Sprite;
+import placeholder.sprite.SpriteReceiver;
+import placeholder.sprite.collision.MiningInteraction;
 import placeholder.sprite.entity.player.inventory.Inventory;
 import placeholder.sprite.resource.mining.Mineable;
 
@@ -23,8 +28,13 @@ public abstract class MiningTool extends Tool {
         super(position, icon, animationImage, hitbox);
     }
 
-    public void mine(int playerLevel, Mineable mineable, Inventory inventory) {
-        mineable.mine(playerLevel, this, inventory);
+    @Override
+    public void attack() {
+        if (!new MiningInteraction(player, this, Arrays.asList(player)).hasSuccess()) {
+            super.attack();
+        }
     }
+    
+    
     
 }

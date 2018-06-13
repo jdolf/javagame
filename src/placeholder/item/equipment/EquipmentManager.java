@@ -33,11 +33,6 @@ public abstract class EquipmentManager<T extends Entity> implements TickUpdatabl
         this.target = target;
     }
     
-    public void tryEquip(Equipment targetEquipment) {
-        EquipmentSlot slot = getEquipmentSlot(targetEquipment.getClass());
-        equip(targetEquipment, slot);
-    }
-    
     protected void equip(Equipment targetEquipment, EquipmentSlot slot) {
         slot.setItem(targetEquipment);
         notifyEquipmentChangedListeners();
@@ -117,8 +112,20 @@ public abstract class EquipmentManager<T extends Entity> implements TickUpdatabl
         return calculateImpact(Equipment::getSpeedPercentage);
     }
     
+    public int calculateCooldownPercentage() {
+        return calculateImpact(Equipment::getCooldownPercentage);
+    }
+    
     public int calculateMagicDefenseImpact() {
         return calculateImpact(Equipment::getMagicDefense);
+    }
+    
+    public int calculateMiningEfficiencyImpact() {
+        return calculateImpact(Equipment::getMiningEfficiency);
+    }
+    
+    public int calculateWoodcuttingEfficiencyImpact() {
+        return calculateImpact(Equipment::getWoodcuttingEfficiency);
     }
     
     private int calculateImpact(Function<Equipment, Integer> fx) {

@@ -24,6 +24,7 @@ import placeholder.sprite.collision.DefaultCollisionDetector;
 import placeholder.sprite.DirectionDependent;
 import placeholder.sprite.Sprite;
 import placeholder.sprite.SpriteReceiver;
+import placeholder.sprite.collision.CollisionalPlaneCreator;
 import placeholder.sprite.entity.attack.Attack;
 import placeholder.sprite.entity.attack.AttackClient;
 import placeholder.sprite.entity.attack.AttackType;
@@ -36,7 +37,7 @@ import placeholder.util.Amount;
  *
  * @author jdolf
  */
-public abstract class Entity extends Sprite implements AttackClient, Hittable, DirectionDependent {
+public abstract class Entity extends Sprite implements AttackClient, Hittable, DirectionDependent, CollisionalPlaneCreator {
     
     protected boolean emitsXp = true;
     protected boolean dead = false;

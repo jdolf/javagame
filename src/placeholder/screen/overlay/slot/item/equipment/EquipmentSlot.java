@@ -25,14 +25,13 @@ import placeholder.sprite.entity.player.Player;
  */
 public abstract class EquipmentSlot<T extends Equipment> extends ItemSlot<T> implements TickUpdatable {
     
-    private ContextMenuManager manager;
     protected Class equipmentClass;
     protected Player player;
 
     public EquipmentSlot(ContextMenuManager manager, Class equipmentClass, Player player) {
+        super(manager);
         this.equipmentClass = equipmentClass;
         this.player = player;
-        this.manager = manager;
     }
 
     @Override
@@ -54,7 +53,9 @@ public abstract class EquipmentSlot<T extends Equipment> extends ItemSlot<T> imp
 
     @Override
     public void choose() {
-        if (!this.isEmpty()) executeCommand();
+        if (!this.isEmpty()) {
+            super.choose();
+        }
     }
 
     @Override
@@ -67,17 +68,18 @@ public abstract class EquipmentSlot<T extends Equipment> extends ItemSlot<T> imp
     }
 
     @Override
-    protected ContextMenu createContextMenu() {
+    protected List<ContextMenuEntry> createContextMenuEntries() {
         Equipment item = getItem();
         List<ContextMenuEntry> contextMenuEntries = new ArrayList();
-        contextMenuEntries.add(new UnequipEntry(player, item));
         
         if (item != null) {
-            return new StandardContextMenu(manager, contextMenuEntries, this.getPosition());
-        } else {
-            return null;
+            contextMenuEntries.add(new UnequipEntry(player, item));
         }
+        
+        return contextMenuEntries;
     }
+    
+    
     
     
     

@@ -7,18 +7,17 @@ package placeholder.map;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import placeholder.screen.TickUpdatable;
 import placeholder.screen.render.Renderable;
 import placeholder.screen.render.Renderer;
-import placeholder.sprite.collision.CollisionDetector;
 import placeholder.sprite.collision.DefaultCollisionDetector;
 import placeholder.sprite.DefaultSpriteReceiver;
 import placeholder.sprite.Sprite;
 import placeholder.sprite.SpriteReceiver;
 import placeholder.sprite.entity.Entity;
 import placeholder.sprite.entity.player.Player;
-import placeholder.util.Unregisterable;
 
 /**
  *
@@ -27,7 +26,6 @@ import placeholder.util.Unregisterable;
 public abstract class Map implements Renderable, TickUpdatable {
     
     public static final Point2D DEFAULT_START_LOCATION = new Point2D.Double(20, 20);
-    
     // Additional sprite lists used to circumvent ConcurrentModificationException
     private List<Sprite> spritesToAdd = new ArrayList();
     private List<Sprite> spritesToDelete = new ArrayList();

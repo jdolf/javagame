@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import placeholder.screen.animation.Animation;
 import placeholder.screen.animation.ResourceAnimation;
 import placeholder.sprite.AnimatedSprite;
+import placeholder.sprite.entity.player.Player;
 import placeholder.sprite.entity.player.inventory.Inventory;
 
 /**
@@ -19,46 +20,43 @@ import placeholder.sprite.entity.player.inventory.Inventory;
  */
 public abstract class Resource extends AnimatedSprite {
     
-    protected boolean depleted = true;
-    protected int replenishTime;
-    protected int stability;
-    protected int requiredLevel;
-    protected double currentReplenishTime = 0;
+    protected int requiredLevel = 1;
+    protected boolean depleted = false;
+    protected int defaultStability = 0;
+    protected int brokenness = 0;
+    protected int defaultReplenishTime = 0;
+    protected double replenishTime = 0;
+    protected int experience = 0;
     
     public Resource(
             Image animationImage,
             Point2D location,
-            Dimension dimension,
-            int replenishTime,
-            int stability,
-            int requiredLevel) {
+            Dimension dimension) {
         super(new ResourceAnimation(animationImage, dimension), dimension, location);
-        this.replenishTime = replenishTime;
-        this.stability = stability;
-        this.requiredLevel = requiredLevel;
         this.animation.setData(this);
     }
 
     public void drain(int efficiency) {
-        this.stability -= efficiency;
+        this.brokenness -= efficiency;
     }
 
-    public void harvest(Inventory inventory) {
+    public void harvest(Player player) {
         this.depleted = true;
-        
-        // TODO: add to inventory
+        // TODO: add to inventory from loottable; maybe in subclass?
     }
 
     public void replenish() {
         this.depleted = false;
-        currentReplenishTime = 0;
+        replenishTime = 0;
+        brokenness = 0;
     }
     
     public void tickUpdate() {
-        currentReplenishTime += 1;
-
-        if (currentReplenishTime >= replenishTime) {
-            replenish();
+        if (depleted) {
+            replenishTime += 1;
+            if (replenishTime >= defaultReplenishTime) {
+                replenish();
+            }
         }
         
         this.animation.update();

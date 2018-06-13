@@ -18,6 +18,7 @@ import placeholder.screen.render.Renderable;
 public abstract class Sprite extends ScreenItem implements Renderable, TickUpdatable {
     
     protected boolean solid = true;
+    protected boolean craftingStation = false;
     
     public Sprite(Dimension dimension, Point2D location) {
         super(location, dimension);
@@ -26,6 +27,10 @@ public abstract class Sprite extends ScreenItem implements Renderable, TickUpdat
     public boolean isSolid() {
         return this.solid;
     };
+
+    public boolean isCraftingStation() {
+        return craftingStation;
+    }
     
     
     

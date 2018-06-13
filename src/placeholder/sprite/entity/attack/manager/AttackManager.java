@@ -31,6 +31,7 @@ public abstract class AttackManager<T> implements TickUpdatable, Renderable {
     protected int attackStartUpTime = 0;
     protected int startUpTime = 0;
     protected boolean initAttack = false;
+    protected int cooldownReductionPercent = 0;
 
     public abstract void attack();
     protected void initializedAttack() {}
@@ -90,16 +91,12 @@ public abstract class AttackManager<T> implements TickUpdatable, Renderable {
         return attackCooldown;
     }
 
-    public void registerAttackCooldown(int attackCooldown) {
-        this.attackCooldown = attackCooldown;
+    protected void registerAttackCooldown(int attackCooldown) {
+        this.attackCooldown = attackCooldown - attackCooldown * cooldownReductionPercent / 100;
     }
     
     @Override
-    public void render(Renderer renderer) {
-        if (meleeAttack != null) {
-            meleeAttack.render(renderer);
-        }
-    }
+    public void render(Renderer renderer) {}
     
     public void setMeleeAttack(MeleeAttack meleeAttack) {
         this.meleeAttack = meleeAttack;
@@ -115,6 +112,10 @@ public abstract class AttackManager<T> implements TickUpdatable, Renderable {
 
     public boolean isInitAttack() {
         return initAttack;
+    }
+    
+    public void setCooldownReductionPercent(int cooldownReductionPercent) {
+        this.cooldownReductionPercent = cooldownReductionPercent;
     }
     
     

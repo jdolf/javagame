@@ -1,4 +1,4 @@
-package placeholder.item;
+package placeholder.item.equipment.weaponequipment;
 
 import placeholder.map.Map;
 import placeholder.sprite.entity.attack.AttackClient;

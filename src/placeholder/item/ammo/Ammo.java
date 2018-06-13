@@ -4,7 +4,7 @@ import java.awt.geom.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.text.TextAlignment;
 import placeholder.item.Item;
-import placeholder.item.ProjectileCreator;
+import placeholder.item.equipment.weaponequipment.ProjectileCreator;
 import placeholder.screen.render.Renderer;
 import placeholder.sprite.entity.attack.AttackClient;
 

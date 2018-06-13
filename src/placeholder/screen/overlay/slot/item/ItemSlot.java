@@ -7,6 +7,7 @@ package placeholder.screen.overlay.slot.item;
 
 import java.awt.Dimension;
 import java.awt.geom.Point2D;
+import java.util.List;
 import javafx.scene.image.Image;
 import javafx.scene.text.TextAlignment;
 import placeholder.screen.ImageContainer;
@@ -14,6 +15,9 @@ import placeholder.screen.render.Renderer;
 import placeholder.item.Item;
 import placeholder.screen.overlay.ScreenItem;
 import placeholder.screen.overlay.contextmenu.ContextMenu;
+import placeholder.screen.overlay.contextmenu.ContextMenuManager;
+import placeholder.screen.overlay.contextmenu.StandardContextMenu;
+import placeholder.screen.overlay.contextmenu.entry.ContextMenuEntry;
 import placeholder.screen.overlay.slot.SelectableSlot;
 
 /**
@@ -28,13 +32,24 @@ public abstract class ItemSlot<T extends Item> extends SelectableSlot {
     private T item;
     protected Dimension itemMargin;
     private Point2D amountTextPosition;
+    private ContextMenuManager contextMenuManager;
 
-    public ItemSlot() {
+    public ItemSlot(ContextMenuManager manager) {
         super(DEFAULT_DIMENSION);
         this.itemMargin = DEFAULT_ITEM_MARGIN;
+        this.contextMenuManager = manager;
     }
     
-    protected abstract ContextMenu createContextMenu();
+    protected ContextMenu createContextMenu() {
+        List<ContextMenuEntry> entries = createContextMenuEntries();
+        if (entries != null) {
+            return new StandardContextMenu(contextMenuManager, createContextMenuEntries(), this.getPosition());
+        } else {
+            return null;
+        }
+    }
+    
+    protected abstract List<ContextMenuEntry> createContextMenuEntries();
 
     @Override
     public void executeCommand() {
@@ -109,5 +124,12 @@ public abstract class ItemSlot<T extends Item> extends SelectableSlot {
     private void calculateAmountTextPosition() {
         this.amountTextPosition = new Point2D.Double(dimension.width + this.getPosition().getX() - 2, this.getPosition().getY() + 2);
     }
+
+    @Override
+    public void choose() {
+        executeCommand();
+    }
+    
+    
     
 }

@@ -8,10 +8,12 @@ package placeholder.sprite.entity.player;
 import java.awt.Dimension;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
+import placeholder.crafting.CraftingManager;
+import placeholder.crafting.CraftingRecipe;
 import placeholder.input.Direction;
 import placeholder.screen.overlay.contextmenu.ContextMenuManager;
 import placeholder.screen.overlay.window.WindowManager;
@@ -19,19 +21,15 @@ import placeholder.screen.render.Renderer;
 import placeholder.input.InputHandler;
 import placeholder.item.ammo.WoodArrow;
 import placeholder.item.equipment.EquipmentChangedListener;
-import placeholder.item.equipment.EquipmentManager;
 import placeholder.item.equipment.PlayerEquipmentManager;
 import placeholder.item.equipment.headequipment.BronzeHelmet;
 import placeholder.item.equipment.weaponequipment.melee.BronzeSword;
 import placeholder.item.equipment.weaponequipment.melee.tool.mining.BronzePickaxe;
 import placeholder.item.equipment.weaponequipment.range.WoodBow;
-import placeholder.skill.Skill;
+import placeholder.map.Map;
 import placeholder.skill.util.SkillLevelChangedListener;
 import placeholder.skill.util.SkillManager;
-import placeholder.sprite.collision.CollisionDetector;
-import placeholder.sprite.entity.attack.manager.AttackManager;
 import placeholder.sprite.entity.Entity;
-import placeholder.sprite.entity.attack.AttackType;
 import placeholder.sprite.entity.attack.manager.PlayerAttackManager;
 import placeholder.sprite.entity.bodypart.BodyBodyPart;
 import placeholder.sprite.entity.bodypart.BodyPart;
@@ -60,15 +58,17 @@ public abstract class Player extends Entity implements EquipmentChangedListener,
     public static final Point2D DEFAULT_LEFT_ARM_OFFSET = new Point2D.Double(-6, 10);
     public static final Dimension DEFAULT_RIGHT_ARM_DIMENSION = new Dimension(20, 16);
     public static final Point2D DEFAULT_RIGHT_ARM_OFFSET = new Point2D.Double(6, 10);
-    
     public static final double BASE_WALK_SPEED = 1.9;
     
     protected InputHandler input;
     protected Inventory inventory;
     protected PlayerEquipmentManager equipmentManager;
     protected SkillManager skillManager = new SkillManager();
+    protected CraftingManager craftingManager;
     protected WindowManager windowManager;
     protected BodyPartContainer bodyPartContainer = new BodyPartContainer(generateBodyParts(), this);
+    protected int miningEfficiency = 0;
+    protected int woodcuttingEfficiency = 0;
     
     public Player(InputHandler inputHandler, WindowManager windowManager, ContextMenuManager contextManager) {
         super(DEFAULT_DIMENSION, null, new PlayerAttackManager());
@@ -101,14 +101,16 @@ public abstract class Player extends Entity implements EquipmentChangedListener,
     }
     
     private void updateStats() {
-        System.out.println("updating stats");
         this.meleeStrength = skillManager.getMelee().calculateMeleeStrengthImpact() + equipmentManager.calculateMeleeStrengthImpact();
         this.meleeDefense = skillManager.getMelee().calculateMeleeDefenseImpact() + equipmentManager.calculateMeleeDefenseImpact();
         this.rangeStrength = skillManager.getRange().calculateRangeStrengthImpact() + equipmentManager.calculateRangeStrengthImpact();
         this.rangeDefense = skillManager.getRange().calculateRangeDefenseImpact() + equipmentManager.calculateRangeDefenseImpact();
         this.magicStrength = skillManager.getMagic().calculateMagicStrengthImpact() + equipmentManager.calculateMagicStrengthImpact();
         this.magicDefense = skillManager.getMagic().calculateMagicDefenseImpact() + equipmentManager.calculateMagicDefenseImpact();
-        this.walkSpeed = BASE_WALK_SPEED + BASE_WALK_SPEED * equipmentManager.calculateSpeedPercentage() / 100 ;
+        this.walkSpeed = BASE_WALK_SPEED + BASE_WALK_SPEED * equipmentManager.calculateSpeedPercentage() / 100;
+        this.attackManager.setCooldownReductionPercent(equipmentManager.calculateCooldownPercentage());
+        this.miningEfficiency = skillManager.getMining().calculateMiningEfficiencyImpact() + equipmentManager.calculateMiningEfficiencyImpact();
+        this.woodcuttingEfficiency = skillManager.getWoodcutting().calculateWoodcuttingEfficiencyImpact() + equipmentManager.calculateWoodcuttingEfficiencyImpact();
     }
 
     protected List<BodyPart> generateBodyParts() {
@@ -174,5 +176,23 @@ public abstract class Player extends Entity implements EquipmentChangedListener,
     public SkillManager getSkillManager() {
         return this.skillManager;
     }
+
+    public int getMiningEfficiency() {
+        return miningEfficiency;
+    }
+
+    public int getWoodcuttingEfficiency() {
+        return woodcuttingEfficiency;
+    }
+
+    @Override
+    public void setMap(Map map) {
+        super.setMap(map);
+        craftingManager = new CraftingManager(this);
+    }
+    
+    
+    
+    
 
 }

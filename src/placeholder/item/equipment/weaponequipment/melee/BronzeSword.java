@@ -16,7 +16,7 @@ public class BronzeSword extends MeleeWeapon {
     
     public static final String ICON_NAME = "bronze_sword_icon.png";
     public static final String ANIMATION_NAME = "bronze_sword.png";
-    public static final Dimension HITBOX = new Dimension(50, 50);
+    public static final Dimension HITBOX = new Dimension(30, 30);
     
     public BronzeSword(Point2D position) {
         super(
@@ -27,7 +27,7 @@ public class BronzeSword extends MeleeWeapon {
         );
         this.cooldown = 50;
         this.meleeStrength = 6;
-        this.speedPercentage = 50;
+        this.speedPercentage = 5;
     }
     
 }

@@ -4,7 +4,7 @@ import java.awt.geom.Point2D;
 import java.util.Map;
 import javafx.scene.image.Image;
 import placeholder.item.Item;
-import placeholder.item.ProjectileCreator;
+import placeholder.item.equipment.weaponequipment.ProjectileCreator;
 import placeholder.screen.ImageContainer;
 import placeholder.sprite.entity.attack.AttackClient;
 import placeholder.sprite.entity.attack.WoodArrowProjectile;

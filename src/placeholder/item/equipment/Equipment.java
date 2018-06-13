@@ -37,12 +37,15 @@ public abstract class Equipment extends Item implements TickUpdatable {
      * The speed percentage bonus. Ratio: 1 = 1%
      */
     protected int speedPercentage = 0;
+    protected int cooldownPercentage = 0;
     protected int meleeDefense = 0;
     protected int rangeDefense = 0;
     protected int magicDefense = 0;
     protected int meleeStrength = 0;
     protected int rangeStrength = 0;
     protected int magicStrength = 0;
+    protected int miningEfficiency = 0;
+    protected int woodcuttingEfficiency = 0;
     
     public Equipment(Point2D position, Image icon, Image animationImage, EquipmentAnimation animation) {
         super(position, icon, MAX_STACK);
@@ -127,6 +130,20 @@ public abstract class Equipment extends Item implements TickUpdatable {
     public int getSpeedPercentage() {
         return speedPercentage;
     }
+    
+    public int getCooldownPercentage() {
+        return cooldownPercentage;
+    }
+
+    public int getMiningEfficiency() {
+        return miningEfficiency;
+    }
+
+    public int getWoodcuttingEfficiency() {
+        return woodcuttingEfficiency;
+    }
+    
+    
 
     
 

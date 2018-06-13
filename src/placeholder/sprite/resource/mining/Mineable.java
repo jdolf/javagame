@@ -6,6 +6,7 @@
 package placeholder.sprite.resource.mining;
 
 import placeholder.item.equipment.weaponequipment.melee.tool.mining.MiningTool;
+import placeholder.sprite.entity.player.Player;
 import placeholder.sprite.entity.player.inventory.Inventory;
 
 
@@ -15,5 +16,5 @@ import placeholder.sprite.entity.player.inventory.Inventory;
  * @author jdolf
  */
 public interface Mineable {
-    public void mine(int playerLevel, MiningTool md, Inventory inventory);
+    public void mine(Player player, MiningTool md);
 }

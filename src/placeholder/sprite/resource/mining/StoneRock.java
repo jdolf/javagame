@@ -17,14 +17,16 @@ import placeholder.screen.ImageContainer;
 public class StoneRock extends Rock {
     
     public final static String IMAGE = "stone_rock.png";
-    public final static Dimension DIMENSION = new Dimension(32, 32);
-    public final static int REPLENISH_TIME = 120;
-    public final static int STABILITY = 500;
+    public final static int REPLENISH_TIME = 200;
+    public final static int STABILITY = 25;
     public final static int REQUIRED_LEVEL = 1;
     
     public StoneRock(Point2D location) {
-        super(ImageContainer.getInstance().getImage(IMAGE),
-                location, REPLENISH_TIME, STABILITY, REQUIRED_LEVEL);
+        super(ImageContainer.getInstance().getImage(IMAGE), location);
+        this.defaultReplenishTime = REPLENISH_TIME;
+        this.defaultStability = STABILITY;
+        this.requiredLevel = REQUIRED_LEVEL;
+        this.experience = 15;
     }
     
 }

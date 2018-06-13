@@ -27,7 +27,7 @@ import placeholder.sprite.entity.player.inventory.Inventory;
  *
  * @author jdolf
  */
-public abstract class Item extends ScreenItem implements ContextMenuEntryCreator {
+public class Item extends ScreenItem implements ContextMenuEntryCreator {
     
     public static final int DEFAULT_AMOUNT = 1;
     public static final Dimension DEFAULT_DIMENSION = new Dimension(32, 32);
@@ -59,6 +59,13 @@ public abstract class Item extends ScreenItem implements ContextMenuEntryCreator
         this.amount = amount;
         validateMaxStack(maxStack);
         if (maxStack > 1) this.stackable = true;
+    }
+    
+    public Item(Item item) {
+        this.icon = item.icon;
+        this.amount = item.amount;
+        this.maxStack = item.maxStack;
+        this.stackable = item.stackable;
     }
     
     public boolean isStackable() {
@@ -94,9 +101,24 @@ public abstract class Item extends ScreenItem implements ContextMenuEntryCreator
         this.amount += amount;
     }
     
-    public void removeAmount(int amount) {
-        this.amount -= amount;
+    /**
+     * Removes A certain quantity of this item.
+     * @param amount
+     * @return The removed amount.
+     */
+    public int removeAmount(int amount) {
+        int removedAmount = 0;
+        
+        if (this.amount - amount < 0) {
+            removedAmount = this.amount;
+            amount = 0;
+        } else {
+            removedAmount = amount;
+            this.amount -= amount;
+        }
         if (this.amount <= 0) inventory.removeItem(this);
+        
+        return removedAmount;
     }
     
     public int getAmount() {

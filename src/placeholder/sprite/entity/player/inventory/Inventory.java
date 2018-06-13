@@ -46,6 +46,20 @@ public abstract class Inventory implements InventoryChangedSubject {
         return success;
     }
     
+    public boolean hasItem(Class<? extends Item> itemClass, int amount) {
+        for (InventorySlot slot : slots) {
+            if (!slot.isEmpty()) {
+                if (itemClass.equals(slot.getItem().getClass())) {
+                    amount -= slot.getItem().getAmount();
+                }
+            }
+            
+            if (amount <= 0) return true;
+        }
+        
+        return false;
+    }
+    
     public <T extends Item> List<T> getItems(Class<T> itemClass) {
         List<T> items = new ArrayList();
         
@@ -64,7 +78,7 @@ public abstract class Inventory implements InventoryChangedSubject {
     public <T extends Item> T getFirstItem(Class<T> itemClass) {
         
         for (InventorySlot slot : slots) {
-            if (!slots.isEmpty()) {
+            if (!slot.isEmpty()) {
                 if (itemClass.isAssignableFrom(slot.getItem().getClass())) {
                     return itemClass.cast(slot.getItem());
                 }
@@ -74,7 +88,7 @@ public abstract class Inventory implements InventoryChangedSubject {
         return null;
     }
 
-    public void insertItem(Item itemToInsert) {
+    public boolean insertItem(Item itemToInsert) {
         // If item is stackable
         if (itemToInsert.isStackable()) {
             // Go through each inventory slot and try to stack
@@ -94,16 +108,23 @@ public abstract class Inventory implements InventoryChangedSubject {
         
         // If items to insert (still) remain
         if (itemToInsert.getAmount() > 0) {
+            boolean success = false;
             // Go through each inventory slot and use empty slots instead
             for (InventorySlot slot : slots) {
                 if (slot.isEmpty()) {
                     slot.setItem(itemToInsert);
+                    success = true;
                     break;
                 }
+            }
+            
+            if (!success) {
+                return false;
             }
         }
         
         notifyListeners();
+        return true;
     }
 
     public void clear() {
@@ -133,6 +154,20 @@ public abstract class Inventory implements InventoryChangedSubject {
         }
         
         notifyListeners();
+    }
+    
+    public boolean removeItemAmount(Class<? extends Item> itemClass, int amount) {
+        for (InventorySlot slot : slots) {
+            if (!slot.isEmpty()) {
+                if (itemClass.isAssignableFrom(slot.getItem().getClass())) {
+                    amount -= slot.getItem().removeAmount(amount);
+                }
+            }
+            
+            if (amount <= 0) return true;
+        }
+        
+        return false;
     }
 
     @Override

@@ -11,21 +11,18 @@ import java.util.Map;
 import javafx.scene.image.Image;
 import placeholder.item.equipment.weaponequipment.WeaponEquipment;
 import placeholder.item.equipment.weaponequipment.melee.MeleeWeapon;
+import placeholder.sprite.collision.CollisionDetector;
+import placeholder.sprite.collision.DefaultCollisionDetector;
+import placeholder.sprite.entity.player.Player;
 
 /**
  *
  * @author jdolf
  */
 public abstract class Tool extends MeleeWeapon {
-
-    protected int efficiency = 30;
     
     public Tool(Point2D position, Image icon, Image animationImage, Dimension hitbox) {
         super(position, icon, animationImage, hitbox);
-    }
-    
-    public void use() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

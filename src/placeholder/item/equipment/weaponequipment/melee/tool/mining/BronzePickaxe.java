@@ -19,9 +19,9 @@ import placeholder.screen.ImageContainer;
  */
 public class BronzePickaxe extends Pickaxe {
     
-    public static final Dimension HITBOX = new Dimension(30, 30);
+    public static final Dimension HITBOX = new Dimension(20, 20);
     public static final String ICON_NAME = "bronze_pickaxe_icon.png";
-    public static final String ANIMATION_NAME = "bronze_helmet.png";
+    public static final String ANIMATION_NAME = "bronze_pickaxe.png";
 
     public BronzePickaxe(Point2D position) {
         super(
@@ -32,7 +32,7 @@ public class BronzePickaxe extends Pickaxe {
         
         this.meleeStrength = 2;
         this.cooldown = 60;
-        this.efficiency = 5;
+        this.miningEfficiency = 5;
     }
 
 

@@ -17,6 +17,7 @@ import placeholder.sprite.Sprite;
 import placeholder.sprite.SpriteReceiver;
 import placeholder.sprite.collision.CollisionCheck;
 import placeholder.sprite.collision.CollisionDetector;
+import placeholder.sprite.collision.CollisionalPlane;
 import placeholder.sprite.collision.DefaultCollisionDetector;
 import placeholder.sprite.entity.Entity;
 import placeholder.sprite.entity.player.Player;
@@ -25,7 +26,7 @@ import placeholder.sprite.entity.player.Player;
  *
  * @author jdolf
  */
-public abstract class Attack extends ScreenItem implements TickUpdatable, Renderable {
+public abstract class Attack extends CollisionalPlane {
     
     private Map<Hittable, Integer> attackInvincibilities = new HashMap();
     private boolean initialized = false;
@@ -47,8 +48,6 @@ public abstract class Attack extends ScreenItem implements TickUpdatable, Render
      */
     protected int startUpTime = 0;
     private AttackClient attacker;
-    private CollisionDetector cd;
-    private CollisionCheck collisionCheck;
 
     public Attack(AttackType type,
             AttackClient attacker,
@@ -56,13 +55,17 @@ public abstract class Attack extends ScreenItem implements TickUpdatable, Render
             int baseDamage,
             int duration,
             int invincibilityStun) {
-        super(attacker.getPosition(), hitbox);
+        super(
+                attacker,
+                hitbox,
+                Arrays.asList(attacker),
+                attacker.getMap()
+        );
         this.type = type;
         this.attacker = attacker;
         this.baseDamage = baseDamage;
         this.duration = duration;
         this.invincibilityStun = invincibilityStun;
-        cd = new DefaultCollisionDetector(this, attacker.getMap().getSpriteReceiver());
     }
     
     public Attack(AttackType type,
@@ -72,13 +75,17 @@ public abstract class Attack extends ScreenItem implements TickUpdatable, Render
             int baseDamage,
             int duration,
             int invincibilityStun) {
-        super(position, hitbox);
+        super(
+                attacker,
+                hitbox,
+                Arrays.asList(attacker),
+                attacker.getMap()
+        );
         this.type = type;
         this.attacker = attacker;
         this.baseDamage = baseDamage;
         this.duration = duration;
         this.invincibilityStun = invincibilityStun;
-        cd = new DefaultCollisionDetector(this, attacker.getMap().getSpriteReceiver());
     }
     
     protected void supplyXp(Player player) {
@@ -87,15 +94,12 @@ public abstract class Attack extends ScreenItem implements TickUpdatable, Render
 
     @Override
     public final void tickUpdate() {
-        collisionCheck = this.cd.collidesAt(this.getPosition(), Arrays.asList(attacker));
-
+        super.tickUpdate();
         if (initialized) {
             if (startUpTime == 0) {
                 if (collisionCheck.hasCollisionOccurrence()) {
                     for (Sprite sprite : collisionCheck.getCollisionPartners()) {
-
                         if (sprite instanceof Hittable) {
-                            
                             if (!attackInvincibilities.keySet().contains(sprite)) {
                                 this.hitVictim((Hittable) sprite);
                             }
@@ -118,9 +122,6 @@ public abstract class Attack extends ScreenItem implements TickUpdatable, Render
         
         initialized = true;
     }
-
-    @Override
-    public void render(Renderer renderer) {}
     
     public void hitVictim(Hittable hittable) {
         calculateDamage(hittable);

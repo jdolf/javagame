@@ -53,17 +53,17 @@ public class PlayerEquipmentManager extends EquipmentManager<Player> {
      * Manage inventory of a player in case an item gets equipped
      * @param targetEquipment 
      */
-    @Override
     public void tryEquip(Equipment targetEquipment) {
         EquipmentSlot slot = getEquipmentSlot(targetEquipment.getClass());
         Inventory inventory = targetEquipment.getInventory();
         
         if (!slot.isEmpty()) {
             Equipment removedSlotEquipment = slot.getItem();
-            super.tryEquip(targetEquipment);
+            super.equip(targetEquipment, slot);
+            inventory.removeItem(targetEquipment);
             inventory.insertItem(removedSlotEquipment);
         } else {
-            super.tryEquip(targetEquipment);
+            super.equip(targetEquipment, slot);
             inventory.removeItem(targetEquipment);
         }
     }
@@ -74,8 +74,8 @@ public class PlayerEquipmentManager extends EquipmentManager<Player> {
         
         if (!slot.isEmpty() && !inventory.isFull()) {
             Equipment removedSlotEquipment = slot.getItem();
-            inventory.insertItem(removedSlotEquipment);
             super.unequip(targetEquipment);
+            inventory.insertItem(removedSlotEquipment);
         }
     }
 

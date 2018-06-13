@@ -20,23 +20,17 @@ public abstract class Rock extends MiningResource {
     public Rock(
             Image animationImage,
             Point2D location,
-            Dimension dimension,
-            int replenishTime,
-            int stability,
-            int requiredLevel) {
+            Dimension dimension) {
         
-        super(animationImage, location, dimension, replenishTime, stability, requiredLevel);
+        super(animationImage, location, dimension);
         
     }
     
      public Rock(
              Image animationImage,
-             Point2D location,
-             int replenishTime,
-             int stability,
-             int requiredLevel) {
+             Point2D location) {
          
-        super(animationImage, location, DEFAULT_DIMENSION, replenishTime, stability, requiredLevel);
+        super(animationImage, location, DEFAULT_DIMENSION);
         
     }
     
