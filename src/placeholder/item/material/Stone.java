@@ -11,7 +11,7 @@ import placeholder.screen.ImageContainer;
  */
 public class Stone extends Item {
     
-    public static final String ICON_NAME = "stone_icon.png";
+    public static final String ICON_NAME = "stone_ore.png";
     
     public Stone(Point2D position, int amount) {
         super(position, ImageContainer.getInstance().getImage(ICON_NAME), 1, amount);

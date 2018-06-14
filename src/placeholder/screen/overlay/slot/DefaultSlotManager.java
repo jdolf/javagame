@@ -49,4 +49,8 @@ public abstract class DefaultSlotManager<T extends Slot> implements Renderable {
         grid.render(renderer);
     }
     
+    public void updateGrid(List<T> slots) {
+        grid.setItems(slots);
+    }
+    
 }

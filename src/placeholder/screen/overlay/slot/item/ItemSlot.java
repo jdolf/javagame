@@ -31,7 +31,6 @@ public abstract class ItemSlot<T extends Item> extends SelectableSlot {
 
     private T item;
     protected Dimension itemMargin;
-    private Point2D amountTextPosition;
     private ContextMenuManager contextMenuManager;
 
     public ItemSlot(ContextMenuManager manager) {
@@ -43,7 +42,7 @@ public abstract class ItemSlot<T extends Item> extends SelectableSlot {
     protected ContextMenu createContextMenu() {
         List<ContextMenuEntry> entries = createContextMenuEntries();
         if (entries != null) {
-            return new StandardContextMenu(contextMenuManager, createContextMenuEntries(), this.getPosition());
+            return new StandardContextMenu(contextMenuManager, entries, this.getPosition());
         } else {
             return null;
         }
@@ -97,13 +96,6 @@ public abstract class ItemSlot<T extends Item> extends SelectableSlot {
         
         if (getItem() != null) {
             getItem().render(renderer);
-            if (getItem().isStackable()) {
-                renderer.renderText(Item.AMOUNT_PAINT,
-                        Item.AMOUNT_FONT,
-                        String.valueOf(getItem().getAmount()),
-                        new ScreenItem(amountTextPosition, this.dimension),
-                        TextAlignment.RIGHT);
-            }
         }
     }
 
@@ -113,16 +105,11 @@ public abstract class ItemSlot<T extends Item> extends SelectableSlot {
         // Update item position if an item exists in this slot
         if (!this.isEmpty()) {
             setItemPosition();
-            calculateAmountTextPosition();
         }
     }
     
     private void setItemPosition() {
         item.setPosition(ScreenItem.merge(itemMargin, this.getPosition()));
-    }
-    
-    private void calculateAmountTextPosition() {
-        this.amountTextPosition = new Point2D.Double(dimension.width + this.getPosition().getX() - 2, this.getPosition().getY() + 2);
     }
 
     @Override

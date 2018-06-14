@@ -7,7 +7,7 @@ import placeholder.item.Item;
 import placeholder.item.equipment.weaponequipment.ProjectileCreator;
 import placeholder.screen.ImageContainer;
 import placeholder.sprite.entity.attack.AttackClient;
-import placeholder.sprite.entity.attack.WoodArrowProjectile;
+import placeholder.item.equipment.weaponequipment.range.projectile.WoodArrowProjectile;
 
 /**
  *

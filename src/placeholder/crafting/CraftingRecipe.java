@@ -1,6 +1,9 @@
 package placeholder.crafting;
 
+import java.awt.geom.Point2D;
 import java.util.Collection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import placeholder.item.Item;
 import placeholder.sprite.Sprite;
 import placeholder.sprite.entity.player.inventory.Inventory;
@@ -26,11 +29,35 @@ public class CraftingRecipe {
     }
     
     public void craft(Inventory inventory) {
-        if (inventory.insertItem(new Item(recipeTemplate))) {
+        boolean inserted = false;
+        if (recipeTemplate.isStackable()) {
+            try {
+                inserted = inventory.insertItem(
+                        recipeTemplate.getClass()
+                        .getDeclaredConstructor(Point2D.class, int.class)
+                        .newInstance(null, recipeTemplate.getAmount()));
+                
+            } catch (Exception ex) {
+                Logger.getLogger(CraftingRecipe.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            try {
+                inserted = inventory.insertItem(
+                        recipeTemplate.getClass()
+                        .getDeclaredConstructor(Point2D.class)
+                        .newInstance(null));
+                
+            } catch (Exception ex) {
+                Logger.getLogger(CraftingRecipe.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        if (inserted) {
             materials.forEach((material) -> {
                 inventory.removeItemAmount(material.getClass(), material.getAmount());
             });
         }
+        
     }
 
     public Item getRecipeTemplate() {

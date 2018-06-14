@@ -24,7 +24,8 @@ public class DefaultInputHandler implements InputHandler {
         new DefaultKey(KeyCode.SPACE),
         new DefaultKey(KeyCode.T),
         new DefaultKey(KeyCode.E),
-        new DefaultKey(KeyCode.F)
+        new DefaultKey(KeyCode.F),
+        new DefaultKey(KeyCode.Q)
     };
 
     @Override

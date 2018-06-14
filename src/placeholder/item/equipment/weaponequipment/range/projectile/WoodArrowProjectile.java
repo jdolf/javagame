@@ -1,4 +1,4 @@
-package placeholder.sprite.entity.attack;
+package placeholder.item.equipment.weaponequipment.range.projectile;
 
 import java.awt.Dimension;
 import java.awt.geom.Point2D;
@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import placeholder.input.Direction;
 import placeholder.item.equipment.weaponequipment.Hitbox;
 import placeholder.screen.ImageContainer;
+import placeholder.sprite.entity.attack.AttackClient;
 
 /**
  *
@@ -27,6 +28,7 @@ public class WoodArrowProjectile extends RangeProjectile {
                 STRENGTH,
                 duration,
                 invincibilityStun
+                
                 
         );
         this.velocity = 4;

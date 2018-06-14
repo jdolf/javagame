@@ -239,6 +239,12 @@ public class EquipmentWindow extends ImageBackgroundWindow implements EquipmentC
             slotManager.tickUpdate();
         }
     }
+    
+    @Override
+    public void close() {
+        super.close();
+        cm.unregisterContextMenu();
+    }
 
     @Override
     public void onEquipmentChanged() {

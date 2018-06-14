@@ -1,4 +1,4 @@
-package placeholder.sprite.entity.attack;
+package placeholder.item.equipment.weaponequipment.range.projectile;
 
 import java.awt.Dimension;
 import java.awt.geom.Point2D;
@@ -8,6 +8,9 @@ import placeholder.input.Direction;
 import placeholder.item.equipment.weaponequipment.Hitbox;
 import placeholder.screen.animation.Animation;
 import placeholder.screen.animation.DirectionAnimation;
+import placeholder.sprite.entity.attack.AttackClient;
+import placeholder.sprite.entity.attack.Projectile;
+import placeholder.sprite.entity.attack.RangeAttack;
 
 /**
  *

@@ -32,8 +32,6 @@ public class RangeWeapon extends WeaponEquipment {
         this.defaultStartUpTime = 24;
         this.defaultDuration = 1;
     }
-    
-    
 
     @Override
     public void attack() {

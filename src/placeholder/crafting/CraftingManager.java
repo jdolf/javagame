@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import placeholder.item.equipment.weaponequipment.range.ThrowingRocks;
+import placeholder.item.material.Stone;
 import placeholder.screen.overlay.PositionChangeListener;
 import placeholder.sprite.Sprite;
 import placeholder.sprite.entity.player.Player;
@@ -16,13 +18,13 @@ import placeholder.sprite.entity.player.inventory.InventoryChangedListener;
  */
 public class CraftingManager implements InventoryChangedListener, PositionChangeListener {
     
-    private Player player;
-    
     public static final Dimension NEARBY_CRAFTING_STATION_RADIUS = new Dimension(100, 100);
     public static final Collection<CraftingRecipe> RECIPES = Arrays.asList(
-            
+            new CraftingRecipe(new ThrowingRocks(null, 20), Arrays.asList(new Stone(null, 1)))
     );
     
+    private Player player;
+    private Collection<CraftableRecipesChangedListener> craftableRecipeListeners = new ArrayList();
     protected Collection<CraftingRecipe> craftableRecipes = new ArrayList();
     protected Collection<Sprite> nearbyCraftingStations = new ArrayList();
     
@@ -44,21 +46,25 @@ public class CraftingManager implements InventoryChangedListener, PositionChange
      * Computes which crafting recipes are craftable from the passed inventory.
      */
     private void calculateCraftableRecipes() {
+        craftableRecipes.clear();
+        
         RECIPES.forEach((recipe) -> {
             boolean allcraftingStationsAvailable = true;
             
-            for (Sprite craftingStation : recipe.getCraftingStations()) {
-                boolean craftingStationAvailable = false;
-                
-                for (Sprite nearbyCraftingStation : nearbyCraftingStations) {
-                    if (craftingStation.getClass().equals(nearbyCraftingStation.getClass())) {
-                        craftingStationAvailable = true;
-                    }
-                }
+            if (recipe.getCraftingStations() != null) {
+                for (Sprite craftingStation : recipe.getCraftingStations()) {
+                    boolean craftingStationAvailable = false;
 
-                if (!craftingStationAvailable) {
-                    allcraftingStationsAvailable = false;
-                    break;
+                    for (Sprite nearbyCraftingStation : nearbyCraftingStations) {
+                        if (craftingStation.getClass().equals(nearbyCraftingStation.getClass())) {
+                            craftingStationAvailable = true;
+                        }
+                    }
+
+                    if (!craftingStationAvailable) {
+                        allcraftingStationsAvailable = false;
+                        break;
+                    }
                 }
             }
             
@@ -70,6 +76,8 @@ public class CraftingManager implements InventoryChangedListener, PositionChange
                 });
             }
         });
+        
+        notifyCraftableRecipesChangedListener();
     }
 
     @Override
@@ -87,6 +95,16 @@ public class CraftingManager implements InventoryChangedListener, PositionChange
 
     public Collection<CraftingRecipe> getCraftableRecipes() {
         return craftableRecipes;
+    }
+    
+    private void notifyCraftableRecipesChangedListener() {
+        craftableRecipeListeners.forEach((recipeListener) -> {
+            recipeListener.onCraftableRecipesChanged();
+        });
+    }
+    
+    public void addCraftableRecipesChangedListener(CraftableRecipesChangedListener listener) {
+        craftableRecipeListeners.add(listener);
     }
     
     

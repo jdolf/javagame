@@ -25,7 +25,9 @@ import placeholder.item.equipment.PlayerEquipmentManager;
 import placeholder.item.equipment.headequipment.BronzeHelmet;
 import placeholder.item.equipment.weaponequipment.melee.BronzeSword;
 import placeholder.item.equipment.weaponequipment.melee.tool.mining.BronzePickaxe;
+import placeholder.item.equipment.weaponequipment.range.ThrowingRocks;
 import placeholder.item.equipment.weaponequipment.range.WoodBow;
+import placeholder.item.material.Stone;
 import placeholder.map.Map;
 import placeholder.skill.util.SkillLevelChangedListener;
 import placeholder.skill.util.SkillManager;
@@ -80,6 +82,8 @@ public abstract class Player extends Entity implements EquipmentChangedListener,
         inventory.insertItem(new BronzeSword(null));
         inventory.insertItem(new WoodArrow(null, 10));
         inventory.insertItem(new WoodBow(null));
+        inventory.insertItem(new ThrowingRocks(null, 20));
+        inventory.insertItem(new Stone(null, 1));
         equipmentManager = new PlayerEquipmentManager(contextManager, this);
         
         // Listener
@@ -189,6 +193,10 @@ public abstract class Player extends Entity implements EquipmentChangedListener,
     public void setMap(Map map) {
         super.setMap(map);
         craftingManager = new CraftingManager(this);
+    }
+
+    public CraftingManager getCraftingManager() {
+        return craftingManager;
     }
     
     

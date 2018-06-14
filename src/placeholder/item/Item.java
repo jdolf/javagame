@@ -31,12 +31,13 @@ public class Item extends ScreenItem implements ContextMenuEntryCreator {
     
     public static final int DEFAULT_AMOUNT = 1;
     public static final Dimension DEFAULT_DIMENSION = new Dimension(32, 32);
-    public static final Font AMOUNT_FONT = new Font(8);
+    public static final Font AMOUNT_FONT = new Font(10);
     public static final Paint AMOUNT_PAINT = Color.BLACK;
     
+    private Point2D amountTextPosition;
     protected Image icon;
-    protected int amount;
-    protected int maxStack;
+    private int amount;
+    private int maxStack;
     private boolean stackable;
     /**
      * The Inventory this item may reside in.
@@ -62,6 +63,7 @@ public class Item extends ScreenItem implements ContextMenuEntryCreator {
     }
     
     public Item(Item item) {
+        super(item.getPosition(), item.getDimension());
         this.icon = item.icon;
         this.amount = item.amount;
         this.maxStack = item.maxStack;
@@ -95,10 +97,12 @@ public class Item extends ScreenItem implements ContextMenuEntryCreator {
     
     public void setAmount(int amount) {
         this.amount = amount;
+        onAmountChanged();
     }
     
     public void addAmount(int amount) {
         this.amount += amount;
+        onAmountChanged();
     }
     
     /**
@@ -116,8 +120,8 @@ public class Item extends ScreenItem implements ContextMenuEntryCreator {
             removedAmount = amount;
             this.amount -= amount;
         }
-        if (this.amount <= 0) inventory.removeItem(this);
         
+        onAmountChanged();
         return removedAmount;
     }
     
@@ -140,12 +144,19 @@ public class Item extends ScreenItem implements ContextMenuEntryCreator {
             throw new IllegalArgumentException("maxStack has "
                     + "to be at least 1");
         }
-        if (amount > maxStack) throw new IllegalArgumentException("amount "
-                + "can't be greater than maxStack");
+
     }
 
     public void render(Renderer renderer) {
         renderer.renderImage(icon, this);
+        
+        if (this.isStackable()) {
+            renderer.renderText(Item.AMOUNT_PAINT,
+                    Item.AMOUNT_FONT,
+                    String.valueOf(amount),
+                    new ScreenItem(amountTextPosition, this.dimension),
+                    TextAlignment.RIGHT);
+        }
     }
 
     public void setInventory(Inventory inventory) {
@@ -162,6 +173,32 @@ public class Item extends ScreenItem implements ContextMenuEntryCreator {
         entries.add(new DestroyEntry(this.inventory, this));
         return entries;
     }
+    
+    private void calculateAmountTextPosition() {
+        this.amountTextPosition = new Point2D.Double(dimension.width + this.getPosition().getX() + 3, this.getPosition().getY() - 3);
+    }
+
+    @Override
+    public void setPosition(Point2D position) {
+        super.setPosition(position);
+        if (dimension != null) {
+            calculateAmountTextPosition();
+        }
+    }
+
+    public void setMaxStack(int maxStack) {
+        validateMaxStack(maxStack);
+        if (maxStack > 1) this.stackable = true;
+        this.maxStack = maxStack;
+    }
+    
+    protected void onAmountChanged() {
+        if (amount <= 0) {
+            inventory.removeItem(this);
+        }
+    }
+    
+    
 
 
 }

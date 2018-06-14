@@ -9,8 +9,8 @@ import placeholder.screen.render.Renderer;
 import placeholder.skill.SkillType;
 import placeholder.sprite.entity.attack.Attack;
 import placeholder.sprite.entity.attack.MeleeAttack;
-import placeholder.sprite.entity.attack.RangeProjectile;
-import placeholder.sprite.entity.attack.WoodArrowProjectile;
+import placeholder.item.equipment.weaponequipment.range.projectile.RangeProjectile;
+import placeholder.item.equipment.weaponequipment.range.projectile.WoodArrowProjectile;
 import placeholder.sprite.entity.player.Player;
 
 /**

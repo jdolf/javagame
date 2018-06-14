@@ -16,6 +16,7 @@ import placeholder.input.Direction;
 import placeholder.item.equipment.Equipment;
 import placeholder.screen.animation.weapon.WeaponAnimation;
 import placeholder.screen.overlay.ScreenItem;
+import placeholder.screen.overlay.slot.item.equipment.WeaponEquipmentSlot;
 import placeholder.screen.render.Renderer;
 import placeholder.sprite.entity.bodypart.BodyPart;
 import placeholder.sprite.entity.bodypart.LeftArmBodyPart;
@@ -142,7 +143,23 @@ public abstract class WeaponEquipment extends Equipment {
         return rightArmAnimationColumns;
     }
     
-    
+    /**
+     * Tests if this is a throwing weapon and removes this from the equipment if theres no ammo left.
+     */
+    @Override
+    protected void onAmountChanged() {
+        if (player != null) {
+            if (this.isStackable()) {
+                if (this.getAmount() <= 0) {
+                    WeaponEquipmentSlot target = player.getPlayerEquipmentManager().getWeaponEquipmentSlot();
+                    
+                    if (!target.isEmpty()) {
+                        player.getPlayerEquipmentManager().getWeaponEquipmentSlot().removeItem();
+                    }
+                }
+            }
+        }
+    }
     
     
     

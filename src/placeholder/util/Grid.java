@@ -108,4 +108,9 @@ public class Grid<T extends ScreenItem & Renderable> extends ScreenItem implemen
         return this.columns;
     }
     
+    public void setItems(List<T> items) {
+        this.items = items;
+        initialize(true);
+    }
+    
 }
