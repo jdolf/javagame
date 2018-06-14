@@ -8,7 +8,9 @@ package placeholder.sprite.resource.mining;
 import java.awt.Dimension;
 import java.awt.geom.Point2D;
 import javafx.scene.image.Image;
+import placeholder.item.material.Stone;
 import placeholder.screen.ImageContainer;
+import placeholder.sprite.entity.player.Player;
 
 /**
  *
@@ -28,5 +30,13 @@ public class StoneRock extends Rock {
         this.requiredLevel = REQUIRED_LEVEL;
         this.experience = 15;
     }
+
+    @Override
+    public void harvest(Player player) {
+        super.harvest(player);
+        player.getInventory().insertItem(new Stone(null, 1));
+    }
+    
+    
     
 }

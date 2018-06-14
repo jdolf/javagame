@@ -30,23 +30,24 @@ public class CraftingRecipe {
     
     public void craft(Inventory inventory) {
         boolean inserted = false;
-        if (recipeTemplate.isStackable()) {
-            try {
-                inserted = inventory.insertItem(
-                        recipeTemplate.getClass()
-                        .getDeclaredConstructor(Point2D.class, int.class)
-                        .newInstance(null, recipeTemplate.getAmount()));
-                
-            } catch (Exception ex) {
-                Logger.getLogger(CraftingRecipe.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else {
+        
+        try {
+            inserted = inventory.insertItem(
+                    recipeTemplate.getClass()
+                    .getDeclaredConstructor(Point2D.class, int.class)
+                    .newInstance(null, recipeTemplate.getAmount()));
+
+        } catch (Exception ex) {
+            Logger.getLogger(CraftingRecipe.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if (inserted == false) {
             try {
                 inserted = inventory.insertItem(
                         recipeTemplate.getClass()
                         .getDeclaredConstructor(Point2D.class)
                         .newInstance(null));
-                
+
             } catch (Exception ex) {
                 Logger.getLogger(CraftingRecipe.class.getName()).log(Level.SEVERE, null, ex);
             }
