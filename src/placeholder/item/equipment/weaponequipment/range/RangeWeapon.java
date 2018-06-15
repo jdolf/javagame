@@ -23,6 +23,8 @@ public class RangeWeapon extends WeaponEquipment {
     public static final Integer[][] BOWPULL_RIGHT_ARM_COLUMNS = {
         {1}, {0, 0}
     };
+    
+    protected int ammoTimeToLive = 1;
 
     public RangeWeapon(Point2D position, Image icon, Image animationImage) {
         super(position, icon, animationImage, new RangeWeaponAnimation());
@@ -39,7 +41,7 @@ public class RangeWeapon extends WeaponEquipment {
         if (inventory.hasItemClass(Ammo.class)) {
             Ammo ammo = inventory.getFirstItem(Ammo.class);
             if (ammo != null) {
-                ammo.createProjectile(player, defaultDuration, invincibilityStun);
+                ammo.createProjectile(player, ammoTimeToLive, invincibilityStun);
             }
         }
         

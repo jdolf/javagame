@@ -15,8 +15,8 @@ import placeholder.item.equipment.weaponequipment.melee.tool.Tool;
 import placeholder.sprite.Sprite;
 import placeholder.sprite.SpriteReceiver;
 import placeholder.sprite.collision.MiningInteraction;
+import placeholder.sprite.collision.ResourceInteraction;
 import placeholder.sprite.entity.player.inventory.Inventory;
-import placeholder.sprite.resource.mining.Mineable;
 
 /**
  *
@@ -29,12 +29,9 @@ public abstract class MiningTool extends Tool {
     }
 
     @Override
-    public void attack() {
-        if (!new MiningInteraction(player, this, Arrays.asList(player)).hasSuccess()) {
-            super.attack();
-        }
+    protected ResourceInteraction createResourceInteraction() {
+        return new MiningInteraction(player, this, Arrays.asList(player));
     }
-    
     
     
 }

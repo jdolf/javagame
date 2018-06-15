@@ -17,7 +17,7 @@ import placeholder.sprite.resource.Resource;
  *
  * @author jdolf
  */
-public abstract class MiningResource extends Resource implements Mineable {
+public abstract class MiningResource extends Resource {
     
     public MiningResource(
             Image animationImage,
@@ -27,21 +27,8 @@ public abstract class MiningResource extends Resource implements Mineable {
     }
 
     @Override
-    public void mine(Player player, MiningTool md) {
-        if (player.getSkillManager().getMining().getLevel() >= requiredLevel) {
-
-            if (this.depleted) {
-                System.out.println("This mining resource is depleted and can't be mined.");
-            } else {
-                this.brokenness += player.getMiningEfficiency();
-                if (this.brokenness >= this.defaultStability) {
-                    harvest(player);
-                }
-            }
-
-        } else {
-            System.out.println("A mining level of at least " + this.requiredLevel + " is required to mine this.");
-        }
+    protected int getPlayerEfficiency(Player player) {
+        return player.getMiningEfficiency();
     }
 
     @Override

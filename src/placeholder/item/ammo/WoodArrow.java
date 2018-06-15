@@ -19,6 +19,7 @@ public class WoodArrow extends Ammo {
     
     public WoodArrow(Point2D position, int amount) {
         super(position, ImageContainer.getInstance().getImage(ICON_NAME), amount);
+        this.displayName = "Wooden Arrow";
     }
 
     @Override

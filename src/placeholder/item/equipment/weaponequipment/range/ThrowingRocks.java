@@ -24,12 +24,15 @@ public class ThrowingRocks extends RangeWeapon implements ProjectileCreator {
                 ImageContainer.getInstance().getImage(ICON_NAME),
                 ImageContainer.getInstance().getImage(ANIMATION_NAME)
         );
+        this.rangeStrength = 3;
         this.defaultDuration = 1;
         this.defaultStartUpTime = 5;
         this.cooldown = 20;
         this.setMaxStack(64);
         this.setAmount(amount);
         rightArmAnimationColumns = null;
+        this.displayName = "Throwing Rock";
+        ammoTimeToLive = 40;
     }
 
     @Override
@@ -42,7 +45,7 @@ public class ThrowingRocks extends RangeWeapon implements ProjectileCreator {
 
     @Override
     public void createProjectile(AttackClient attackClient, int duration, int invincibilityStun) {
-        new ThrowingRockProjectile(attackClient, 40, invincibilityStun);
+        new ThrowingRockProjectile(attackClient, ammoTimeToLive, invincibilityStun);
     }
     
     

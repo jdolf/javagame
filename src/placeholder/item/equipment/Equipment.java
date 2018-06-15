@@ -33,7 +33,6 @@ public abstract class Equipment extends Item implements TickUpdatable {
 
     protected Player player;
     protected EquipmentAnimation animation;
-    protected String displayName = "Unknown";
     /**
      * The speed percentage bonus. Ratio: 1 = 1%
      */

@@ -7,6 +7,8 @@ package placeholder.util;
 
 import java.awt.Point;
 import java.awt.geom.Point2D;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import placeholder.screen.overlay.slot.Selectable;
 
@@ -16,10 +18,11 @@ import placeholder.screen.overlay.slot.Selectable;
  */
 public class MatrixSelectionChooser implements SelectionChooser {
 
+    private Collection<SelectionChangedListener> listener = new ArrayList();
     protected Selectable[][] itemMatrix;
     protected Point currentSelection = new Point(0, 0);
     
-    public MatrixSelectionChooser(List<? extends Selectable> items, int numColumns, int numRows) {
+        public MatrixSelectionChooser(List<? extends Selectable> items, int numColumns, int numRows) {
         itemMatrix = new Selectable[numRows][numColumns];
         
         createMatrix(items, numColumns);
@@ -46,7 +49,7 @@ public class MatrixSelectionChooser implements SelectionChooser {
         trySelect(0, 1);
     }
     
-    private void trySelect(int relativeRow, int relativeColumn) {
+    public void trySelect(int relativeRow, int relativeColumn) {
         Selectable target = null;
         
         try {
@@ -60,6 +63,7 @@ public class MatrixSelectionChooser implements SelectionChooser {
             currentSelection.x += relativeColumn;
             unselectAll();
             target.select();
+            notifySelectionChangedListeners();
         }
     }
     
@@ -92,6 +96,20 @@ public class MatrixSelectionChooser implements SelectionChooser {
     @Override
     public void choose() {
         itemMatrix[currentSelection.y][currentSelection.x].choose();
+    }
+    
+    private void notifySelectionChangedListeners() {
+        listener.forEach((l) -> {
+            l.onSelectionChanged();
+        });
+    }
+    
+    public void addSelectionChangedListener(SelectionChangedListener listener) {
+        this.listener.add(listener);
+    }
+    
+    public void onGridItemsChanged() {
+        
     }
     
 }

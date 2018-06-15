@@ -53,4 +53,8 @@ public abstract class DefaultSlotManager<T extends Slot> implements Renderable {
         grid.setItems(slots);
     }
     
+    public Grid getGrid() {
+        return this.grid;
+    }
+    
 }

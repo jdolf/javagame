@@ -39,6 +39,7 @@ public class Item extends ScreenItem implements ContextMenuEntryCreator {
     private int amount;
     private int maxStack;
     private boolean stackable;
+    protected String displayName = "Unknown";
     /**
      * The Inventory this item may reside in.
      */
@@ -198,7 +199,9 @@ public class Item extends ScreenItem implements ContextMenuEntryCreator {
         }
     }
     
-    
+    public String getDisplayName() {
+        return displayName;
+    }
 
 
 }

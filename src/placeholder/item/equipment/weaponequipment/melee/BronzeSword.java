@@ -28,6 +28,7 @@ public class BronzeSword extends MeleeWeapon {
         this.cooldown = 50;
         this.meleeStrength = 6;
         this.speedPercentage = 5;
+        this.displayName = "Bronze Sword";
     }
     
 }

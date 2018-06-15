@@ -19,6 +19,7 @@ public class WoodBow extends RangeWeapon {
                 ImageContainer.getInstance().getImage(ANIMATION_NAME));
         this.rangeStrength = 3;
         this.displayName = "Wooden Bow";
+        ammoTimeToLive = 60;
     }
 
 

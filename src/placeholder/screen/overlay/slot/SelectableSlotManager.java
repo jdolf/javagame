@@ -55,6 +55,18 @@ public class SelectableSlotManager<T extends SelectableSlot> extends DefaultSlot
         this.input = input;
     }
     
+    public SelectionChooser getSelectionChooser() {
+        return chooser;
+    }
+
+    @Override
+    public void updateGrid(List<T> slots) {
+        super.updateGrid(slots);
+        chooser = new MatrixSelectionChooser(slots, grid.getColumns(), grid.getRows());
+    }
+    
+    
+    
     
     
 }

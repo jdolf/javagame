@@ -15,4 +15,6 @@ public interface SelectionChooser {
     void left();
     void right();
     void choose();
+    void addSelectionChangedListener(SelectionChangedListener listener);
+    void onGridItemsChanged();
 }

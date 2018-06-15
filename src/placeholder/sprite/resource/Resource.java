@@ -8,6 +8,7 @@ package placeholder.sprite.resource;
 import java.awt.Dimension;
 import java.awt.geom.Point2D;
 import javafx.scene.image.Image;
+import placeholder.item.equipment.weaponequipment.melee.tool.Tool;
 import placeholder.screen.animation.Animation;
 import placeholder.screen.animation.ResourceAnimation;
 import placeholder.sprite.AnimatedSprite;
@@ -35,6 +36,25 @@ public abstract class Resource extends AnimatedSprite {
         super(new ResourceAnimation(animationImage, dimension), dimension, location);
         this.animation.setData(this);
     }
+    
+    public void mine(Player player) {
+        if (player.getSkillManager().getMining().getLevel() >= requiredLevel) {
+
+            if (this.depleted) {
+                System.out.println("This resource is depleted and can't be harvested.");
+            } else {
+                this.brokenness += getPlayerEfficiency(player);
+                if (this.brokenness >= this.defaultStability) {
+                    harvest(player);
+                }
+            }
+
+        } else {
+            System.out.println("A level of at least " + this.requiredLevel + " is required to harvest this.");
+        }
+    }
+    
+    protected abstract int getPlayerEfficiency(Player player);
 
     public void drain(int efficiency) {
         this.brokenness -= efficiency;

@@ -8,6 +8,7 @@ import placeholder.screen.overlay.contextmenu.ContextMenuManager;
 import placeholder.screen.overlay.contextmenu.entry.ContextMenuEntry;
 import placeholder.screen.overlay.contextmenu.entry.CraftEntry;
 import placeholder.screen.overlay.slot.item.ItemSlot;
+import placeholder.screen.overlay.window.crafting.CraftingWindow;
 import placeholder.sprite.entity.player.inventory.Inventory;
 
 /**
@@ -18,9 +19,11 @@ public class CraftingSlot extends ItemSlot {
 
     private CraftingRecipe recipe;
     private Inventory inventory;
+    private CraftingWindow window;
     
-    public CraftingSlot(ContextMenuManager manager, CraftingRecipe recipe, Inventory inventory) {
+    public CraftingSlot(ContextMenuManager manager, CraftingRecipe recipe, Inventory inventory, CraftingWindow window) {
         super(manager);
+        this.window = window;
         this.recipe = recipe;
         this.inventory = inventory;
         setItem(recipe.getRecipeTemplate());
@@ -28,12 +31,21 @@ public class CraftingSlot extends ItemSlot {
 
     @Override
     protected List createContextMenuEntries() {
-        System.out.println("creating");
         List<ContextMenuEntry> contextMenuEntries = new ArrayList();
         contextMenuEntries.add(new CraftEntry(recipe, inventory));
         
         return contextMenuEntries;
     }
+
+    @Override
+    public void select() {
+        super.select();
+        window.onSelectionChanged(recipe);
+    }
+    
+    
+    
+    
     
     
     

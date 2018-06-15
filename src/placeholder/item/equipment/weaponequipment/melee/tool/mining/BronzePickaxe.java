@@ -33,6 +33,7 @@ public class BronzePickaxe extends Pickaxe {
         this.meleeStrength = 2;
         this.cooldown = 60;
         this.miningEfficiency = 5;
+        this.displayName = "Bronze Pickaxe";
     }
 
 

@@ -33,6 +33,6 @@ public class BronzeHelmet extends HeadEquipment {
         this.meleeDefense = 3;
         this.magicStrength = -1;
         this.magicDefense = -2;
-        
+        this.displayName = "Bronze Helmet";
     }
 }

@@ -11,7 +11,7 @@ import placeholder.sprite.entity.attack.AttackClient;
  */
 public class ThrowingRockProjectile extends RangeProjectile {
 
-    public static final int STRENGTH = 2;
+    public static final int STRENGTH = 0;
     public static final Dimension DIMENSION = new Dimension(16, 16);
     public static final String ANIMATION_NAME = "throwing_rock.png";
 
