@@ -11,6 +11,7 @@ import java.util.List;
 import placeholder.sprite.Sprite;
 import placeholder.sprite.entity.mob.Dummy;
 import placeholder.sprite.resource.mining.StoneRock;
+import placeholder.sprite.resource.woodcutting.DefaultTree;
 
 /**
  *
@@ -28,7 +29,10 @@ public class NewbieLandMap extends Map {
     protected List<Sprite> createSprites() {
         List<Sprite> sprites = new ArrayList();
         sprites.add(new StoneRock(new Point2D.Double(100, 80)));
+        sprites.add(new DefaultTree(new Point2D.Double(300, 210)));
         sprites.add(new Dummy(new Point2D.Double(200, 120)));
+        sprites.add(new Dummy(new Point2D.Double(240, 120)));
+        sprites.add(new Dummy(new Point2D.Double(280, 120)));
         return sprites;
     }
     

@@ -7,14 +7,24 @@ package placeholder.sprite;
 
 import java.awt.Dimension;
 import java.awt.geom.Point2D;
+import java.util.ArrayList;
 import java.util.List;
+import placeholder.map.Map;
+import placeholder.util.Maths;
 
 /**
  *
  * @author jdolf
  */
-public interface SpriteReceiver {
-    <T> List<T> getSpritesAt(Class<T> conditionClass, Point2D Point2D, Dimension area);
-    List<Sprite> getSpritesAt(Point2D Point2D, Dimension area);
-    List<Sprite> getSprites();
+public class SpriteReceiver extends Receiver<Sprite> {
+    
+    public SpriteReceiver(Map map) {
+        super(map);
+    }
+
+    @Override
+    public List<Sprite> getItems() {
+        return map.getSprites();
+    }
+    
 }

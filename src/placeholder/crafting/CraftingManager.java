@@ -86,7 +86,7 @@ public class CraftingManager implements InventoryChangedListener, PositionChange
     }
     
     private void calculateNearbyCraftingStations() {
-        player.getMap().getSpriteReceiver().getSpritesAt(player.getPosition(), NEARBY_CRAFTING_STATION_RADIUS).forEach((sprite) -> {
+        player.getMap().getSpriteReceiver().getAt(player.getPosition(), NEARBY_CRAFTING_STATION_RADIUS).forEach((sprite) -> {
             if (sprite.isCraftingStation()) {
                 nearbyCraftingStations.add(sprite);
             }

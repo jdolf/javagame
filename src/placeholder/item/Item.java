@@ -195,7 +195,9 @@ public class Item extends ScreenItem implements ContextMenuEntryCreator {
     
     protected void onAmountChanged() {
         if (amount <= 0) {
-            inventory.removeItem(this);
+            if (inventory != null) {
+                inventory.removeItem(this);
+            }
         }
     }
     

@@ -9,6 +9,8 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import placeholder.item.Item;
+import placeholder.map.Map;
 import placeholder.screen.overlay.ScreenItem;
 import placeholder.sprite.Sprite;
 import placeholder.sprite.SpriteReceiver;
@@ -20,12 +22,12 @@ import placeholder.sprite.entity.attack.Hittable;
  */
 public class DefaultCollisionDetector implements CollisionDetector {
     
-    private SpriteReceiver spriteReceiver;
+    private Map map;
     private ScreenItem owner;
     
-    public DefaultCollisionDetector(ScreenItem owner, SpriteReceiver spriteReceiver) {
+    public DefaultCollisionDetector(ScreenItem owner, Map map) {
         this.owner = owner;
-        this.spriteReceiver = spriteReceiver;
+        this.map = map;
     }
     
     /**
@@ -36,7 +38,7 @@ public class DefaultCollisionDetector implements CollisionDetector {
     @Override
     public CollisionCheck collidesAt(Point2D targetLocation) {
         
-        List<Sprite> sprites = spriteReceiver.getSpritesAt(targetLocation, owner.getDimension());
+        List<Sprite> sprites = map.getSpriteReceiver().getAt(targetLocation, owner.getDimension());
         return new CollisionCheck(filterCollision(sprites)); 
     }
 
@@ -55,9 +57,13 @@ public class DefaultCollisionDetector implements CollisionDetector {
 
     @Override
     public CollisionCheck collidesAt(Point2D targetLocation, Collection<Object> exceptions) {
-        List<Sprite> sprites = spriteReceiver.getSpritesAt(targetLocation, owner.getDimension());
+        List<Sprite> sprites = map.getSpriteReceiver().getAt(targetLocation, owner.getDimension());
         sprites.removeAll(exceptions);
         return new CollisionCheck(filterCollision(sprites)); 
+    }
+    
+    public Collection<Item> collidesWithItemsAt(Point2D targetLocation) {
+        return map.getItemReceiver().getAt(targetLocation, owner.getDimension());
     }
     
     

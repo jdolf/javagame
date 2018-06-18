@@ -16,6 +16,7 @@ import java.util.Map.Entry;
 import javax.annotation.PostConstruct;
 import placeholder.input.Direction;
 import placeholder.item.equipment.weaponequipment.Hitbox;
+import placeholder.loot.LootTable;
 import placeholder.screen.animation.Animation;
 import placeholder.screen.overlay.ScreenItem;
 import placeholder.screen.render.Renderer;
@@ -39,6 +40,7 @@ import placeholder.util.Amount;
  */
 public abstract class Entity extends Sprite implements AttackClient, Hittable, DirectionDependent, CollisionalPlaneCreator {
     
+    protected LootTable lootTable = new LootTable();
     protected boolean emitsXp = true;
     protected boolean dead = false;
     protected int deathDuration = 30;
@@ -66,6 +68,7 @@ public abstract class Entity extends Sprite implements AttackClient, Hittable, D
             AttackManager attackManager) {
         super(dimension, location);
         this.attackManager = attackManager;
+        lootTable.setStartPosition(location);
     }
 
     @Override
@@ -82,6 +85,9 @@ public abstract class Entity extends Sprite implements AttackClient, Hittable, D
     }
     
     public void die() {
+        lootTable.roll().forEach((item) -> {
+            map.addItem(item);
+        });
         map.removeSprite(this);
     }
 

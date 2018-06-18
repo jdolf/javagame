@@ -5,12 +5,13 @@
  */
 package placeholder.sprite.resource.mining;
 
-import java.awt.Dimension;
 import java.awt.geom.Point2D;
-import javafx.scene.image.Image;
+import java.util.Arrays;
+import java.util.Collection;
 import placeholder.item.material.Stone;
+import placeholder.loot.LootTableItem;
+import placeholder.loot.UnlimitedDropManager;
 import placeholder.screen.ImageContainer;
-import placeholder.sprite.entity.player.Player;
 
 /**
  *
@@ -22,6 +23,9 @@ public class StoneRock extends Rock {
     public final static int REPLENISH_TIME = 200;
     public final static int STABILITY = 25;
     public final static int REQUIRED_LEVEL = 1;
+    public static final Collection<LootTableItem> DROPS = Arrays.asList(
+            new LootTableItem(Stone.class, 1, 1)
+    );
     
     public StoneRock(Point2D location) {
         super(ImageContainer.getInstance().getImage(IMAGE), location);
@@ -29,12 +33,7 @@ public class StoneRock extends Rock {
         this.defaultStability = STABILITY;
         this.requiredLevel = REQUIRED_LEVEL;
         this.experience = 15;
-    }
-
-    @Override
-    public void harvest(Player player) {
-        super.harvest(player);
-        player.getInventory().insertItem(new Stone(null, 1));
+        this.lootTable.addDropManager(new UnlimitedDropManager(DROPS));
     }
     
     

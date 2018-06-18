@@ -9,6 +9,7 @@ import java.awt.Dimension;
 import java.awt.geom.Point2D;
 import javafx.scene.image.Image;
 import placeholder.item.equipment.weaponequipment.melee.tool.Tool;
+import placeholder.loot.LootTable;
 import placeholder.screen.animation.Animation;
 import placeholder.screen.animation.ResourceAnimation;
 import placeholder.sprite.AnimatedSprite;
@@ -21,12 +22,13 @@ import placeholder.sprite.entity.player.inventory.Inventory;
  */
 public abstract class Resource extends AnimatedSprite {
     
+    protected LootTable lootTable = new LootTable();
     protected int requiredLevel = 1;
     protected boolean depleted = false;
     protected int defaultStability = 0;
-    protected int brokenness = 0;
+    private int brokenness = 0;
     protected int defaultReplenishTime = 0;
-    protected double replenishTime = 0;
+    private double replenishTime = 0;
     protected int experience = 0;
     
     public Resource(
@@ -62,7 +64,9 @@ public abstract class Resource extends AnimatedSprite {
 
     public void harvest(Player player) {
         this.depleted = true;
-        // TODO: add to inventory from loottable; maybe in subclass?
+        lootTable.roll().forEach((item) -> {
+            player.getInventory().insertItem(item);
+        });
     }
 
     public void replenish() {

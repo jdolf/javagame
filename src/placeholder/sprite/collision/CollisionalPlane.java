@@ -47,7 +47,7 @@ public class CollisionalPlane extends ScreenItem implements TickUpdatable {
     
     public CollisionalPlane(CollisionalPlaneCreator creator, Dimension hitboxDown, Collection<Object> exceptions, Map map) {
         super(calculateInitPosition(hitboxDown, creator), calculateInitHitbox(hitboxDown, creator.getDirection()));
-        this.cd = new DefaultCollisionDetector(this, creator.getMap().getSpriteReceiver());
+        this.cd = new DefaultCollisionDetector(this, creator.getMap());
         this.exceptions = exceptions;
     }
 

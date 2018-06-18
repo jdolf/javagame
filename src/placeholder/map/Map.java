@@ -9,11 +9,13 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import placeholder.item.Item;
+import placeholder.item.ItemReceiver;
 import placeholder.screen.TickUpdatable;
 import placeholder.screen.render.Renderable;
 import placeholder.screen.render.Renderer;
 import placeholder.sprite.collision.DefaultCollisionDetector;
-import placeholder.sprite.DefaultSpriteReceiver;
+import placeholder.sprite.Receiver;
 import placeholder.sprite.Sprite;
 import placeholder.sprite.SpriteReceiver;
 import placeholder.sprite.entity.Entity;
@@ -30,7 +32,11 @@ public abstract class Map implements Renderable, TickUpdatable {
     private List<Sprite> spritesToAdd = new ArrayList();
     private List<Sprite> spritesToDelete = new ArrayList();
     private List<Sprite> sprites = new ArrayList();
-    protected SpriteReceiver spriteReceiver = new DefaultSpriteReceiver(this);
+    private List<Item> items = new ArrayList();
+    private List<Item> itemsToDelete = new ArrayList();
+    private List<Item> itemsToAdd = new ArrayList();
+    protected SpriteReceiver spriteReceiver = new SpriteReceiver(this);
+    protected ItemReceiver itemReceiver = new ItemReceiver(this);
     protected MapCode mapCode;
     
     public Map(MapCode mapCode) {
@@ -47,10 +53,15 @@ public abstract class Map implements Renderable, TickUpdatable {
         for (int i = 0; i < spritesToDelete.size(); i++) {
             sprites.remove(spritesToDelete.remove(i));
         }
-
-        for (Sprite sprite : sprites) {
+        
+        sprites.forEach((sprite) -> {
             sprite.tickUpdate();
-        }
+        });
+        
+        items.removeAll(itemsToDelete);
+        itemsToDelete.clear();
+        items.addAll(itemsToAdd);
+        itemsToAdd.clear();
     }
 
     @Override
@@ -58,10 +69,18 @@ public abstract class Map implements Renderable, TickUpdatable {
         for (Sprite sprite : sprites) {
             sprite.render(renderer);
         }
+        
+        items.forEach((item) -> {
+            item.render(renderer);
+        });
     }
 
     public List<Sprite> getSprites() {
         return this.sprites;
+    }
+    
+    public List<Item> getItems() {
+        return this.items;
     }
     
     protected abstract List<Sprite> createSprites();
@@ -73,13 +92,21 @@ public abstract class Map implements Renderable, TickUpdatable {
     public void removeSprite(Sprite sprite) {
         spritesToDelete.add(sprite);
     }
+    
+    public void addItem(Item item) {
+        itemsToAdd.add(item);
+    }
+    
+    public void removeItem(Item item) {
+        itemsToDelete.add(item);
+    }
 
     public boolean matchesMapCode(MapCode testMapCode) {
         return testMapCode.equals(this.mapCode);
     }
 
     public final void enrichPlayer(Player player) {
-        player.setCollisionDetector(new DefaultCollisionDetector(player, spriteReceiver));
+        player.setCollisionDetector(new DefaultCollisionDetector(player, this));
         player.setPosition(DEFAULT_START_LOCATION);
         player.setMap(this);
     }
@@ -94,6 +121,10 @@ public abstract class Map implements Renderable, TickUpdatable {
     
     public SpriteReceiver getSpriteReceiver() {
         return this.spriteReceiver;
+    }
+    
+    public ItemReceiver getItemReceiver() {
+        return this.itemReceiver;
     }
     
     

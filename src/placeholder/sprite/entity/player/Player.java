@@ -19,12 +19,14 @@ import placeholder.screen.overlay.contextmenu.ContextMenuManager;
 import placeholder.screen.overlay.window.WindowManager;
 import placeholder.screen.render.Renderer;
 import placeholder.input.InputHandler;
+import placeholder.item.Item;
 import placeholder.item.ammo.WoodArrow;
 import placeholder.item.equipment.EquipmentChangedListener;
 import placeholder.item.equipment.PlayerEquipmentManager;
 import placeholder.item.equipment.headequipment.BronzeHelmet;
 import placeholder.item.equipment.weaponequipment.melee.BronzeSword;
 import placeholder.item.equipment.weaponequipment.melee.tool.mining.BronzePickaxe;
+import placeholder.item.equipment.weaponequipment.melee.tool.woodcutting.BronzeAxe;
 import placeholder.item.equipment.weaponequipment.range.ThrowingRocks;
 import placeholder.item.equipment.weaponequipment.range.WoodBow;
 import placeholder.item.material.Stone;
@@ -82,8 +84,9 @@ public abstract class Player extends Entity implements EquipmentChangedListener,
         inventory.insertItem(new BronzeSword(null));
         inventory.insertItem(new WoodArrow(null, 10));
         inventory.insertItem(new WoodBow(null));
-        inventory.insertItem(new ThrowingRocks(null, 20));
+        inventory.insertItem(new ThrowingRocks(null, 1000));
         inventory.insertItem(new Stone(null, 1));
+        inventory.insertItem(new BronzeAxe(null));
         equipmentManager = new PlayerEquipmentManager(contextManager, this);
         
         // Listener
@@ -137,6 +140,15 @@ public abstract class Player extends Entity implements EquipmentChangedListener,
     public void tickUpdate() {
         super.tickUpdate();
         this.equipmentManager.tickUpdate();
+        Collection<Item> itemsToPickUp = this.cd.collidesWithItemsAt(this.getPosition());
+        
+        if (itemsToPickUp != null) {
+            itemsToPickUp.forEach((item) -> {
+                if (inventory.insertItem(item)) {
+                    map.removeItem(item);
+                }
+            });
+        }
         
         if (!windowManager.hasWindow()) {
             if (input.getKey(KeyCode.DOWN).isBeingPressed()) {

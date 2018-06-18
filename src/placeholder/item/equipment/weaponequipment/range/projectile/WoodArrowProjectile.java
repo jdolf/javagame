@@ -31,7 +31,7 @@ public class WoodArrowProjectile extends RangeProjectile {
                 
                 
         );
-        this.velocity = 4;
+        this.velocity = 7;
     }
     
 }

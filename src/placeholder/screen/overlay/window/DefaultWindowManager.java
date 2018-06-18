@@ -37,7 +37,6 @@ public class DefaultWindowManager implements WindowManager {
 
     @Override
     public void unregisterWindow() {
-        System.out.println("unregistering window");
         this.window = null;
     }
 
