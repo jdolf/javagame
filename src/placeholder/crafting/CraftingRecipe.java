@@ -25,7 +25,7 @@ public class CraftingRecipe {
     
     public CraftingRecipe(Item recipeTemplate, Collection<Item> materials, Collection<Sprite> craftingStations) {
         this(recipeTemplate, materials);
-        this.craftingStations = this.craftingStations;
+        this.craftingStations = craftingStations;
     }
     
     public void craft(Inventory inventory) {

@@ -32,7 +32,7 @@ public class StoneRock extends Rock {
         this.defaultReplenishTime = REPLENISH_TIME;
         this.defaultStability = STABILITY;
         this.requiredLevel = REQUIRED_LEVEL;
-        this.experience = 15;
+        this.experience = 45;
         this.lootTable.addDropManager(new UnlimitedDropManager(DROPS));
     }
     

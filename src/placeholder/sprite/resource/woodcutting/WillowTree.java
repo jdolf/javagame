@@ -4,9 +4,8 @@ import java.awt.Dimension;
 import java.awt.geom.Point2D;
 import java.util.Arrays;
 import java.util.Collection;
-import javafx.scene.image.Image;
-import placeholder.item.material.Log;
-import placeholder.item.material.Stone;
+import placeholder.item.material.JungleLog;
+import placeholder.item.material.WillowLog;
 import placeholder.loot.LootTableItem;
 import placeholder.loot.UnlimitedDropManager;
 import placeholder.screen.ImageContainer;
@@ -15,23 +14,23 @@ import placeholder.screen.ImageContainer;
  *
  * @author jdolf
  */
-public class DefaultTree extends WoodcuttingResource {
+public class WillowTree extends WoodcuttingResource {
     
-    public final static String IMAGE = "default_tree.png";
+    public final static String IMAGE = "willow_tree.png";
     public final static Dimension DIMENSION = new Dimension(48, 48);
-    public final static int REPLENISH_TIME = 500;
-    public final static int STABILITY = 30;
-    public final static int REQUIRED_LEVEL = 1;
+    public final static int REPLENISH_TIME = 1500;
+    public final static int STABILITY = 70;
+    public final static int REQUIRED_LEVEL = 10;
     public static final Collection<LootTableItem> DROPS = Arrays.asList(
-            new LootTableItem(Log.class, 1, 1)
+            new LootTableItem(WillowLog.class, 1, 1)
     );
     
-    public DefaultTree(Point2D location) {
+    public WillowTree(Point2D location) {
         super(ImageContainer.getInstance().getImage(IMAGE), location, DIMENSION);
         this.defaultReplenishTime = REPLENISH_TIME;
         this.defaultStability = STABILITY;
         this.requiredLevel = REQUIRED_LEVEL;
-        this.experience = 40;
+        this.experience = 150;
         lootTable.addDropManager(new UnlimitedDropManager(DROPS));
     }
     

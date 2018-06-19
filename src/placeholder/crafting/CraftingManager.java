@@ -4,13 +4,17 @@ import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import placeholder.item.ammo.WoodArrow;
 import placeholder.item.equipment.weaponequipment.range.ThrowingRocks;
+import placeholder.item.material.Log;
 import placeholder.item.material.Stone;
 import placeholder.screen.overlay.PositionChangeListener;
+import placeholder.screen.overlay.ScreenItem;
 import placeholder.sprite.Sprite;
 import placeholder.sprite.entity.player.Player;
 import placeholder.sprite.entity.player.inventory.Inventory;
 import placeholder.sprite.entity.player.inventory.InventoryChangedListener;
+import placeholder.sprite.furniture.Workbench;
 
 /**
  *
@@ -20,7 +24,15 @@ public class CraftingManager implements InventoryChangedListener, PositionChange
     
     public static final Dimension NEARBY_CRAFTING_STATION_RADIUS = new Dimension(100, 100);
     public static final Collection<CraftingRecipe> RECIPES = Arrays.asList(
-            new CraftingRecipe(new ThrowingRocks(null, 20), Arrays.asList(new Stone(null, 1)))
+            new CraftingRecipe(
+                    new ThrowingRocks(null, 20),
+                    Arrays.asList(new Stone(null, 1))
+            ),
+            new CraftingRecipe(
+                    new WoodArrow(null, 15),
+                    Arrays.asList(new Log(null, 1)),
+                    Arrays.asList(new Workbench(null))
+            )
     );
     
     private Player player;
@@ -83,10 +95,19 @@ public class CraftingManager implements InventoryChangedListener, PositionChange
     @Override
     public void onPositionChanged() {
         calculateNearbyCraftingStations();
+        calculateCraftableRecipes();
     }
     
     private void calculateNearbyCraftingStations() {
-        player.getMap().getSpriteReceiver().getAt(player.getPosition(), NEARBY_CRAFTING_STATION_RADIUS).forEach((sprite) -> {
+        nearbyCraftingStations.clear();
+        player.getMap().getSpriteReceiver().getAt(
+                ScreenItem.merge(
+                        new Dimension(
+                                player.getDimension().width / 2 - NEARBY_CRAFTING_STATION_RADIUS.width / 2,
+                                player.getDimension().height / 2 - NEARBY_CRAFTING_STATION_RADIUS.height / 2
+                        ), player.getPosition()
+                ), NEARBY_CRAFTING_STATION_RADIUS
+        ).forEach((sprite) -> {
             if (sprite.isCraftingStation()) {
                 nearbyCraftingStations.add(sprite);
             }

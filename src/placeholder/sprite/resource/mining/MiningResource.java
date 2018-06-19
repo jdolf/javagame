@@ -7,8 +7,14 @@ package placeholder.sprite.resource.mining;
 
 import java.awt.Dimension;
 import java.awt.geom.Point2D;
+import java.util.ArrayList;
+import java.util.Collection;
 import javafx.scene.image.Image;
 import placeholder.item.equipment.weaponequipment.melee.tool.mining.MiningTool;
+import placeholder.map.Map;
+import placeholder.screen.particle.LeafParticle;
+import placeholder.screen.particle.Particle;
+import placeholder.screen.particle.StoneParticle;
 import placeholder.sprite.entity.player.Player;
 import placeholder.sprite.entity.player.inventory.Inventory;
 import placeholder.sprite.resource.Resource;
@@ -24,6 +30,7 @@ public abstract class MiningResource extends Resource {
             Point2D location,
             Dimension dimension) {
         super(animationImage, location, dimension);
+        this.particleClasses.add(StoneParticle.class);
     }
 
     @Override
@@ -36,6 +43,8 @@ public abstract class MiningResource extends Resource {
         super.harvest(player);
         player.getSkillManager().getMining().addExperience(experience);
     }
+    
+    
     
     
     

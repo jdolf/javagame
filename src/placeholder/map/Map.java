@@ -12,6 +12,7 @@ import java.util.List;
 import placeholder.item.Item;
 import placeholder.item.ItemReceiver;
 import placeholder.screen.TickUpdatable;
+import placeholder.screen.particle.Particle;
 import placeholder.screen.render.Renderable;
 import placeholder.screen.render.Renderer;
 import placeholder.sprite.collision.DefaultCollisionDetector;
@@ -35,6 +36,9 @@ public abstract class Map implements Renderable, TickUpdatable {
     private List<Item> items = new ArrayList();
     private List<Item> itemsToDelete = new ArrayList();
     private List<Item> itemsToAdd = new ArrayList();
+    private List<Particle> particles = new ArrayList();
+    private List<Particle> particlesToAdd = new ArrayList();
+    private List<Particle> particlesToDelete = new ArrayList();
     protected SpriteReceiver spriteReceiver = new SpriteReceiver(this);
     protected ItemReceiver itemReceiver = new ItemReceiver(this);
     protected MapCode mapCode;
@@ -58,10 +62,18 @@ public abstract class Map implements Renderable, TickUpdatable {
             sprite.tickUpdate();
         });
         
+        particles.forEach((particle) -> {
+            particle.tickUpdate();
+        });
+        
         items.removeAll(itemsToDelete);
         itemsToDelete.clear();
         items.addAll(itemsToAdd);
         itemsToAdd.clear();
+        particles.addAll(particlesToAdd);
+        particlesToAdd.clear();
+        particles.removeAll(particlesToDelete);
+        particlesToDelete.clear();
     }
 
     @Override
@@ -72,6 +84,10 @@ public abstract class Map implements Renderable, TickUpdatable {
         
         items.forEach((item) -> {
             item.render(renderer);
+        });
+        
+        particles.forEach((particle) -> {
+            particle.render(renderer);
         });
     }
 
@@ -99,6 +115,14 @@ public abstract class Map implements Renderable, TickUpdatable {
     
     public void removeItem(Item item) {
         itemsToDelete.add(item);
+    }
+    
+    public void addParticle(Particle particle) {
+        particlesToAdd.add(particle);
+    }
+    
+    public void removeParticle(Particle particle) {
+        particlesToDelete.add(particle);
     }
 
     public boolean matchesMapCode(MapCode testMapCode) {
