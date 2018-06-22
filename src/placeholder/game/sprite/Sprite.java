@@ -31,6 +31,11 @@ public abstract class Sprite extends ScreenItem implements Renderable, TickUpdat
     public boolean isCraftingStation() {
         return craftingStation;
     }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName();
+    }
     
     
     

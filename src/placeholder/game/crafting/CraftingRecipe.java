@@ -37,20 +37,16 @@ public class CraftingRecipe {
                     .getDeclaredConstructor(Point2D.class, int.class)
                     .newInstance(null, recipeTemplate.getAmount()));
 
-        } catch (Exception ex) {
-            Logger.getLogger(CraftingRecipe.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } catch (Exception ex) {}
         
         if (inserted == false) {
             try {
                 inserted = inventory.insertItem(
                         recipeTemplate.getClass()
                         .getDeclaredConstructor(Point2D.class)
-                        .newInstance(null));
+                        .newInstance((Object)null));
 
-            } catch (Exception ex) {
-                Logger.getLogger(CraftingRecipe.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            } catch (Exception ex) {}
         }
         
         if (inserted) {

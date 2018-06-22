@@ -157,14 +157,16 @@ public abstract class Inventory implements InventoryChangedSubject {
     }
     
     public boolean removeItemAmount(Class<? extends Item> itemClass, int amount) {
+        System.out.println(amount + "to remove");
         for (InventorySlot slot : slots) {
             if (!slot.isEmpty()) {
                 if (itemClass.isAssignableFrom(slot.getItem().getClass())) {
                     amount -= slot.getItem().removeAmount(amount);
+                    System.out.println(amount + " required now");
+                    
+                    if (amount <= 0) return true;
                 }
             }
-            
-            if (amount <= 0) return true;
         }
         
         return false;

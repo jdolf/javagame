@@ -116,7 +116,7 @@ public class Item extends ScreenItem implements ContextMenuEntryCreator {
         
         if (this.amount - amount < 0) {
             removedAmount = this.amount;
-            amount = 0;
+            this.amount = 0;
         } else {
             removedAmount = amount;
             this.amount -= amount;
@@ -151,7 +151,7 @@ public class Item extends ScreenItem implements ContextMenuEntryCreator {
     public void render(Renderer renderer) {
         renderer.renderImage(icon, this);
         
-        if (this.isStackable()) {
+        if (this.amount > 1) {
             renderer.renderText(Item.AMOUNT_PAINT,
                     Item.AMOUNT_FONT,
                     String.valueOf(amount),
@@ -194,7 +194,7 @@ public class Item extends ScreenItem implements ContextMenuEntryCreator {
     }
     
     protected void onAmountChanged() {
-        if (amount <= 0) {
+        if (this.amount <= 0) {
             if (inventory != null) {
                 inventory.removeItem(this);
             }

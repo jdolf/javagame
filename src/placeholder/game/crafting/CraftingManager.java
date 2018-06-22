@@ -4,16 +4,25 @@ import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import placeholder.game.item.Item;
 import placeholder.game.item.ammo.WoodArrow;
+import placeholder.game.item.equipment.headequipment.BronzeHelmet;
 import placeholder.game.item.equipment.weaponequipment.range.ThrowingRocks;
+import placeholder.game.item.material.BronzeBar;
+import placeholder.game.item.material.CoalOre;
+import placeholder.game.item.material.CopperOre;
+import placeholder.game.item.material.IronBar;
+import placeholder.game.item.material.IronOre;
 import placeholder.game.item.material.Log;
+import placeholder.game.item.material.SteelBar;
 import placeholder.game.item.material.Stone;
+import placeholder.game.item.material.TinOre;
 import placeholder.game.screen.overlay.PositionChangeListener;
 import placeholder.game.screen.overlay.ScreenItem;
 import placeholder.game.sprite.Sprite;
 import placeholder.game.sprite.entity.player.Player;
-import placeholder.game.sprite.entity.player.inventory.Inventory;
 import placeholder.game.sprite.entity.player.inventory.InventoryChangedListener;
+import placeholder.game.sprite.furniture.Furnace;
 import placeholder.game.sprite.furniture.Workbench;
 
 /**
@@ -32,6 +41,36 @@ public class CraftingManager implements InventoryChangedListener, PositionChange
                     new WoodArrow(null, 15),
                     Arrays.asList(new Log(null, 1)),
                     Arrays.asList(new Workbench(null))
+            ),
+            new CraftingRecipe(
+                    new BronzeBar(null, 1),
+                    Arrays.asList(
+                            new TinOre(null),
+                            new CopperOre(null)
+                    ),
+                    Arrays.asList(new Furnace(null))
+            ),
+            new CraftingRecipe(
+                    new IronBar(null, 1),
+                    Arrays.asList(
+                            new IronOre(null)
+                    ),
+                    Arrays.asList(new Furnace(null))
+            ),
+            new CraftingRecipe(
+                    new SteelBar(null, 1),
+                    Arrays.asList(
+                            new IronOre(null),
+                            new CoalOre(null)
+                    ),
+                    Arrays.asList(new Furnace(null))
+            ),
+            new CraftingRecipe(
+                    new BronzeHelmet(null),
+                    Arrays.asList(
+                            new BronzeBar(null, 3)
+                    ),
+                    Arrays.asList(new Furnace(null))
             )
     );
     
@@ -81,13 +120,21 @@ public class CraftingManager implements InventoryChangedListener, PositionChange
             }
             
             if (allcraftingStationsAvailable) {
-                recipe.getMaterials().forEach((material) -> {
-                    if (player.getInventory().hasItem(material.getClass(), material.getAmount())) {
-                        craftableRecipes.add(recipe);
-                    }
-                });
+                boolean hasMaterials = true;
+                
+                for (Item material : recipe.getMaterials()) {
+                    if (!player.getInventory().hasItem(material.getClass(), material.getAmount())) {
+                        hasMaterials = false;
+                    } 
+                }
+                
+                if (hasMaterials) {
+                    craftableRecipes.add(recipe);
+                }
             }
         });
+        
+        System.out.println(craftableRecipes.size());
         
         notifyCraftableRecipesChangedListener();
     }

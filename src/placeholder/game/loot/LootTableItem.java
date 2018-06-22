@@ -65,8 +65,8 @@ public class LootTableItem<T extends Item> {
     private T tryWithoutAmountConstructor() {
         try {
             return itemClass
-            .getDeclaredConstructor(Point2D.class, int.class)
-            .newInstance(null);
+            .getDeclaredConstructor(Point2D.class)
+            .newInstance((Object) null);
         } catch (Exception ex) {
             return null;
         }

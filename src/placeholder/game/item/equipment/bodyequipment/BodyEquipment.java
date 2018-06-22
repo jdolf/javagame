@@ -10,6 +10,7 @@ import java.awt.geom.Point2D;
 import java.util.Map;
 import javafx.scene.image.Image;
 import placeholder.game.item.equipment.Equipment;
+import placeholder.game.item.equipment.headequipment.HeadEquipment;
 import placeholder.game.screen.animation.EquipmentAnimation;
 import placeholder.game.sprite.entity.bodypart.BodyBodyPart;
 import placeholder.game.sprite.entity.player.Player;
@@ -32,6 +33,11 @@ public abstract class BodyEquipment extends Equipment {
     @Override
     protected Class getBodyPartClass() {
         return BodyBodyPart.class;
+    }
+    
+    @Override
+    protected Class getRequiredEquipmentClass() {
+        return BodyEquipment.class;
     }
     
     

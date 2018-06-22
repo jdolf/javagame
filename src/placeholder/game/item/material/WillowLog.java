@@ -14,6 +14,7 @@ public class WillowLog extends Item {
     
     public WillowLog(Point2D position, int amount) {
         super(position, ImageContainer.getInstance().getImage(ICON_NAME), 1, amount);
+        this.displayName = "Willow Log";
     }
     
 }

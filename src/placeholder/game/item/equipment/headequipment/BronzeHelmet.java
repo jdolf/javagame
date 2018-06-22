@@ -30,9 +30,10 @@ public class BronzeHelmet extends HeadEquipment {
                 ImageContainer.getInstance().getImage(ICON_NAME),
                 ImageContainer.getInstance().getImage(ANIMATION_NAME)
         );
-        this.meleeDefense = 3;
+        this.meleeDefense = 2;
         this.magicStrength = -1;
         this.magicDefense = -2;
+        this.rangeDefense = 3;
         this.displayName = "Bronze Helmet";
     }
 }

@@ -14,6 +14,7 @@ public class PineLog extends Item {
     
     public PineLog(Point2D position, int amount) {
         super(position, ImageContainer.getInstance().getImage(ICON_NAME), 1, amount);
+        this.displayName = "Pine Log";
     }
     
 }

@@ -15,6 +15,7 @@ public class Log extends Item {
     
     public Log(Point2D position, int amount) {
         super(position, ImageContainer.getInstance().getImage(ICON_NAME), 1, amount);
+        this.displayName = "Log";
     }
     
 }

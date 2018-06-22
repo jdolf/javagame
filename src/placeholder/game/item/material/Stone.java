@@ -15,6 +15,7 @@ public class Stone extends Item {
     
     public Stone(Point2D position, int amount) {
         super(position, ImageContainer.getInstance().getImage(ICON_NAME), 1, amount);
+        this.displayName = "Stone";
     }
     
 }

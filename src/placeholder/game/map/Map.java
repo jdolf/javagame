@@ -31,7 +31,7 @@ import placeholder.game.sprite.entity.player.Player;
  */
 public abstract class Map implements Renderable, TickUpdatable {
     
-    public static final Point2D DEFAULT_START_LOCATION = new Point2D.Double(20, 20);
+    public static final Point2D DEFAULT_START_LOCATION = new Point2D.Double(300, 250);
     // Additional sprite lists used to circumvent ConcurrentModificationException
     private List<Sprite> spritesToAdd = new ArrayList();
     private List<Sprite> spritesToDelete = new ArrayList();

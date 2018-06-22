@@ -8,13 +8,13 @@ import placeholder.game.screen.ImageContainer;
  *
  * @author jdolf
  */
-public class JungleLog extends Item {
+public class IronBar extends Item {
     
-    public static final String ICON_NAME = "jungle_log_icon.png";
+    public static final String ICON_NAME = "iron_ore.png";
     
-    public JungleLog(Point2D position, int amount) {
+    public IronBar(Point2D position, int amount) {
         super(position, ImageContainer.getInstance().getImage(ICON_NAME), 1, amount);
-        this.displayName = "Jungle Log";
+        this.displayName = "Iron Bar";
     }
     
 }
