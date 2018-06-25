@@ -95,8 +95,12 @@ public abstract class ItemSlot<T extends Item> extends SelectableSlot {
         renderer.renderImage(image, this);
         
         if (getItem() != null) {
-            getItem().render(renderer);
+            renderItem(renderer);
         }
+    }
+    
+    protected void renderItem(Renderer renderer) {
+        getItem().render(renderer);
     }
 
     @Override

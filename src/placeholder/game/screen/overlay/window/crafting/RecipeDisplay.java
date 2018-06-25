@@ -46,7 +46,7 @@ public class RecipeDisplay extends ScreenItem implements Renderable {
     
     private void update() {
         recipeName = new TextDisplay(
-                template.getRecipeTemplate().getDisplayName(),
+                template.getRecipeTemplate().getDisplayName() + " (" + template.getRecipeTemplate().getAmount() + ")",
                 TextAlignment.LEFT,
                 Color.BLACK,
                 new Font(14),

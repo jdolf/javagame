@@ -6,7 +6,27 @@ import java.util.Arrays;
 import java.util.Collection;
 import placeholder.game.item.Item;
 import placeholder.game.item.ammo.WoodArrow;
+import placeholder.game.item.equipment.bodyequipment.BronzeChestplate;
+import placeholder.game.item.equipment.bodyequipment.IronChestplate;
+import placeholder.game.item.equipment.bodyequipment.SteelChestplate;
 import placeholder.game.item.equipment.headequipment.BronzeHelmet;
+import placeholder.game.item.equipment.headequipment.IronHelmet;
+import placeholder.game.item.equipment.headequipment.SteelHelmet;
+import placeholder.game.item.equipment.legsequipment.BronzePlatelegs;
+import placeholder.game.item.equipment.legsequipment.IronPlatelegs;
+import placeholder.game.item.equipment.legsequipment.SteelPlatelegs;
+import placeholder.game.item.equipment.shieldequipment.BronzeShield;
+import placeholder.game.item.equipment.shieldequipment.IronShield;
+import placeholder.game.item.equipment.shieldequipment.SteelShield;
+import placeholder.game.item.equipment.weaponequipment.melee.BronzeSword;
+import placeholder.game.item.equipment.weaponequipment.melee.IronSword;
+import placeholder.game.item.equipment.weaponequipment.melee.SteelSword;
+import placeholder.game.item.equipment.weaponequipment.melee.tool.mining.BronzePickaxe;
+import placeholder.game.item.equipment.weaponequipment.melee.tool.mining.IronPickaxe;
+import placeholder.game.item.equipment.weaponequipment.melee.tool.mining.SteelPickaxe;
+import placeholder.game.item.equipment.weaponequipment.melee.tool.woodcutting.BronzeAxe;
+import placeholder.game.item.equipment.weaponequipment.melee.tool.woodcutting.IronAxe;
+import placeholder.game.item.equipment.weaponequipment.melee.tool.woodcutting.SteelAxe;
 import placeholder.game.item.equipment.weaponequipment.range.ThrowingRocks;
 import placeholder.game.item.material.BronzeBar;
 import placeholder.game.item.material.CoalOre;
@@ -22,6 +42,7 @@ import placeholder.game.screen.overlay.ScreenItem;
 import placeholder.game.sprite.Sprite;
 import placeholder.game.sprite.entity.player.Player;
 import placeholder.game.sprite.entity.player.inventory.InventoryChangedListener;
+import placeholder.game.sprite.furniture.Anvil;
 import placeholder.game.sprite.furniture.Furnace;
 import placeholder.game.sprite.furniture.Workbench;
 
@@ -70,7 +91,147 @@ public class CraftingManager implements InventoryChangedListener, PositionChange
                     Arrays.asList(
                             new BronzeBar(null, 3)
                     ),
-                    Arrays.asList(new Furnace(null))
+                    Arrays.asList(new Anvil(null))
+            ),
+            new CraftingRecipe(
+                    new BronzeChestplate(null),
+                    Arrays.asList(
+                            new BronzeBar(null, 7)
+                    ),
+                    Arrays.asList(new Anvil(null))
+            ),
+            new CraftingRecipe(
+                    new BronzePlatelegs(null),
+                    Arrays.asList(
+                            new BronzeBar(null, 5)
+                    ),
+                    Arrays.asList(new Anvil(null))
+            ),
+            new CraftingRecipe(
+                    new BronzeShield(null),
+                    Arrays.asList(
+                            new BronzeBar(null, 5)
+                    ),
+                    Arrays.asList(new Anvil(null))
+            ),
+            new CraftingRecipe(
+                    new BronzePickaxe(null),
+                    Arrays.asList(
+                            new BronzeBar(null, 4)
+                    ),
+                    Arrays.asList(new Anvil(null))
+            ),
+            new CraftingRecipe(
+                    new BronzeAxe(null),
+                    Arrays.asList(
+                            new BronzeBar(null, 4)
+                    ),
+                    Arrays.asList(new Anvil(null))
+            ),
+            new CraftingRecipe(
+                    new BronzeSword(null),
+                    Arrays.asList(
+                            new BronzeBar(null, 4)
+                    ),
+                    Arrays.asList(new Anvil(null))
+            ),
+            new CraftingRecipe(
+                    new IronHelmet(null),
+                    Arrays.asList(
+                            new IronBar(null, 3)
+                    ),
+                    Arrays.asList(new Anvil(null))
+            ),
+            new CraftingRecipe(
+                    new IronChestplate(null),
+                    Arrays.asList(
+                            new IronBar(null, 7)
+                    ),
+                    Arrays.asList(new Anvil(null))
+            ),
+            new CraftingRecipe(
+                    new IronPlatelegs(null),
+                    Arrays.asList(
+                            new IronBar(null, 5)
+                    ),
+                    Arrays.asList(new Anvil(null))
+            ),
+            new CraftingRecipe(
+                    new IronShield(null),
+                    Arrays.asList(
+                            new IronBar(null, 5)
+                    ),
+                    Arrays.asList(new Anvil(null))
+            ),
+            new CraftingRecipe(
+                    new IronSword(null),
+                    Arrays.asList(
+                            new IronBar(null, 4)
+                    ),
+                    Arrays.asList(new Anvil(null))
+            ),
+            new CraftingRecipe(
+                    new IronPickaxe(null),
+                    Arrays.asList(
+                            new IronBar(null, 4)
+                    ),
+                    Arrays.asList(new Anvil(null))
+            ),
+            new CraftingRecipe(
+                    new IronAxe(null),
+                    Arrays.asList(
+                            new IronBar(null, 4)
+                    ),
+                    Arrays.asList(new Anvil(null))
+            ),
+            new CraftingRecipe(
+                    new SteelHelmet(null),
+                    Arrays.asList(
+                            new SteelBar(null, 3)
+                    ),
+                    Arrays.asList(new Anvil(null))
+            ),
+            new CraftingRecipe(
+                    new SteelChestplate(null),
+                    Arrays.asList(
+                            new SteelBar(null, 7)
+                    ),
+                    Arrays.asList(new Anvil(null))
+            ),
+            new CraftingRecipe(
+                    new SteelPlatelegs(null),
+                    Arrays.asList(
+                            new SteelBar(null, 5)
+                    ),
+                    Arrays.asList(new Anvil(null))
+            ),
+            new CraftingRecipe(
+                    new SteelShield(null),
+                    Arrays.asList(
+                            new SteelBar(null, 5)
+                    ),
+                    Arrays.asList(new Anvil(null))
+            ),
+            new CraftingRecipe(
+                    new SteelSword(null),
+                    Arrays.asList(
+                            new SteelBar(null, 4)
+                    ),
+                    Arrays.asList(new Anvil(null))
+            ),
+            new CraftingRecipe(
+                    new SteelPickaxe(null),
+                    Arrays.asList(
+                            new SteelBar(null, 4)
+                    ),
+                    Arrays.asList(new Anvil(null))
+            ),
+            new CraftingRecipe(
+                    new SteelAxe(null),
+                    Arrays.asList(
+                            new SteelBar(null, 4)
+                    ),
+                    Arrays.asList(new Anvil(null))
             )
     );
     

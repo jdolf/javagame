@@ -21,7 +21,7 @@ public class Mining extends Skill {
     }
 
     public int calculateMiningEfficiencyImpact() {
-        return this.level * 3;
+        return this.level;
     }
     
 }

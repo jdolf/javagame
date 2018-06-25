@@ -96,6 +96,9 @@ public abstract class Player extends Entity implements EquipmentChangedListener,
         inventory.insertItem(new BronzeBar(null, 1));
         inventory.insertItem(new BronzeBar(null, 1));
         inventory.insertItem(new BronzeBar(null, 1));
+        inventory.insertItem(new BronzeBar(null, 1));
+        inventory.insertItem(new BronzeBar(null, 1));
+        inventory.insertItem(new BronzeBar(null, 1));
         equipmentManager = new PlayerEquipmentManager(contextManager, this);
         
         // Listener

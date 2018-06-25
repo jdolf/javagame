@@ -21,7 +21,7 @@ public class Woodcutting extends Skill {
     }
     
     public int calculateWoodcuttingEfficiencyImpact() {
-        return this.level * 2;
+        return this.level;
     }
     
 }

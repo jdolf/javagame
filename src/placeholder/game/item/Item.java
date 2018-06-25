@@ -39,6 +39,7 @@ public class Item extends ScreenItem implements ContextMenuEntryCreator {
     private int amount;
     private int maxStack;
     private boolean stackable;
+    private boolean renderAmountText = true;
     protected String displayName = "Unknown";
     /**
      * The Inventory this item may reside in.
@@ -150,7 +151,17 @@ public class Item extends ScreenItem implements ContextMenuEntryCreator {
 
     public void render(Renderer renderer) {
         renderer.renderImage(icon, this);
-        
+        renderText(renderer);
+    }
+    
+    public void renderAtScreenItem(Renderer renderer, ScreenItem si) {
+        renderer.renderImage(icon, si);
+        if (renderAmountText) {
+            renderText(renderer);
+        }
+    }
+    
+    private void renderText(Renderer renderer) {
         if (this.amount > 1) {
             renderer.renderText(Item.AMOUNT_PAINT,
                     Item.AMOUNT_FONT,
@@ -183,7 +194,9 @@ public class Item extends ScreenItem implements ContextMenuEntryCreator {
     public void setPosition(Point2D position) {
         super.setPosition(position);
         if (dimension != null) {
-            calculateAmountTextPosition();
+            if (renderAmountText) {
+                calculateAmountTextPosition();
+            }
         }
     }
 
@@ -203,6 +216,10 @@ public class Item extends ScreenItem implements ContextMenuEntryCreator {
     
     public String getDisplayName() {
         return displayName;
+    }
+    
+    public void setRenderAmountText(boolean state) {
+        this.renderAmountText = state;
     }
 
 

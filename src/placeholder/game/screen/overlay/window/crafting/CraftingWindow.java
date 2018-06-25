@@ -29,6 +29,7 @@ public class CraftingWindow extends ImageBackgroundWindow implements CraftableRe
     
     public static final Dimension SLOTS_INIT_MARGIN = new Dimension(0, 100);
     public static final Dimension SCREEN_DIMENSION = new Dimension(500, 350);
+    public static final Dimension RECIPE_DISPLAY_DIMENSION = new Dimension(175, 115);
     public static final String BACKGROUND_IMAGE = "window_crafting.png";
     
     private RecipeDisplay recipeDisplay;
@@ -50,7 +51,7 @@ public class CraftingWindow extends ImageBackgroundWindow implements CraftableRe
         this.gameDimension = gameDimension;
         this.craftingmanager = player.getCraftingManager();
         this.contextMenuManager = contextMenuManager;
-        recipeDisplay = new RecipeDisplay(ScreenItem.merge(new Dimension(this.dimension.width - 175, 115), this.getPosition()), new Dimension(150, 200));
+        recipeDisplay = new RecipeDisplay(ScreenItem.merge(new Dimension(this.dimension.width - RECIPE_DISPLAY_DIMENSION.width, RECIPE_DISPLAY_DIMENSION.height), this.getPosition()), new Dimension(150, 200));
         
         createSlotManager();
         player.getCraftingManager().addCraftableRecipesChangedListener(this);
@@ -88,7 +89,7 @@ public class CraftingWindow extends ImageBackgroundWindow implements CraftableRe
                 slotManager = new SelectableSlotManager<CraftingSlot>(
                     createSlots(),
                     new Point2D.Double(this.getPosition().getX() + SLOTS_INIT_MARGIN.width, this.getPosition().getY() + SLOTS_INIT_MARGIN.height),
-                    this.dimension
+                    new Dimension(this.dimension.width - RECIPE_DISPLAY_DIMENSION.width, this.dimension.height - RECIPE_DISPLAY_DIMENSION.height)
                 );
                 slotManager.setInputHandler(input);
             }
