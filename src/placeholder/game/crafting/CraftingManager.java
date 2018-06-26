@@ -4,6 +4,9 @@ import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import placeholder.game.crafting.CraftingRecipe.CraftingRecipeBuilder;
 import placeholder.game.item.Item;
 import placeholder.game.item.ammo.WoodArrow;
 import placeholder.game.item.equipment.bodyequipment.BronzeChestplate;
@@ -39,6 +42,8 @@ import placeholder.game.item.material.Stone;
 import placeholder.game.item.material.TinOre;
 import placeholder.game.screen.overlay.PositionChangeListener;
 import placeholder.game.screen.overlay.ScreenItem;
+import placeholder.game.skill.Skill;
+import placeholder.game.skill.Smithing;
 import placeholder.game.sprite.Sprite;
 import placeholder.game.sprite.entity.player.Player;
 import placeholder.game.sprite.entity.player.inventory.InventoryChangedListener;
@@ -54,185 +59,302 @@ public class CraftingManager implements InventoryChangedListener, PositionChange
     
     public static final Dimension NEARBY_CRAFTING_STATION_RADIUS = new Dimension(100, 100);
     public static final Collection<CraftingRecipe> RECIPES = Arrays.asList(
-            new CraftingRecipe(
+            new CraftingRecipeBuilder(
                     new ThrowingRocks(null, 20),
-                    Arrays.asList(new Stone(null, 1))
-            ),
-            new CraftingRecipe(
+                    Arrays.asList(
+                            new Stone(null, 1)
+                    )
+            ).build(),
+            new CraftingRecipeBuilder(
                     new WoodArrow(null, 15),
-                    Arrays.asList(new Log(null, 1)),
-                    Arrays.asList(new Workbench(null))
-            ),
-            new CraftingRecipe(
+                    Arrays.asList(
+                            new Log(null, 1)
+                    )
+            ).withCraftingStations(Arrays.asList(
+                    new Workbench(null)
+            )).build(),
+            new CraftingRecipeBuilder(
                     new BronzeBar(null, 1),
                     Arrays.asList(
                             new TinOre(null),
                             new CopperOre(null)
-                    ),
-                    Arrays.asList(new Furnace(null))
-            ),
-            new CraftingRecipe(
+                    )
+            ).withCraftingStations(
+                    Arrays.asList(
+                            new Furnace(null)
+                    )
+            ).addExperienceReward(Smithing.class, 90)
+            .build(),
+            new CraftingRecipeBuilder(
                     new IronBar(null, 1),
                     Arrays.asList(
                             new IronOre(null)
-                    ),
-                    Arrays.asList(new Furnace(null))
-            ),
-            new CraftingRecipe(
+                    )
+            ).withCraftingStations(
+                    Arrays.asList(
+                            new Furnace(null)
+                    )
+            ).addExperienceReward(Smithing.class, 120)
+            .addSkillRequirement(Smithing.class, 10)
+            .build(),
+            new CraftingRecipeBuilder(
                     new SteelBar(null, 1),
                     Arrays.asList(
                             new IronOre(null),
                             new CoalOre(null)
-                    ),
-                    Arrays.asList(new Furnace(null))
-            ),
-            new CraftingRecipe(
+                    )
+            ).withCraftingStations(
+                    Arrays.asList(
+                            new Furnace(null)
+                    )
+            ).addExperienceReward(Smithing.class, 250)
+            .addSkillRequirement(Smithing.class, 20)
+            .build(),
+            new CraftingRecipeBuilder(
                     new BronzeHelmet(null),
                     Arrays.asList(
                             new BronzeBar(null, 3)
-                    ),
-                    Arrays.asList(new Anvil(null))
-            ),
-            new CraftingRecipe(
+                    )
+            ).withCraftingStations(
+                    Arrays.asList(
+                            new Anvil(null)
+                    )
+            ).addExperienceReward(Smithing.class, 270)
+            .build(),
+            new CraftingRecipeBuilder(
                     new BronzeChestplate(null),
                     Arrays.asList(
                             new BronzeBar(null, 7)
-                    ),
-                    Arrays.asList(new Anvil(null))
-            ),
-            new CraftingRecipe(
+                    )
+            ).withCraftingStations(
+                    Arrays.asList(
+                            new Anvil(null)
+                    )
+            ).addExperienceReward(Smithing.class, 630)
+            .build(),
+            new CraftingRecipeBuilder(
                     new BronzePlatelegs(null),
                     Arrays.asList(
                             new BronzeBar(null, 5)
-                    ),
-                    Arrays.asList(new Anvil(null))
-            ),
-            new CraftingRecipe(
+                    )
+            ).withCraftingStations(
+                    Arrays.asList(
+                            new Anvil(null)
+                    )
+            ).addExperienceReward(Smithing.class, 450)
+            .build(),
+            new CraftingRecipeBuilder(
                     new BronzeShield(null),
                     Arrays.asList(
                             new BronzeBar(null, 5)
-                    ),
-                    Arrays.asList(new Anvil(null))
-            ),
-            new CraftingRecipe(
+                    )
+            ).withCraftingStations(
+                    Arrays.asList(
+                            new Anvil(null)
+                    )
+            ).addExperienceReward(Smithing.class, 450)
+            .build(),
+            new CraftingRecipeBuilder(
                     new BronzePickaxe(null),
                     Arrays.asList(
                             new BronzeBar(null, 4)
-                    ),
-                    Arrays.asList(new Anvil(null))
-            ),
-            new CraftingRecipe(
+                    )
+            ).withCraftingStations(
+                    Arrays.asList(
+                            new Anvil(null)
+                    )
+            ).addExperienceReward(Smithing.class, 360)
+            .build(),
+            new CraftingRecipeBuilder(
                     new BronzeAxe(null),
                     Arrays.asList(
                             new BronzeBar(null, 4)
-                    ),
-                    Arrays.asList(new Anvil(null))
-            ),
-            new CraftingRecipe(
+                    )
+            ).withCraftingStations(
+                    Arrays.asList(
+                            new Anvil(null)
+                    )
+            ).addExperienceReward(Smithing.class, 360)
+            .build(),
+            new CraftingRecipeBuilder(
                     new BronzeSword(null),
                     Arrays.asList(
                             new BronzeBar(null, 4)
-                    ),
-                    Arrays.asList(new Anvil(null))
-            ),
-            new CraftingRecipe(
+                    )
+            ).withCraftingStations(
+                    Arrays.asList(
+                            new Anvil(null)
+                    )
+            ).addExperienceReward(Smithing.class, 360)
+            .build(),
+            new CraftingRecipeBuilder(
                     new IronHelmet(null),
                     Arrays.asList(
                             new IronBar(null, 3)
-                    ),
-                    Arrays.asList(new Anvil(null))
-            ),
-            new CraftingRecipe(
+                    )
+            ).withCraftingStations(
+                    Arrays.asList(
+                            new Anvil(null)
+                    )
+            ).addExperienceReward(Smithing.class, 360)
+            .addSkillRequirement(Smithing.class, 10)
+            .build(),
+            new CraftingRecipeBuilder(
                     new IronChestplate(null),
                     Arrays.asList(
                             new IronBar(null, 7)
-                    ),
-                    Arrays.asList(new Anvil(null))
-            ),
-            new CraftingRecipe(
+                    )
+            ).withCraftingStations(
+                    Arrays.asList(
+                            new Anvil(null)
+                    )
+            ).addExperienceReward(Smithing.class, 840)
+            .addSkillRequirement(Smithing.class, 10)
+            .build(),
+            new CraftingRecipeBuilder(
                     new IronPlatelegs(null),
                     Arrays.asList(
                             new IronBar(null, 5)
-                    ),
-                    Arrays.asList(new Anvil(null))
-            ),
-            new CraftingRecipe(
+                    )
+            ).withCraftingStations(
+                    Arrays.asList(
+                            new Anvil(null)
+                    )
+            ).addExperienceReward(Smithing.class, 600)
+            .addSkillRequirement(Smithing.class, 10)
+            .build(),
+            new CraftingRecipeBuilder(
                     new IronShield(null),
                     Arrays.asList(
                             new IronBar(null, 5)
-                    ),
-                    Arrays.asList(new Anvil(null))
-            ),
-            new CraftingRecipe(
+                    )
+            ).withCraftingStations(
+                    Arrays.asList(
+                            new Anvil(null)
+                    )
+            ).addExperienceReward(Smithing.class, 500)
+            .addSkillRequirement(Smithing.class, 10)
+            .build(),
+            new CraftingRecipeBuilder(
                     new IronSword(null),
                     Arrays.asList(
                             new IronBar(null, 4)
-                    ),
-                    Arrays.asList(new Anvil(null))
-            ),
-            new CraftingRecipe(
+                    )
+            ).withCraftingStations(
+                    Arrays.asList(
+                            new Anvil(null)
+                    )
+            ).addExperienceReward(Smithing.class, 480)
+            .addSkillRequirement(Smithing.class, 10)
+            .build(),
+            new CraftingRecipeBuilder(
                     new IronPickaxe(null),
                     Arrays.asList(
                             new IronBar(null, 4)
-                    ),
-                    Arrays.asList(new Anvil(null))
-            ),
-            new CraftingRecipe(
+                    )
+            ).withCraftingStations(
+                    Arrays.asList(
+                            new Anvil(null)
+                    )
+            ).addExperienceReward(Smithing.class, 480)
+            .addSkillRequirement(Smithing.class, 10)
+            .build(),
+            new CraftingRecipeBuilder(
                     new IronAxe(null),
                     Arrays.asList(
                             new IronBar(null, 4)
-                    ),
-                    Arrays.asList(new Anvil(null))
-            ),
-            new CraftingRecipe(
+                    )
+            ).withCraftingStations(
+                    Arrays.asList(
+                            new Anvil(null)
+                    )
+            ).addExperienceReward(Smithing.class, 480)
+            .addSkillRequirement(Smithing.class, 10)
+            .build(),
+            new CraftingRecipeBuilder(
                     new SteelHelmet(null),
                     Arrays.asList(
                             new SteelBar(null, 3)
-                    ),
-                    Arrays.asList(new Anvil(null))
-            ),
-            new CraftingRecipe(
+                    )
+            ).withCraftingStations(
+                    Arrays.asList(
+                            new Anvil(null)
+                    )
+            ).addExperienceReward(Smithing.class, 750)
+            .addSkillRequirement(Smithing.class, 20)
+            .build(),
+            new CraftingRecipeBuilder(
                     new SteelChestplate(null),
                     Arrays.asList(
                             new SteelBar(null, 7)
-                    ),
-                    Arrays.asList(new Anvil(null))
-            ),
-            new CraftingRecipe(
+                    )
+            ).withCraftingStations(
+                    Arrays.asList(
+                            new Anvil(null)
+                    )
+            ).addExperienceReward(Smithing.class, 1750)
+            .addSkillRequirement(Smithing.class, 20)
+            .build(),
+            new CraftingRecipeBuilder(
                     new SteelPlatelegs(null),
                     Arrays.asList(
                             new SteelBar(null, 5)
-                    ),
-                    Arrays.asList(new Anvil(null))
-            ),
-            new CraftingRecipe(
-                    new SteelShield(null),
+                    )
+            ).withCraftingStations(
+                    Arrays.asList(
+                            new Anvil(null)
+                    )
+            ).addExperienceReward(Smithing.class, 1250)
+            .addSkillRequirement(Smithing.class, 20)
+            .build(),
+            new CraftingRecipeBuilder(
+                    new SteelHelmet(null),
                     Arrays.asList(
                             new SteelBar(null, 5)
-                    ),
-                    Arrays.asList(new Anvil(null))
-            ),
-            new CraftingRecipe(
+                    )
+            ).withCraftingStations(
+                    Arrays.asList(
+                            new Anvil(null)
+                    )
+            ).addExperienceReward(Smithing.class, 1250)
+            .addSkillRequirement(Smithing.class, 20)
+            .build(),
+            new CraftingRecipeBuilder(
                     new SteelSword(null),
                     Arrays.asList(
                             new SteelBar(null, 4)
-                    ),
-                    Arrays.asList(new Anvil(null))
-            ),
-            new CraftingRecipe(
+                    )
+            ).withCraftingStations(
+                    Arrays.asList(
+                            new Anvil(null)
+                    )
+            ).addExperienceReward(Smithing.class, 1000)
+            .addSkillRequirement(Smithing.class, 20)
+            .build(),
+            new CraftingRecipeBuilder(
                     new SteelPickaxe(null),
                     Arrays.asList(
                             new SteelBar(null, 4)
-                    ),
-                    Arrays.asList(new Anvil(null))
-            ),
-            new CraftingRecipe(
+                    )
+            ).withCraftingStations(
+                    Arrays.asList(
+                            new Anvil(null)
+                    )
+            ).addExperienceReward(Smithing.class, 1000)
+            .addSkillRequirement(Smithing.class, 20)
+            .build(),
+            new CraftingRecipeBuilder(
                     new SteelAxe(null),
                     Arrays.asList(
                             new SteelBar(null, 4)
-                    ),
-                    Arrays.asList(new Anvil(null))
-            )
+                    )
+            ).withCraftingStations(
+                    Arrays.asList(
+                            new Anvil(null)
+                    )
+            ).addExperienceReward(Smithing.class, 1000)
+            .addSkillRequirement(Smithing.class, 20)
+            .build()
     );
     
     private Player player;
@@ -261,43 +383,65 @@ public class CraftingManager implements InventoryChangedListener, PositionChange
         craftableRecipes.clear();
         
         RECIPES.forEach((recipe) -> {
-            boolean allcraftingStationsAvailable = true;
             
-            if (recipe.getCraftingStations() != null) {
-                for (Sprite craftingStation : recipe.getCraftingStations()) {
-                    boolean craftingStationAvailable = false;
+            if (hasSkillRequirements(recipe)) {
+                boolean allcraftingStationsAvailable = true;
+            
+                if (recipe.getCraftingStations() != null) {
+                    for (Sprite craftingStation : recipe.getCraftingStations()) {
+                        boolean craftingStationAvailable = false;
 
-                    for (Sprite nearbyCraftingStation : nearbyCraftingStations) {
-                        if (craftingStation.getClass().equals(nearbyCraftingStation.getClass())) {
-                            craftingStationAvailable = true;
+                        for (Sprite nearbyCraftingStation : nearbyCraftingStations) {
+                            if (craftingStation.getClass().equals(nearbyCraftingStation.getClass())) {
+                                craftingStationAvailable = true;
+                            }
+                        }
+
+                        if (!craftingStationAvailable) {
+                            allcraftingStationsAvailable = false;
+                            break;
                         }
                     }
+                }
 
-                    if (!craftingStationAvailable) {
-                        allcraftingStationsAvailable = false;
+                if (allcraftingStationsAvailable) {
+                    boolean hasMaterials = true;
+
+                    for (Item material : recipe.getMaterials()) {
+                        if (!player.getInventory().hasItem(material.getClass(), material.getAmount())) {
+                            hasMaterials = false;
+                        } 
+                    }
+
+                    if (hasMaterials) {
+                        craftableRecipes.add(recipe);
+                    }
+                }
+            }
+        });
+        
+        notifyCraftableRecipesChangedListener();
+    }
+    
+    private boolean hasSkillRequirements(CraftingRecipe recipe) {
+        boolean success = true;
+        
+        for (Map.Entry<Class<? extends Skill>, Integer> set : recipe.getSkillRequirements().entrySet()) {
+            for (Skill skill : player.getSkillManager().getSkills()) {
+                if (skill.getClass() == set.getKey()) {
+                    if (skill.getLevel() < set.getValue()) {
+                        success = false;
                         break;
                     }
                 }
             }
             
-            if (allcraftingStationsAvailable) {
-                boolean hasMaterials = true;
-                
-                for (Item material : recipe.getMaterials()) {
-                    if (!player.getInventory().hasItem(material.getClass(), material.getAmount())) {
-                        hasMaterials = false;
-                    } 
-                }
-                
-                if (hasMaterials) {
-                    craftableRecipes.add(recipe);
-                }
+            if (!success) {
+                break;
             }
-        });
+        }
         
-        System.out.println(craftableRecipes.size());
-        
-        notifyCraftableRecipesChangedListener();
+        return success;
     }
 
     @Override

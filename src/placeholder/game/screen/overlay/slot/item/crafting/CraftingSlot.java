@@ -37,7 +37,7 @@ public class CraftingSlot extends ItemSlot {
     @Override
     protected List createContextMenuEntries() {
         List<ContextMenuEntry> contextMenuEntries = new ArrayList();
-        contextMenuEntries.add(new CraftEntry(recipe, inventory));
+        contextMenuEntries.add(new CraftEntry(recipe, inventory.getPlayer()));
         
         return contextMenuEntries;
     }
