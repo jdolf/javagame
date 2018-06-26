@@ -18,6 +18,7 @@ public class Mining extends Skill {
     
     public Mining() {
         super(DISPLAY_NAME, ICON);
+        this.level = 10;
     }
 
     public int calculateMiningEfficiencyImpact() {

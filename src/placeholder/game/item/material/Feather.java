@@ -8,13 +8,13 @@ import placeholder.game.screen.ImageContainer;
  *
  * @author jdolf
  */
-public class GoldOre extends Item {
+public class Feather extends Item {
     
-    public static final String ICON_NAME = "gold_ore.png";
+    public static final String ICON_NAME = "feather.png";
     
-    public GoldOre(Point2D position) {
+    public Feather(Point2D position) {
         super(position, ImageContainer.getInstance().getImage(ICON_NAME), 1);
-        this.displayName = "Gold Ore";
+        this.displayName = "Feather";
     }
     
 }

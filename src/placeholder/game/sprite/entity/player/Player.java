@@ -20,11 +20,14 @@ import placeholder.game.screen.overlay.window.WindowManager;
 import placeholder.game.screen.render.Renderer;
 import placeholder.game.input.InputHandler;
 import placeholder.game.item.Item;
+import placeholder.game.item.ammo.SteelArrow;
 import placeholder.game.item.ammo.WoodArrow;
 import placeholder.game.item.equipment.EquipmentChangedListener;
 import placeholder.game.item.equipment.PlayerEquipmentManager;
 import placeholder.game.item.equipment.bodyequipment.BronzeChestplate;
 import placeholder.game.item.equipment.headequipment.BronzeHelmet;
+import placeholder.game.item.equipment.headequipment.IronHelmet;
+import placeholder.game.item.equipment.headequipment.SteelHelmet;
 import placeholder.game.item.equipment.legsequipment.BronzePlatelegs;
 import placeholder.game.item.equipment.shieldequipment.BronzeShield;
 import placeholder.game.item.equipment.weaponequipment.melee.BronzeSword;
@@ -32,8 +35,8 @@ import placeholder.game.item.equipment.weaponequipment.melee.tool.mining.BronzeP
 import placeholder.game.item.equipment.weaponequipment.melee.tool.woodcutting.BronzeAxe;
 import placeholder.game.item.equipment.weaponequipment.range.ThrowingRocks;
 import placeholder.game.item.equipment.weaponequipment.range.WoodBow;
-import placeholder.game.item.material.BronzeBar;
-import placeholder.game.item.material.Stone;
+import placeholder.game.item.material.bar.BronzeBar;
+import placeholder.game.item.material.ore.Stone;
 import placeholder.game.map.Map;
 import placeholder.game.skill.util.SkillLevelChangedListener;
 import placeholder.game.skill.util.SkillManager;
@@ -86,7 +89,7 @@ public abstract class Player extends Entity implements EquipmentChangedListener,
         inventory.insertItem(new BronzeHelmet(null));
         inventory.insertItem(new BronzePickaxe(null));
         inventory.insertItem(new BronzeSword(null));
-        inventory.insertItem(new WoodArrow(null, 10));
+        inventory.insertItem(new SteelArrow(null, 30));
         inventory.insertItem(new WoodBow(null));
         inventory.insertItem(new Stone(null, 1));
         inventory.insertItem(new BronzeAxe(null));
@@ -99,6 +102,8 @@ public abstract class Player extends Entity implements EquipmentChangedListener,
         inventory.insertItem(new BronzeBar(null, 1));
         inventory.insertItem(new BronzeBar(null, 1));
         inventory.insertItem(new BronzeBar(null, 1));
+        inventory.insertItem(new IronHelmet(null));
+        inventory.insertItem(new SteelHelmet(null));
         equipmentManager = new PlayerEquipmentManager(contextManager, this);
         
         // Listener

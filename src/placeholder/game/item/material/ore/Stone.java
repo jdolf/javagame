@@ -1,6 +1,7 @@
-package placeholder.game.item.material;
+package placeholder.game.item.material.ore;
 
 import java.awt.geom.Point2D;
+import javafx.scene.image.Image;
 import placeholder.game.item.Item;
 import placeholder.game.screen.ImageContainer;
 
@@ -8,13 +9,13 @@ import placeholder.game.screen.ImageContainer;
  *
  * @author jdolf
  */
-public class SteelBar extends Item {
+public class Stone extends Item {
     
-    public static final String ICON_NAME = "steel_bar.png";
+    public static final String ICON_NAME = "stone_ore.png";
     
-    public SteelBar(Point2D position, int amount) {
+    public Stone(Point2D position, int amount) {
         super(position, ImageContainer.getInstance().getImage(ICON_NAME), 1, amount);
-        this.displayName = "Steel Bar";
+        this.displayName = "Stone";
     }
     
 }

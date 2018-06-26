@@ -1,4 +1,4 @@
-package placeholder.game.item.material;
+package placeholder.game.item.material.log;
 
 import java.awt.geom.Point2D;
 import javafx.scene.image.Image;

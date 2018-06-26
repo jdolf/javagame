@@ -8,13 +8,13 @@ import placeholder.game.screen.ImageContainer;
  *
  * @author jdolf
  */
-public class CoalOre extends Item {
+public class BronzeArrowTips extends Item {
     
-    public static final String ICON_NAME = "coal_ore.png";
+    public static final String ICON_NAME = "bronze_arrow_tips.png";
     
-    public CoalOre(Point2D position) {
+    public BronzeArrowTips(Point2D position) {
         super(position, ImageContainer.getInstance().getImage(ICON_NAME), 1);
-        this.displayName = "Coal Ore";
+        this.displayName = "Bronze Arrow Tips";
     }
     
 }

@@ -55,16 +55,16 @@ public class CraftingRecipe {
             materials.forEach((material) -> {
                 player.getInventory().removeItemAmount(material.getClass(), material.getAmount());
             });
-        }
-        
-        experienceRewards.entrySet().forEach((set) -> {
-            for (Skill skill : player.getSkillManager().getSkills()) {
-                if (skill.getClass() == set.getKey()) {
-                    skill.addExperience(set.getValue());
-                    break;
+            
+            experienceRewards.entrySet().forEach((set) -> {
+                for (Skill skill : player.getSkillManager().getSkills()) {
+                    if (skill.getClass() == set.getKey()) {
+                        skill.addExperience(set.getValue());
+                        break;
+                    }
                 }
-            }
-        });
+            });
+        }
         
     }
 

@@ -8,7 +8,7 @@ package placeholder.game.sprite.resource.mining;
 import java.awt.geom.Point2D;
 import java.util.Arrays;
 import java.util.Collection;
-import placeholder.game.item.material.Stone;
+import placeholder.game.item.material.ore.Stone;
 import placeholder.game.loot.LootTableItem;
 import placeholder.game.loot.UnlimitedDropManager;
 import placeholder.game.screen.ImageContainer;

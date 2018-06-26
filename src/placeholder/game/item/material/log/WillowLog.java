@@ -1,4 +1,4 @@
-package placeholder.game.item.material;
+package placeholder.game.item.material.log;
 
 import java.awt.geom.Point2D;
 import placeholder.game.item.Item;
@@ -8,13 +8,13 @@ import placeholder.game.screen.ImageContainer;
  *
  * @author jdolf
  */
-public class BronzeBar extends Item {
+public class WillowLog extends Item {
     
-    public static final String ICON_NAME = "bronze_bar.png";
+    public static final String ICON_NAME = "willow_log_icon.png";
     
-    public BronzeBar(Point2D position, int amount) {
+    public WillowLog(Point2D position, int amount) {
         super(position, ImageContainer.getInstance().getImage(ICON_NAME), 1, amount);
-        this.displayName = "Bronze Bar";
+        this.displayName = "Willow Log";
     }
     
 }

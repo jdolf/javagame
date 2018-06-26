@@ -31,17 +31,18 @@ import placeholder.game.item.equipment.weaponequipment.melee.tool.woodcutting.Br
 import placeholder.game.item.equipment.weaponequipment.melee.tool.woodcutting.IronAxe;
 import placeholder.game.item.equipment.weaponequipment.melee.tool.woodcutting.SteelAxe;
 import placeholder.game.item.equipment.weaponequipment.range.ThrowingRocks;
-import placeholder.game.item.material.BronzeBar;
-import placeholder.game.item.material.CoalOre;
-import placeholder.game.item.material.CopperOre;
-import placeholder.game.item.material.IronBar;
-import placeholder.game.item.material.IronOre;
-import placeholder.game.item.material.Log;
-import placeholder.game.item.material.SteelBar;
-import placeholder.game.item.material.Stone;
-import placeholder.game.item.material.TinOre;
+import placeholder.game.item.material.bar.BronzeBar;
+import placeholder.game.item.material.ore.CoalOre;
+import placeholder.game.item.material.ore.CopperOre;
+import placeholder.game.item.material.bar.IronBar;
+import placeholder.game.item.material.ore.IronOre;
+import placeholder.game.item.material.log.Log;
+import placeholder.game.item.material.bar.SteelBar;
+import placeholder.game.item.material.ore.Stone;
+import placeholder.game.item.material.ore.TinOre;
 import placeholder.game.screen.overlay.PositionChangeListener;
 import placeholder.game.screen.overlay.ScreenItem;
+import placeholder.game.skill.Fletching;
 import placeholder.game.skill.Skill;
 import placeholder.game.skill.Smithing;
 import placeholder.game.sprite.Sprite;
@@ -70,9 +71,12 @@ public class CraftingManager implements InventoryChangedListener, PositionChange
                     Arrays.asList(
                             new Log(null, 1)
                     )
-            ).withCraftingStations(Arrays.asList(
-                    new Workbench(null)
-            )).build(),
+            ).withCraftingStations(
+                    Arrays.asList(
+                        new Workbench(null)
+                    )
+            ).addExperienceReward(Fletching.class, 70)
+            .build(),
             new CraftingRecipeBuilder(
                     new BronzeBar(null, 1),
                     Arrays.asList(
