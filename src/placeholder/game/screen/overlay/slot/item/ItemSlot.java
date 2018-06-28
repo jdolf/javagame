@@ -17,6 +17,7 @@ import placeholder.game.screen.overlay.ScreenItem;
 import placeholder.game.screen.overlay.contextmenu.ContextMenu;
 import placeholder.game.screen.overlay.contextmenu.ContextMenuManager;
 import placeholder.game.screen.overlay.contextmenu.StandardContextMenu;
+import placeholder.game.screen.overlay.contextmenu.entry.CancelEntry;
 import placeholder.game.screen.overlay.contextmenu.entry.ContextMenuEntry;
 import placeholder.game.screen.overlay.slot.SelectableSlot;
 
@@ -41,6 +42,7 @@ public abstract class ItemSlot<T extends Item> extends SelectableSlot {
     
     protected ContextMenu createContextMenu() {
         List<ContextMenuEntry> entries = createContextMenuEntries();
+        entries.add(0, new CancelEntry(contextMenuManager));
         if (entries != null) {
             return new StandardContextMenu(contextMenuManager, entries, this.getPosition());
         } else {

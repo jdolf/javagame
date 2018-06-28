@@ -34,6 +34,7 @@ import placeholder.game.item.equipment.weaponequipment.melee.BronzeSword;
 import placeholder.game.item.equipment.weaponequipment.melee.tool.mining.BronzePickaxe;
 import placeholder.game.item.equipment.weaponequipment.melee.tool.woodcutting.BronzeAxe;
 import placeholder.game.item.equipment.weaponequipment.range.ThrowingRocks;
+import placeholder.game.item.equipment.weaponequipment.range.WillowWoodBow;
 import placeholder.game.item.equipment.weaponequipment.range.WoodBow;
 import placeholder.game.item.material.bar.BronzeBar;
 import placeholder.game.item.material.ore.Stone;
@@ -101,7 +102,7 @@ public abstract class Player extends Entity implements EquipmentChangedListener,
         inventory.insertItem(new BronzeBar(null, 1));
         inventory.insertItem(new BronzeBar(null, 1));
         inventory.insertItem(new BronzeBar(null, 1));
-        inventory.insertItem(new BronzeBar(null, 1));
+        inventory.insertItem(new WillowWoodBow(null));
         inventory.insertItem(new IronHelmet(null));
         inventory.insertItem(new SteelHelmet(null));
         equipmentManager = new PlayerEquipmentManager(contextManager, this);

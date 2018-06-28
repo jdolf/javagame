@@ -200,7 +200,6 @@ public class EquipmentWindow extends ImageBackgroundWindow implements EquipmentC
     }
     
     private void updateDisplays() {
-        System.out.println("equimentchanged");
         meleeStrength.setData(String.valueOf(equipmentManager.calculateMeleeStrengthImpact()));
         rangeStrength.setData(String.valueOf(equipmentManager.calculateRangeStrengthImpact()));
         magicStrength.setData(String.valueOf(equipmentManager.calculateMagicStrengthImpact()));

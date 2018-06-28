@@ -12,8 +12,8 @@ public class BronzeArrowTips extends Item {
     
     public static final String ICON_NAME = "bronze_arrow_tips.png";
     
-    public BronzeArrowTips(Point2D position) {
-        super(position, ImageContainer.getInstance().getImage(ICON_NAME), 1);
+    public BronzeArrowTips(Point2D position, int amount) {
+        super(position, ImageContainer.getInstance().getImage(ICON_NAME), 999, amount);
         this.displayName = "Bronze Arrow Tips";
     }
     

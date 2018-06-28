@@ -4,10 +4,12 @@ import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
 import placeholder.game.crafting.CraftingRecipe.CraftingRecipeBuilder;
 import placeholder.game.item.Item;
+import placeholder.game.item.ammo.BronzeArrow;
+import placeholder.game.item.ammo.IronArrow;
+import placeholder.game.item.ammo.SteelArrow;
 import placeholder.game.item.ammo.WoodArrow;
 import placeholder.game.item.equipment.bodyequipment.BronzeChestplate;
 import placeholder.game.item.equipment.bodyequipment.IronChestplate;
@@ -20,7 +22,6 @@ import placeholder.game.item.equipment.legsequipment.IronPlatelegs;
 import placeholder.game.item.equipment.legsequipment.SteelPlatelegs;
 import placeholder.game.item.equipment.shieldequipment.BronzeShield;
 import placeholder.game.item.equipment.shieldequipment.IronShield;
-import placeholder.game.item.equipment.shieldequipment.SteelShield;
 import placeholder.game.item.equipment.weaponequipment.melee.BronzeSword;
 import placeholder.game.item.equipment.weaponequipment.melee.IronSword;
 import placeholder.game.item.equipment.weaponequipment.melee.SteelSword;
@@ -30,7 +31,18 @@ import placeholder.game.item.equipment.weaponequipment.melee.tool.mining.SteelPi
 import placeholder.game.item.equipment.weaponequipment.melee.tool.woodcutting.BronzeAxe;
 import placeholder.game.item.equipment.weaponequipment.melee.tool.woodcutting.IronAxe;
 import placeholder.game.item.equipment.weaponequipment.melee.tool.woodcutting.SteelAxe;
+import placeholder.game.item.equipment.weaponequipment.range.JungleWoodBow;
+import placeholder.game.item.equipment.weaponequipment.range.PineWoodBow;
 import placeholder.game.item.equipment.weaponequipment.range.ThrowingRocks;
+import placeholder.game.item.equipment.weaponequipment.range.WillowWoodBow;
+import placeholder.game.item.equipment.weaponequipment.range.WoodBow;
+import placeholder.game.item.material.ArrowShaft;
+import placeholder.game.item.material.BronzeArrowTips;
+import placeholder.game.item.material.Feather;
+import placeholder.game.item.material.IronArrowTips;
+import placeholder.game.item.material.SteelArrowTips;
+import placeholder.game.item.material.StringItem;
+import placeholder.game.item.material.WoodArrowTips;
 import placeholder.game.item.material.bar.BronzeBar;
 import placeholder.game.item.material.ore.CoalOre;
 import placeholder.game.item.material.ore.CopperOre;
@@ -38,6 +50,9 @@ import placeholder.game.item.material.bar.IronBar;
 import placeholder.game.item.material.ore.IronOre;
 import placeholder.game.item.material.log.Log;
 import placeholder.game.item.material.bar.SteelBar;
+import placeholder.game.item.material.log.JungleLog;
+import placeholder.game.item.material.log.PineLog;
+import placeholder.game.item.material.log.WillowLog;
 import placeholder.game.item.material.ore.Stone;
 import placeholder.game.item.material.ore.TinOre;
 import placeholder.game.screen.overlay.PositionChangeListener;
@@ -67,7 +82,7 @@ public class CraftingManager implements InventoryChangedListener, PositionChange
                     )
             ).build(),
             new CraftingRecipeBuilder(
-                    new WoodArrow(null, 15),
+                    new ArrowShaft(null, 25),
                     Arrays.asList(
                             new Log(null, 1)
                     )
@@ -75,7 +90,108 @@ public class CraftingManager implements InventoryChangedListener, PositionChange
                     Arrays.asList(
                         new Workbench(null)
                     )
+            ).addExperienceReward(Fletching.class, 30)
+            .build(),
+            new CraftingRecipeBuilder(
+                    new ArrowShaft(null, 35),
+                    Arrays.asList(
+                            new JungleLog(null, 1)
+                    )
+            ).withCraftingStations(
+                    Arrays.asList(
+                        new Workbench(null)
+                    )
+            ).addExperienceReward(Fletching.class, 45)
+            .addSkillRequirement(Fletching.class, 5)
+            .build(),
+            new CraftingRecipeBuilder(
+                    new ArrowShaft(null, 45),
+                    Arrays.asList(
+                            new WillowLog(null, 1)
+                    )
+            ).withCraftingStations(
+                    Arrays.asList(
+                        new Workbench(null)
+                    )
+            ).addExperienceReward(Fletching.class, 60)
+            .addSkillRequirement(Fletching.class, 10)
+            .build(),
+            new CraftingRecipeBuilder(
+                    new ArrowShaft(null, 55),
+                    Arrays.asList(
+                            new PineLog(null, 1)
+                    )
+            ).withCraftingStations(
+                    Arrays.asList(
+                        new Workbench(null)
+                    )
+            ).addExperienceReward(Fletching.class, 75)
+            .addSkillRequirement(Fletching.class, 20)
+            .build(),
+            new CraftingRecipeBuilder(
+                    new WoodArrowTips(null, 50),
+                    Arrays.asList(
+                            new Log(null, 1)
+                    )
+            ).withCraftingStations(
+                    Arrays.asList(
+                            new Workbench(null)
+                    )
+            ).addExperienceReward(Fletching.class, 25)
+            .build(),
+            new CraftingRecipeBuilder(
+                    new WoodArrow(null, 25),
+                    Arrays.asList(
+                            new ArrowShaft(null, 25),
+                            new Feather(null, 25),
+                            new WoodArrowTips(null, 25)
+                    )
+            ).withCraftingStations(
+                    Arrays.asList(
+                        new Workbench(null)
+                    )
             ).addExperienceReward(Fletching.class, 70)
+            .build(),
+            new CraftingRecipeBuilder(
+                    new BronzeArrow(null, 25),
+                    Arrays.asList(
+                            new ArrowShaft(null, 25),
+                            new Feather(null, 25),
+                            new BronzeArrowTips(null, 25)
+                    )
+            ).withCraftingStations(
+                    Arrays.asList(
+                        new Workbench(null)
+                    )
+            ).addExperienceReward(Fletching.class, 100)
+            .build(),
+            new CraftingRecipeBuilder(
+                    new IronArrow(null, 25),
+                    Arrays.asList(
+                            new ArrowShaft(null, 25),
+                            new Feather(null, 25),
+                            new IronArrowTips(null, 25)
+                    )
+            ).withCraftingStations(
+                    Arrays.asList(
+                        new Workbench(null)
+                    )
+            ).addExperienceReward(Fletching.class, 140)
+            .addSkillRequirement(Fletching.class, 10)
+            .build(),
+            new CraftingRecipeBuilder(
+                    new SteelArrow(null, 25),
+                    Arrays.asList(
+                            new ArrowShaft(null, 25),
+                            new Feather(null, 25),
+                            new SteelArrowTips(null, 25)
+                    )
+            ).withCraftingStations(
+                    Arrays.asList(
+                        new Workbench(null)
+                    )
+            ).addExperienceReward(Fletching.class, 210)
+            .addSkillRequirement(Fletching.class, 20)
             .build(),
             new CraftingRecipeBuilder(
                     new BronzeBar(null, 1),
@@ -192,6 +308,17 @@ public class CraftingManager implements InventoryChangedListener, PositionChange
             ).addExperienceReward(Smithing.class, 360)
             .build(),
             new CraftingRecipeBuilder(
+                    new BronzeArrowTips(null, 50),
+                    Arrays.asList(
+                            new BronzeBar(null, 1)
+                    )
+            ).withCraftingStations(
+                    Arrays.asList(
+                            new Anvil(null)
+                    )
+            ).addExperienceReward(Smithing.class, 90)
+            .build(),
+            new CraftingRecipeBuilder(
                     new IronHelmet(null),
                     Arrays.asList(
                             new IronBar(null, 3)
@@ -273,6 +400,18 @@ public class CraftingManager implements InventoryChangedListener, PositionChange
                             new Anvil(null)
                     )
             ).addExperienceReward(Smithing.class, 480)
+            .addSkillRequirement(Smithing.class, 10)
+            .build(),
+            new CraftingRecipeBuilder(
+                    new IronArrowTips(null, 50),
+                    Arrays.asList(
+                            new IronBar(null, 1)
+                    )
+            ).withCraftingStations(
+                    Arrays.asList(
+                            new Anvil(null)
+                    )
+            ).addExperienceReward(Smithing.class, 120)
             .addSkillRequirement(Smithing.class, 10)
             .build(),
             new CraftingRecipeBuilder(
@@ -358,6 +497,69 @@ public class CraftingManager implements InventoryChangedListener, PositionChange
                     )
             ).addExperienceReward(Smithing.class, 1000)
             .addSkillRequirement(Smithing.class, 20)
+            .build(),
+            new CraftingRecipeBuilder(
+                    new SteelArrowTips(null, 50),
+                    Arrays.asList(
+                            new SteelBar(null, 1)
+                    )
+            ).withCraftingStations(
+                    Arrays.asList(
+                            new Anvil(null)
+                    )
+            ).addExperienceReward(Smithing.class, 250)
+            .addSkillRequirement(Smithing.class, 20)
+            .build(),
+            new CraftingRecipeBuilder(
+                    new WoodBow(null),
+                    Arrays.asList(
+                            new Log(null, 4),
+                            new StringItem(null, 1)
+                    )
+            ).withCraftingStations(
+                    Arrays.asList(
+                        new Workbench(null)
+                    )
+            ).addExperienceReward(Fletching.class, 200)
+            .build(),
+            new CraftingRecipeBuilder(
+                    new JungleWoodBow(null),
+                    Arrays.asList(
+                            new JungleLog(null, 4),
+                            new StringItem(null, 1)
+                    )
+            ).withCraftingStations(
+                    Arrays.asList(
+                        new Workbench(null)
+                    )
+            ).addExperienceReward(Fletching.class, 350)
+            .addSkillRequirement(Fletching.class, 5)
+            .build(),
+            new CraftingRecipeBuilder(
+                    new WillowWoodBow(null),
+                    Arrays.asList(
+                            new WillowLog(null, 4),
+                            new StringItem(null, 1)
+                    )
+            ).withCraftingStations(
+                    Arrays.asList(
+                        new Workbench(null)
+                    )
+            ).addExperienceReward(Fletching.class, 500)
+            .addSkillRequirement(Fletching.class, 10)
+            .build(),
+            new CraftingRecipeBuilder(
+                    new PineWoodBow(null),
+                    Arrays.asList(
+                            new Log(null, 4),
+                            new StringItem(null, 1)
+                    )
+            ).withCraftingStations(
+                    Arrays.asList(
+                        new Workbench(null)
+                    )
+            ).addExperienceReward(Fletching.class, 650)
+            .addSkillRequirement(Fletching.class, 20)
             .build()
     );
     

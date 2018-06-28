@@ -19,19 +19,19 @@ public class LootTableItem<T extends Item> {
     private int maxQuantity;
     private Random random = new Random();
     
-    public LootTableItem(Class<T> itemClass, int chance, int quantity) {
+    public LootTableItem(Class<T> itemClass, double chance, int quantity) {
         initialize(itemClass, chance);
         this.minQuantity = quantity;
         this.maxQuantity = quantity;
     }
     
-    public LootTableItem(Class<T> itemClass, int chance, int minQuantity, int maxQuantity) {
+    public LootTableItem(Class<T> itemClass, double chance, int minQuantity, int maxQuantity) {
         initialize(itemClass, chance);
         this.minQuantity = minQuantity;
         this.maxQuantity = maxQuantity;
     }
     
-    private void initialize(Class itemClass1, int chance1) {
+    private void initialize(Class itemClass1, double chance1) {
         this.itemClass = itemClass1;
         if (chance1 < 1) throw new IllegalArgumentException("Chance can't be less than 1");
         this.chance = chance1;

@@ -12,8 +12,8 @@ public class SteelArrowTips extends Item {
     
     public static final String ICON_NAME = "steel_arrow_tips.png";
     
-    public SteelArrowTips(Point2D position) {
-        super(position, ImageContainer.getInstance().getImage(ICON_NAME), 1);
+    public SteelArrowTips(Point2D position, int amount) {
+        super(position, ImageContainer.getInstance().getImage(ICON_NAME), 999, amount);
         this.displayName = "Steel Arrow Tips";
     }
     
