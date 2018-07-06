@@ -19,9 +19,7 @@ public class LeftArmAnimation extends DirectionAnimation<Player> {
 
     @Override
     public int calculateColumn() {
-        if (this.data.getAttackManager().isInitAttack()) {
-            return 1;
-        } else if (this.data.getAttackManager().isAttacking()) {
+        if (this.data.getAttackManager().isAttacking()) {
             if (this.data.getAttackManager().getUsedWeapon() != null) {
                 WeaponEquipment usedWeapon = this.data.getAttackManager().getUsedWeapon();
                 
@@ -36,15 +34,21 @@ public class LeftArmAnimation extends DirectionAnimation<Player> {
                     }
                     
                 }
-            } else if (this.data.getAttackManager().getMeleeAttack() != null) {
+            } else {
                 // If boxing
-                MeleeAttack meleeAttack = this.data.getAttackManager().getMeleeAttack();
-                if (meleeAttack.getDuration() > PlayerAttackManager.DEFAULT_ATTACK_DURATION / 2) {
-                    return 2;
-                } else if (meleeAttack.getDuration() > 0) {
-                    return 3;
+                if (this.data.getAttackManager().getStartUpTime() > 0) {
+                    return 1;
+                }
+                if (this.data.getAttackManager().getPunchAttack() != null) {
+                    MeleeAttack meleeAttack = this.data.getAttackManager().getPunchAttack();
+                    if (meleeAttack.getDuration() > PlayerAttackManager.DEFAULT_ATTACK_DURATION / 2) {
+                        return 2;
+                    } else if (meleeAttack.getDuration() > 0) {
+                        return 3;
+                    }
                 }
             }
+                
         }
         return 0;
     }

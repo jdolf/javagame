@@ -42,8 +42,8 @@ public abstract class ItemSlot<T extends Item> extends SelectableSlot {
     
     protected ContextMenu createContextMenu() {
         List<ContextMenuEntry> entries = createContextMenuEntries();
-        entries.add(0, new CancelEntry(contextMenuManager));
         if (entries != null) {
+            entries.add(0, new CancelEntry(contextMenuManager));
             return new StandardContextMenu(contextMenuManager, entries, this.getPosition());
         } else {
             return null;

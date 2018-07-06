@@ -38,7 +38,7 @@ public class MeleeWeapon extends WeaponEquipment {
 
     @Override
     public void attack() {
-        new MeleeAttack(player, hitbox, defaultDuration, invincibilityStun);
+        new MeleeAttack(player, hitbox, defaultDuration, invincibilityStun).attack();
     }
     
     public Dimension getHitbox() {

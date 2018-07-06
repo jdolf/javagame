@@ -1,0 +1,7 @@
+column 1: staying still
+column 2: dead
+column 3: walking 1
+column 4: walking 2
+column 5: attack init
+column 6: attack 1
+column 7: attack 2

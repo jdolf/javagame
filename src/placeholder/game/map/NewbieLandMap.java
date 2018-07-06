@@ -11,6 +11,7 @@ import java.util.List;
 import placeholder.game.screen.ImageContainer;
 import placeholder.game.sprite.Sprite;
 import placeholder.game.sprite.entity.mob.Dummy;
+import placeholder.game.sprite.entity.mob.Goblin;
 import placeholder.game.sprite.furniture.Anvil;
 import placeholder.game.sprite.furniture.Furnace;
 import placeholder.game.sprite.furniture.Workbench;
@@ -80,6 +81,7 @@ public class NewbieLandMap extends Map {
         sprites.add(new placeholder.game.sprite.ambient.StoneMud(new Point2D.Double(698.0, 312.0)));
         sprites.add(new placeholder.game.sprite.entity.mob.Dummy(new Point2D.Double(611.0, 358.0)));
         sprites.add(new placeholder.game.sprite.entity.mob.Dummy(new Point2D.Double(658.0, 363.0)));
+        sprites.add(new Goblin(new Point2D.Double(658.0, 500.0)));
         sprites.add(new placeholder.game.sprite.furniture.Workbench(new Point2D.Double(293.0, 115.0)));
         sprites.add(new placeholder.game.sprite.furniture.Furnace(new Point2D.Double(31.0, 80.0)));
         sprites.add(new placeholder.game.sprite.furniture.Anvil(new Point2D.Double(165.0, 106.0)));
@@ -88,6 +90,8 @@ public class NewbieLandMap extends Map {
         sprites.add(new placeholder.game.sprite.resource.mining.IronRock(new Point2D.Double(280.0, 308.0)));
         sprites.add(new placeholder.game.sprite.resource.mining.CoalRock(new Point2D.Double(329.0, 311.0)));
         sprites.add(new placeholder.game.sprite.resource.mining.GoldRock(new Point2D.Double(377.0, 313.0)));
+        sprites.add(new placeholder.game.sprite.entity.mob.Goblin(new Point2D.Double(283.0, 171.0)));
+        sprites.add(new placeholder.game.sprite.entity.mob.Goblin(new Point2D.Double(423.0, 227.0)));
         return sprites;
     }
     

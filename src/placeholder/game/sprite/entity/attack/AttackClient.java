@@ -13,12 +13,11 @@ import placeholder.game.sprite.entity.attack.Hittable;
  * @author jdolf
  */
 public interface AttackClient extends CollisionalPlaneCreator {
-    void attack();;
+    void attack();
     int getMeleeStrength();
     int getMeleeDefense();
     int getRangeStrength();
     int getRangeDefense();
     int getMagicStrength();
     int getMagicDefense();
-    void setMeleeAttack(MeleeAttack meleeAttack);
 }

@@ -65,6 +65,11 @@ public class DefaultCollisionDetector implements CollisionDetector {
     public Collection<Item> collidesWithItemsAt(Point2D targetLocation) {
         return map.getItemReceiver().getAt(targetLocation, owner.getDimension());
     }
+
+    @Override
+    public void setMap(Map map) {
+        this.map = map;
+    }
     
     
     

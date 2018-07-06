@@ -38,15 +38,15 @@ import placeholder.game.util.Amount;
  *
  * @author jdolf
  */
-public abstract class Entity extends Sprite implements AttackClient, Hittable, DirectionDependent, CollisionalPlaneCreator {
+public abstract class Entity<T extends AttackManager> extends Sprite implements AttackClient, Hittable, DirectionDependent, CollisionalPlaneCreator {
     
     protected LootTable lootTable = new LootTable();
     protected boolean emitsXp = true;
     protected boolean dead = false;
-    protected int deathDuration = 30;
+    protected int deathDuration = 60;
     protected placeholder.game.map.Map map;
     protected boolean moving = false;
-    protected AttackManager attackManager;
+    protected T attackManager;
     protected CollisionDetector cd;
     protected Direction direction = Direction.DOWN;
     protected Health health;
@@ -54,7 +54,7 @@ public abstract class Entity extends Sprite implements AttackClient, Hittable, D
     protected HitsplatDisplayer hitsplatDisplayer;
     private boolean initialized = false;
     protected double walkSpeed = 1.0;
-    protected int initHealth = 30;
+    protected int initHealth = 1;
     protected int meleeStrength = 0;
     protected int meleeDefense = 0;
     protected int rangeStrength = 0;
@@ -64,10 +64,8 @@ public abstract class Entity extends Sprite implements AttackClient, Hittable, D
     
     public Entity(
             Dimension dimension,
-            Point2D location,
-            AttackManager attackManager) {
+            Point2D location) {
         super(dimension, location);
-        this.attackManager = attackManager;
         lootTable.setStartPosition(location);
     }
 
@@ -114,11 +112,6 @@ public abstract class Entity extends Sprite implements AttackClient, Hittable, D
     }
 
     @Override
-    public void setMeleeAttack(MeleeAttack meleeAttack) {
-        attackManager.setMeleeAttack(meleeAttack);
-    }
-
-    @Override
     public Direction getDirection() {
         return this.direction;
     }
@@ -161,13 +154,14 @@ public abstract class Entity extends Sprite implements AttackClient, Hittable, D
     
     public void setMap(placeholder.game.map.Map map) {
         this.map = map;
+        this.cd = new DefaultCollisionDetector(this, map);
     }
     
     public placeholder.game.map.Map getMap() {
         return this.map;
     }
     
-    public AttackManager getAttackManager() {
+    public T getAttackManager() {
         return this.attackManager;
     }
 

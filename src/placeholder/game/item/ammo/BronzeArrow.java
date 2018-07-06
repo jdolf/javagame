@@ -9,6 +9,7 @@ import placeholder.game.item.equipment.weaponequipment.range.projectile.BronzeAr
 import placeholder.game.screen.ImageContainer;
 import placeholder.game.sprite.entity.attack.AttackClient;
 import placeholder.game.item.equipment.weaponequipment.range.projectile.WoodArrowProjectile;
+import placeholder.game.sprite.entity.attack.Projectile;
 
 /**
  *
@@ -26,7 +27,7 @@ public class BronzeArrow extends Ammo {
     @Override
     public void createProjectile(AttackClient attackClient, int duration, int invincibilityStun) {
         super.createProjectile(attackClient, duration, invincibilityStun);
-        new BronzeArrowProjectile(attackClient, duration, invincibilityStun);
+        new BronzeArrowProjectile(attackClient, duration, invincibilityStun).attack();
     }
     
     

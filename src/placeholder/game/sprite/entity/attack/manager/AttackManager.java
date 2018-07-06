@@ -6,65 +6,67 @@ import placeholder.game.item.equipment.weaponequipment.WeaponEquipment;
 import placeholder.game.screen.TickUpdatable;
 import placeholder.game.screen.render.Renderable;
 import placeholder.game.screen.render.Renderer;
+import placeholder.game.sprite.entity.Entity;
 import placeholder.game.sprite.entity.attack.Attack;
 import placeholder.game.sprite.entity.attack.AttackType;
 import placeholder.game.sprite.entity.attack.MeleeAttack;
-import static placeholder.game.sprite.entity.attack.manager.PlayerAttackManager.DEFAULT_ATTACK_COOLDOWN;
-import static placeholder.game.sprite.entity.attack.manager.PlayerAttackManager.DEFAULT_ATTACK_DURATION;
-import static placeholder.game.sprite.entity.attack.manager.PlayerAttackManager.DEFAULT_ATTACK_HITBOX;
-import static placeholder.game.sprite.entity.attack.manager.PlayerAttackManager.DEFAULT_ATTACK_INVINCIBILITYSTUN;
 
 /**
  *
  * @author jdolf
  */
-public abstract class AttackManager<T> implements TickUpdatable, Renderable {
+public abstract class AttackManager<T extends Entity> implements TickUpdatable, Renderable {
     
     /**
      * The target this attack manager belongs to
      */
     protected T source;
     protected boolean attacking = false;
-    private int attackCooldown = 0;
-    protected MeleeAttack meleeAttack;
-    protected WeaponEquipment usedWeapon = null;
-    protected int attackStartUpTime = 0;
+    protected int attackCooldown = 0;
+    protected int defaultStartUpTime = 0;
     protected int startUpTime = 0;
-    protected boolean initAttack = false;
     protected int cooldownReductionPercent = 0;
+    protected boolean isGoingToAttack = false;
+    
+    /**
+     * The implementation of attack.
+     * @return The attack cooldown.
+     */
+    protected abstract int attackImpl();
 
-    public abstract void attack();
-    protected void initializedAttack() {}
+    public void attack() {
+        isGoingToAttack = true;
+        attacking = true;
+        startUpTime = defaultStartUpTime;
+    }
 
     @Override
     public void tickUpdate() {
-        if (meleeAttack != null) {
-            meleeAttack.tickUpdate();
-            if (meleeAttack.getDuration() == 0) {
-                meleeAttack = null;
-            }
-        }
-            
-        if (attackCooldown > 0) {
-            attackCooldown -= 1;
-        }
         
-        if (attackCooldown <= 0) {
+        if (source.isDead()) {
             attacking = false;
-            usedWeapon = null;
+            isGoingToAttack = false;
         }
         
-        if (startUpTime > 0) startUpTime -= 1;
+        if (isGoingToAttack && attackCooldown <= 0) {
+            registerAttackCooldown(attackImpl());
+        }
         
-        if (initAttack && startUpTime == 0) {
-            initAttack = false;
-            initializedAttack();
+        if (startUpTime > 0) {
+            startUpTime -= 1;
+        } else if (attacking) {
+            if (attackCooldown <= 0) {
+                attacking = false;
+            }
+            if (attackCooldown > 0) {
+                attackCooldown -= 1;
+            }
         }
         
     }
     
     public boolean canAttack() {
-        return !attacking;
+        return !attacking && !isGoingToAttack;
     }
     
     public void registerSource(T t) {
@@ -98,24 +100,12 @@ public abstract class AttackManager<T> implements TickUpdatable, Renderable {
     @Override
     public void render(Renderer renderer) {}
     
-    public void setMeleeAttack(MeleeAttack meleeAttack) {
-        this.meleeAttack = meleeAttack;
-    }
-
-    public MeleeAttack getMeleeAttack() {
-        return meleeAttack;
-    }
-
-    public WeaponEquipment getUsedWeapon() {
-        return usedWeapon;
-    }
-
-    public boolean isInitAttack() {
-        return initAttack;
-    }
-    
     public void setCooldownReductionPercent(int cooldownReductionPercent) {
         this.cooldownReductionPercent = cooldownReductionPercent;
+    }
+
+    public int getStartUpTime() {
+        return startUpTime;
     }
     
     

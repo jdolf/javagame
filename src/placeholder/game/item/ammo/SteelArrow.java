@@ -26,7 +26,7 @@ public class SteelArrow extends Ammo {
     @Override
     public void createProjectile(AttackClient attackClient, int duration, int invincibilityStun) {
         super.createProjectile(attackClient, duration, invincibilityStun);
-        new SteelArrowProjectile(attackClient, duration, invincibilityStun);
+        new SteelArrowProjectile(attackClient, duration, invincibilityStun).attack();
     }
     
     

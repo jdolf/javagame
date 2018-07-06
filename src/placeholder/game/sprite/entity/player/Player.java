@@ -57,7 +57,7 @@ import placeholder.game.sprite.entity.player.inventory.StandardInventory;
  *
  * @author jdolf
  */
-public abstract class Player extends Entity implements EquipmentChangedListener, SkillLevelChangedListener {
+public abstract class Player extends Entity<PlayerAttackManager> implements EquipmentChangedListener, SkillLevelChangedListener {
     
     public static final Dimension DEFAULT_DIMENSION = new Dimension(20, 32);
     public static final Dimension DEFAULT_HEAD_DIMENSION = new Dimension(20, 13);
@@ -70,7 +70,7 @@ public abstract class Player extends Entity implements EquipmentChangedListener,
     public static final Point2D DEFAULT_LEFT_ARM_OFFSET = new Point2D.Double(-6, 10);
     public static final Dimension DEFAULT_RIGHT_ARM_DIMENSION = new Dimension(20, 16);
     public static final Point2D DEFAULT_RIGHT_ARM_OFFSET = new Point2D.Double(6, 10);
-    public static final double BASE_WALK_SPEED = 1.9;
+    public static final double BASE_WALK_SPEED = 3;
     
     protected InputHandler input;
     protected Inventory inventory;
@@ -83,7 +83,7 @@ public abstract class Player extends Entity implements EquipmentChangedListener,
     protected int woodcuttingEfficiency = 0;
     
     public Player(InputHandler inputHandler, WindowManager windowManager, ContextMenuManager contextManager) {
-        super(DEFAULT_DIMENSION, null, new PlayerAttackManager());
+        super(DEFAULT_DIMENSION, null);
         this.input = inputHandler;
         this.windowManager = windowManager;
         this.inventory = new StandardInventory(contextManager, this);
@@ -105,6 +105,7 @@ public abstract class Player extends Entity implements EquipmentChangedListener,
         inventory.insertItem(new WillowWoodBow(null));
         inventory.insertItem(new IronHelmet(null));
         inventory.insertItem(new SteelHelmet(null));
+        this.attackManager = new PlayerAttackManager();
         equipmentManager = new PlayerEquipmentManager(contextManager, this);
         
         // Listener
@@ -113,6 +114,7 @@ public abstract class Player extends Entity implements EquipmentChangedListener,
         
         // Other
         updateStats();
+        initHealth = 1300;
     }
 
     @Override

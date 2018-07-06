@@ -9,6 +9,8 @@ import placeholder.game.sprite.entity.Entity;
 public class BrainlessAttackManager extends AttackManager<Entity> {
 
     @Override
-    public void attack() {}
+    protected int attackImpl() {
+        return 0;
+    }
     
 }

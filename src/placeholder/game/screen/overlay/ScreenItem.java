@@ -22,11 +22,13 @@ public class ScreenItem {
     
     private List<PositionChangeListener> listener = new ArrayList();
     private Point2D position;
+    private Point2D middlePosition;
     protected Dimension dimension;
     
     public ScreenItem(Point2D screenPosition, Dimension dimension) {
         this.position = screenPosition;
         this.dimension = dimension;
+        if (hasPositionAndDimension()) calcMiddlePosition();
     }
     
     public ScreenItem(Dimension dimension) {
@@ -41,6 +43,7 @@ public class ScreenItem {
 
     public void setDimension(Dimension dimension) {
         this.dimension = dimension;
+        if (hasPositionAndDimension()) calcMiddlePosition();
         notifyPositionChangedListener();
     }
     
@@ -54,7 +57,16 @@ public class ScreenItem {
 
     public void setPosition(Point2D position) {
         this.position = position;
+        if (hasPositionAndDimension()) calcMiddlePosition();
         notifyPositionChangedListener();
+    }
+    
+    private void calcMiddlePosition() {
+        this.middlePosition = new Point2D.Double(position.getX() + dimension.width / 2, position.getY() + dimension.height / 2);
+    }
+    
+    public Point2D getMiddlePosition() {
+        return this.middlePosition;
     }
     
     public void addPositionChangeListener(PositionChangeListener listener) {
@@ -77,6 +89,10 @@ public class ScreenItem {
     
     public static Point2D merge(Dimension d, Point2D p) {
         return new Point2D.Double(p.getX() + d.width, p.getY() + d.height);
+    }
+    
+    public static Point2D shiftBackByHalfOfDimension(Dimension dimension, Point2D point) {
+        return new Point2D.Double(point.getX() - dimension.width / 2, point.getY() - dimension.height / 2);
     }
     
     public boolean hasPositionAndDimension() {

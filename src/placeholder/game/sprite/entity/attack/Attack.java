@@ -33,11 +33,13 @@ public abstract class Attack extends CollisionalPlane {
     private AttackType type;
     protected int baseDamage;
     protected int damage;
-    Random random = new Random();
+    private boolean attackSwitch = false;
+    private Random random = new Random();
+    private int defaultDuration = 15;
     /**
      * How long the attack should stay active for. Mainly used by animation.
      */
-    protected int duration = 15;
+    protected int duration = 30;
     /**
      * How long the attack cant hit the same enemy after it hit the enemy.
      * Piercing effect is possible with low values.
@@ -46,8 +48,7 @@ public abstract class Attack extends CollisionalPlane {
     /**
      * Time it takes for this attack to start making damage.
      */
-    protected int startUpTime = 0;
-    private AttackClient attacker;
+    protected AttackClient attacker;
 
     public Attack(AttackType type,
             AttackClient attacker,
@@ -58,14 +59,9 @@ public abstract class Attack extends CollisionalPlane {
         super(
                 attacker,
                 hitbox,
-                Arrays.asList(attacker),
-                attacker.getMap()
+                Arrays.asList(attacker)
         );
-        this.type = type;
-        this.attacker = attacker;
-        this.baseDamage = baseDamage;
-        this.duration = duration;
-        this.invincibilityStun = invincibilityStun;
+        init(type, attacker, baseDamage, duration, invincibilityStun);
     }
     
     public Attack(AttackType type,
@@ -78,14 +74,23 @@ public abstract class Attack extends CollisionalPlane {
         super(
                 attacker,
                 hitbox,
-                Arrays.asList(attacker),
-                attacker.getMap()
+                Arrays.asList(attacker)
         );
-        this.type = type;
-        this.attacker = attacker;
-        this.baseDamage = baseDamage;
-        this.duration = duration;
-        this.invincibilityStun = invincibilityStun;
+        init(type, attacker, baseDamage, duration, invincibilityStun);
+    }
+
+    private void init(AttackType type1, AttackClient attacker1, int baseDamage1, int duration1, int invincibilityStun1) {
+        this.type = type1;
+        this.attacker = attacker1;
+        this.baseDamage = baseDamage1;
+        this.defaultDuration = duration1;
+        this.invincibilityStun = invincibilityStun1;
+    }
+    
+    public void attack() {
+        attackSwitch = true;
+        duration = defaultDuration;
+        attacker.getMap().addAttack(this);
     }
     
     protected void supplyXp(Player player) {
@@ -95,30 +100,31 @@ public abstract class Attack extends CollisionalPlane {
     @Override
     public final void tickUpdate() {
         super.tickUpdate();
-        if (initialized) {
-            if (startUpTime == 0) {
-                if (collisionCheck.hasCollisionOccurrence()) {
-                    for (Sprite sprite : collisionCheck.getCollisionPartners()) {
-                        if (sprite instanceof Hittable) {
-                            if (!attackInvincibilities.keySet().contains(sprite)) {
-                                this.hitVictim((Hittable) sprite);
-                            }
+        
+        if (initialized && attackSwitch) {
+            if (collisionCheck != null && collisionCheck.hasCollisionOccurrence()) {
+                for (Sprite sprite : collisionCheck.getCollisionPartners()) {
+                    if (sprite instanceof Hittable) {
+                        if (!attackInvincibilities.keySet().contains(sprite)) {
+                            this.hitVictim((Hittable) sprite);
+                            attackSwitch = false;
                         }
                     }
                 }
             }
         }
         
-        if (startUpTime > 0) this.startUpTime -= 1;
-        if (startUpTime == 0 && duration > 0) this.duration -= 1;
+        if (duration > 0) this.duration -= 1;
         
         for (Map.Entry<Hittable, Integer> set : attackInvincibilities.entrySet()) {
             set.setValue(set.getValue() - 1);
         }
-
+        
         attackInvincibilities.entrySet().removeIf((set) -> {
             return set.getValue() == 0;
         });
+        
+        if (duration <= 0) attacker.getMap().removeAttack(this);
         
         initialized = true;
     }
@@ -191,17 +197,15 @@ public abstract class Attack extends CollisionalPlane {
         this.invincibilityStun = invincibilityStun;
     }
 
-    public void setStartUpTime(int startUpTime) {
-        this.startUpTime = startUpTime;
+    public void setAttacker(AttackClient attackClient) {
+        this.attacker = attackClient;
+        calculateScreenItem(attacker, hitboxDown, Arrays.asList(attacker));
+        this.cd.setMap(attackClient.getMap());
     }
 
-    public int getStartUpTime() {
-        return startUpTime;
+    public int getDefaultDuration() {
+        return defaultDuration;
     }
-
-    
-    
-    
     
     
     

@@ -9,13 +9,13 @@ import placeholder.game.sprite.entity.Entity;
  *
  * @author jdolf
  */
-public class EntityMoveAnimation extends DirectionAnimation<Entity> {
+public class PlayerMoveAnimation extends DirectionAnimation<Entity> {
     
     public static final int DEFAULT_NUM_COLUMNS = 3;
     public static final int DEFAULT_CYCLE_TIME = 15;
     private int moveCounter = 0;
     
-    public EntityMoveAnimation(Entity data, Image image, Dimension dimension) {
+    public PlayerMoveAnimation(Entity data, Image image, Dimension dimension) {
         super(data, data, image, dimension);
     }
 

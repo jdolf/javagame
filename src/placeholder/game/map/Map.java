@@ -23,6 +23,7 @@ import placeholder.game.sprite.Receiver;
 import placeholder.game.sprite.Sprite;
 import placeholder.game.sprite.SpriteReceiver;
 import placeholder.game.sprite.entity.Entity;
+import placeholder.game.sprite.entity.attack.Attack;
 import placeholder.game.sprite.entity.player.Player;
 
 /**
@@ -42,6 +43,9 @@ public abstract class Map implements Renderable, TickUpdatable {
     private List<Particle> particles = new ArrayList();
     private List<Particle> particlesToAdd = new ArrayList();
     private List<Particle> particlesToDelete = new ArrayList();
+    private List<Attack> attacks = new ArrayList();
+    private List<Attack> attacksToAdd = new ArrayList();
+    private List<Attack> attacksToDelete = new ArrayList();
     protected SpriteReceiver spriteReceiver = new SpriteReceiver(this);
     protected ItemReceiver itemReceiver = new ItemReceiver(this);
     protected MapCode mapCode;
@@ -69,6 +73,10 @@ public abstract class Map implements Renderable, TickUpdatable {
             particle.tickUpdate();
         });
         
+        attacks.forEach((attack) -> {
+            attack.tickUpdate();
+        });
+        
         items.removeAll(itemsToDelete);
         itemsToDelete.clear();
         items.addAll(itemsToAdd);
@@ -77,6 +85,10 @@ public abstract class Map implements Renderable, TickUpdatable {
         particlesToAdd.clear();
         particles.removeAll(particlesToDelete);
         particlesToDelete.clear();
+        attacks.removeAll(attacksToDelete);
+        attacksToDelete.clear();
+        attacks.addAll(attacksToAdd);
+        attacksToAdd.clear();
     }
 
     @Override
@@ -127,6 +139,14 @@ public abstract class Map implements Renderable, TickUpdatable {
     
     public void removeParticle(Particle particle) {
         particlesToDelete.add(particle);
+    }
+    
+    public void addAttack(Attack attack) {
+        attacksToAdd.add(attack);
+    }
+    
+    public void removeAttack(Attack attack) {
+        attacksToDelete.add(attack);
     }
 
     public boolean matchesMapCode(MapCode testMapCode) {

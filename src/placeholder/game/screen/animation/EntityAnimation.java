@@ -8,7 +8,7 @@ import placeholder.game.sprite.entity.Entity;
  *
  * @author jdolf
  */
-public class EntityAnimation extends DirectionAnimation<Entity> {
+public class EntityAnimation<T extends Entity> extends DirectionAnimation<T> {
     
     public EntityAnimation(Image image, Dimension dimension) {
         super(image, dimension);
@@ -20,10 +20,6 @@ public class EntityAnimation extends DirectionAnimation<Entity> {
             return 1;
         }
         return super.calculateColumn();
-    }
-    
-    public void setEntity(Entity entity) {
-        this.data = entity;
     }
     
     

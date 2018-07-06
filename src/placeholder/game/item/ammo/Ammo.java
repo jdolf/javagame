@@ -7,6 +7,7 @@ import placeholder.game.item.Item;
 import placeholder.game.item.equipment.weaponequipment.ProjectileCreator;
 import placeholder.game.screen.render.Renderer;
 import placeholder.game.sprite.entity.attack.AttackClient;
+import placeholder.game.sprite.entity.attack.Projectile;
 
 /**
  *

@@ -8,30 +8,30 @@ import placeholder.game.screen.animation.EntityAnimation;
 import placeholder.game.screen.render.Renderer;
 import placeholder.game.sprite.AnimatedSprite;
 import placeholder.game.sprite.entity.attack.manager.AttackManager;
+import placeholder.game.sprite.entity.attack.manager.SimpleAttackManager;
 
 /**
  *
  * @author jdolf
  */
-public class AnimatedEntity extends Entity {
+public class AnimatedEntity<T extends SimpleAttackManager> extends Entity<T> {
     
     protected Animation animation;
     
     public AnimatedEntity(
             EntityAnimation animation,
             Dimension dimension,
-            Point2D location,
-            AttackManager attackManager) {
-        super(dimension, location, attackManager);
+            Point2D location) {
+        super(dimension, location);
         this.animation = animation;
         animation.setDirectionDependent(this);
-        animation.setEntity(this);
+        animation.setData(this);
     }
     
     @Override
     public void tickUpdate() {
-        super.tickUpdate();
         animation.update();
+        super.tickUpdate();
     }    
     
     @Override

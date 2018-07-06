@@ -8,7 +8,7 @@ package placeholder.game.sprite.entity.bodypart;
 import java.awt.Dimension;
 import java.awt.geom.Point2D;
 import javafx.scene.image.Image;
-import placeholder.game.screen.animation.EntityMoveAnimation;
+import placeholder.game.screen.animation.PlayerMoveAnimation;
 import placeholder.game.sprite.entity.Entity;
 import placeholder.game.sprite.entity.player.Player;
 
@@ -19,7 +19,7 @@ import placeholder.game.sprite.entity.player.Player;
 public class LegsBodyPart extends BodyPart {
 
     public LegsBodyPart(Image image, Point2D offsetCoordinates, Dimension dimension, Player player) {
-        super(offsetCoordinates, dimension, player, new EntityMoveAnimation(player, image, dimension));
+        super(offsetCoordinates, dimension, player, new PlayerMoveAnimation(player, image, dimension));
     }
 
     @Override

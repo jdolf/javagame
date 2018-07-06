@@ -25,7 +25,7 @@ public class WoodArrow extends Ammo {
     @Override
     public void createProjectile(AttackClient attackClient, int duration, int invincibilityStun) {
         super.createProjectile(attackClient, duration, invincibilityStun);
-        new WoodArrowProjectile(attackClient, duration, invincibilityStun);
+        new WoodArrowProjectile(attackClient, duration, invincibilityStun).attack();
     }
     
     

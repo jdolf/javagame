@@ -91,7 +91,7 @@ public class CameraOrientedRenderer extends DefaultRenderer {
         gc.fillText(
                 text,
                 sharpen(screenItem.getPosition().getX() - camera.getPosition().getX()),
-                height + gc.getFont().getSize()
+                sharpen(height + gc.getFont().getSize())
         );
     }
 

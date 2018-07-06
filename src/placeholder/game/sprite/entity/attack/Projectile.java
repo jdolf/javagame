@@ -56,8 +56,7 @@ public abstract class Projectile extends AnimatedSprite implements DirectionDepe
         super.tickUpdate();
         
         if (attack.isInitialized()) {
-            if (attack.getStartUpTime() == 0 &&
-                    attack.getCollisionCheck().hasCollisionOccurrence()) {
+            if (attack.getCollisionCheck().hasCollisionOccurrence()) {
                 map.removeSprite(this);
             } else {
                 Point2D directionOffset = this.direction.calculateOffsetChanges(
@@ -72,13 +71,15 @@ public abstract class Projectile extends AnimatedSprite implements DirectionDepe
             }
         }
         
-        attack.tickUpdate();
-        
     }
 
     @Override
     public Direction getDirection() {
         return this.direction;
+    }
+    
+    public void attack() {
+        attack.attack();
     }
     
 }

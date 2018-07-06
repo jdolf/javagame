@@ -21,7 +21,7 @@ public abstract class ResourceInteraction extends CollisionalPlane {
     private boolean success;
     
     public ResourceInteraction(Player player, Tool tool, Collection<Object> exceptions) {
-        super(player, tool.getHitbox(), exceptions, player.getMap());
+        super(player, tool.getHitbox(), exceptions);
         
         super.tickUpdate();
         

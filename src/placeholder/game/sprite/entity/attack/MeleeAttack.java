@@ -2,6 +2,7 @@ package placeholder.game.sprite.entity.attack;
 
 import java.awt.Dimension;
 import java.awt.geom.Point2D;
+import java.util.Arrays;
 import placeholder.game.input.Direction;
 import placeholder.game.sprite.SpriteReceiver;
 import placeholder.game.sprite.entity.player.Player;
@@ -21,7 +22,6 @@ public class MeleeAttack extends Attack {
                 duration,
                 invincibilityStun
         );
-        attacker.setMeleeAttack(this);
     }
 
     @Override
@@ -32,8 +32,16 @@ public class MeleeAttack extends Attack {
 
     @Override
     protected int calculateDamageImpl(Hittable hittable) {
-        return 3 + this.baseDamage - (hittable.getMeleeDefense() / 4);
+        return 1 + this.baseDamage - (hittable.getMeleeDefense() / 2);
     }
+
+    @Override
+    public void attack() {
+        super.attack();
+        calculateScreenItem(attacker, hitboxDown, Arrays.asList(attacker));
+    }
+    
+    
     
     
     

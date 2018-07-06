@@ -20,9 +20,11 @@ import placeholder.game.sprite.entity.Entity;
  */
 public class CollisionalPlane extends ScreenItem implements TickUpdatable {
     
-    private CollisionDetector cd;
+    private CollisionalPlaneCreator creator;
+    protected Dimension hitboxDown;
+    protected CollisionDetector cd = new DefaultCollisionDetector(this, null);
     protected CollisionCheck collisionCheck;
-    private Collection<Object> exceptions;
+    protected Collection<Object> exceptions;
     
     private static Point2D calculateInitPosition(Dimension hitboxDown, CollisionalPlaneCreator creator) {
         return creator.getDirection().calculatePointWithOffset(hitboxDown, creator.getPosition(), creator.getDimension());
@@ -45,16 +47,31 @@ public class CollisionalPlane extends ScreenItem implements TickUpdatable {
         return hitbox;
     }
     
-    public CollisionalPlane(CollisionalPlaneCreator creator, Dimension hitboxDown, Collection<Object> exceptions, Map map) {
-        super(calculateInitPosition(hitboxDown, creator), calculateInitHitbox(hitboxDown, creator.getDirection()));
+    protected void calculateScreenItem(CollisionalPlaneCreator creator, Dimension hitboxDown, Collection<Object> exceptions) {
+        this.setDimension(calculateInitHitbox(hitboxDown, creator.getDirection()));
+        this.setPosition(calculateInitPosition(hitboxDown, creator));
         this.cd = new DefaultCollisionDetector(this, creator.getMap());
+        this.exceptions = exceptions;
+    }
+    
+    public CollisionalPlane(CollisionalPlaneCreator creator, Dimension hitboxDown, Collection<Object> exceptions) {
+        this.creator = creator;
+        this.hitboxDown = hitboxDown;
         this.exceptions = exceptions;
     }
 
     @Override
     public void tickUpdate() {
-        collisionCheck = this.cd.collidesAt(this.getPosition(), exceptions);
+        if (this.getPosition() != null) {
+            collisionCheck = this.cd.collidesAt(this.getPosition(), exceptions);
+        }
     }
+    
+    public void addException(Object object) {
+        this.exceptions.add(object);
+    }
+    
+    
     
     
     

@@ -37,6 +37,7 @@ import placeholder.game.sprite.ambient.GrassBig;
 import placeholder.game.sprite.ambient.StoneMud;
 import placeholder.game.sprite.ambient.StoneMudBig;
 import placeholder.game.sprite.entity.mob.Dummy;
+import placeholder.game.sprite.entity.mob.Goblin;
 import placeholder.game.sprite.furniture.Anvil;
 import placeholder.game.sprite.furniture.Furnace;
 import placeholder.game.sprite.furniture.Workbench;
@@ -73,7 +74,7 @@ public class Editor extends Application {
         templates.add(new JungleTree(null));
         templates.add(new WillowTree(null));
         templates.add(new PineTree(null));
-        templates.add(new Dummy(null));
+        templates.add(new Goblin(null));
         templates.add(new Grass(null));
         templates.add(new GrassBig(null));
         templates.add(new StoneMudBig(null));
