@@ -2,6 +2,7 @@ package placeholder.game.sprite.entity;
 
 import java.awt.Dimension;
 import java.awt.geom.Point2D;
+import javafx.scene.image.Image;
 import placeholder.game.screen.animation.Animation;
 import placeholder.game.screen.animation.DirectionAnimation;
 import placeholder.game.screen.animation.EntityAnimation;
@@ -38,6 +39,11 @@ public class AnimatedEntity<T extends SimpleAttackManager> extends Entity<T> {
     public void render(Renderer renderer) {
         super.render(renderer);
         renderer.renderAnimation(animation, this);
+    }
+
+    @Override
+    public Image makePreviewImage() {
+        return animation.createPreviewImage();
     }
     
     

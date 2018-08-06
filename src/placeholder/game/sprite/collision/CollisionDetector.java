@@ -21,4 +21,5 @@ public interface CollisionDetector {
     CollisionCheck collidesAt(Point2D targetLocation, Collection<Object> exceptions);
     Collection<Item> collidesWithItemsAt(Point2D targetLocation);
     void setMap(Map map);
+    Map getMap();
 }

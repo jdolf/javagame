@@ -70,6 +70,11 @@ public class DefaultCollisionDetector implements CollisionDetector {
     public void setMap(Map map) {
         this.map = map;
     }
+
+    @Override
+    public Map getMap() {
+        return map;
+    }
     
     
     

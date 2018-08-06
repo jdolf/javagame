@@ -39,7 +39,9 @@ public abstract class Particle extends ScreenItem implements Renderable, TickUpd
 
     @Override
     public void tickUpdate() {
-        if (duration <= 0) map.removeParticle(this);
+        if (duration <= 0) {
+            map.removeParticle(this);
+        }
         
         this.getPosition().setLocation(ScreenItem.mergePoints(this.getPosition(), new Point2D.Double(velocityX, velocityY)));
         duration--;

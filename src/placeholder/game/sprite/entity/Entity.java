@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import javafx.scene.image.Image;
 import javax.annotation.PostConstruct;
 import placeholder.game.input.Direction;
 import placeholder.game.item.equipment.weaponequipment.Hitbox;
@@ -109,6 +110,11 @@ public abstract class Entity<T extends AttackManager> extends Sprite implements 
             if (this.dead && deathDuration > 0) deathDuration -= 1;
             if (deathDuration == 0) die();
         }
+    }
+
+    @Override
+    public Image makePreviewImage() {
+        return null;
     }
 
     @Override

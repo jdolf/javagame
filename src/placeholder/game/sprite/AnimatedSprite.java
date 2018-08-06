@@ -33,6 +33,17 @@ public abstract class AnimatedSprite extends Sprite {
     public void render(Renderer renderer) {
         renderer.renderAnimation(animation, this);
     }
+
+    @Override
+    public Image makePreviewImage() {
+        return animation.createPreviewImage();
+    }
+    
+    
+
+    
+    
+    
     
     
 }

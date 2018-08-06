@@ -9,16 +9,22 @@ import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -34,8 +40,12 @@ import placeholder.game.screen.render.Renderer;
 import placeholder.game.sprite.Sprite;
 import placeholder.game.sprite.ambient.Grass;
 import placeholder.game.sprite.ambient.GrassBig;
+import placeholder.game.sprite.ambient.NaturalStoneWall;
 import placeholder.game.sprite.ambient.StoneMud;
 import placeholder.game.sprite.ambient.StoneMudBig;
+import placeholder.game.sprite.ambient.WoodFloor;
+import placeholder.game.sprite.ambient.WoodWallHorizontal;
+import placeholder.game.sprite.ambient.WoodWallVertical;
 import placeholder.game.sprite.entity.mob.Dummy;
 import placeholder.game.sprite.entity.mob.Goblin;
 import placeholder.game.sprite.furniture.Anvil;
@@ -45,6 +55,7 @@ import placeholder.game.sprite.resource.mining.CoalRock;
 import placeholder.game.sprite.resource.mining.CopperRock;
 import placeholder.game.sprite.resource.mining.GoldRock;
 import placeholder.game.sprite.resource.mining.IronRock;
+import placeholder.game.sprite.resource.mining.StoneRock;
 import placeholder.game.sprite.resource.mining.TinRock;
 import placeholder.game.sprite.resource.woodcutting.DefaultTree;
 import placeholder.game.sprite.resource.woodcutting.JungleTree;
@@ -64,6 +75,7 @@ public class Editor extends Application {
     private Map map = new NewbieLandMap();
     private Sprite selection = null;
     private Point mousePosition = null;
+    private Text selectionText;
     
     private static ObservableList<Sprite> createItems() {
         ObservableList<Sprite> templates = FXCollections.observableArrayList();
@@ -79,11 +91,16 @@ public class Editor extends Application {
         templates.add(new GrassBig(null));
         templates.add(new StoneMudBig(null));
         templates.add(new StoneMud(null));
+        templates.add(new StoneRock(null));
         templates.add(new TinRock(null));
         templates.add(new CopperRock(null));
         templates.add(new IronRock(null));
         templates.add(new CoalRock(null));
         templates.add(new GoldRock(null));
+        templates.add(new WoodWallHorizontal(null));
+        templates.add(new WoodWallVertical(null));
+        templates.add(new WoodFloor(null));
+        templates.add(new NaturalStoneWall(null));
         return templates;
     }
     
@@ -96,6 +113,29 @@ public class Editor extends Application {
         AnchorPane sidePanel = new AnchorPane();
         sidePanel.setPrefWidth(200);
         sidePanel.setBackground(new Background(new BackgroundFill(Color.GRAY, CornerRadii.EMPTY, Insets.EMPTY)));
+        
+        TilePane itemHolder = new TilePane();
+        itemHolder.setPrefWidth(sidePanel.getPrefWidth());
+        ITEMS.forEach((item) -> {
+            ImageView imageView = new ImageView(item.makePreviewImage());
+            imageView.setFitHeight(32);
+            imageView.setFitWidth(32);
+            imageView.setOnMouseClicked((event) -> {
+                select(item);
+            });
+            itemHolder.getChildren().add(imageView);
+        });
+        System.out.println(itemHolder.getChildren().size());
+        
+        ScrollPane itemScrollPane = new ScrollPane();
+        itemScrollPane.setLayoutX(0);
+        itemScrollPane.setLayoutY(300);
+        itemScrollPane.setPrefWidth(sidePanel.getPrefWidth());
+        itemScrollPane.setContent(itemHolder);
+        itemScrollPane.setVisible(false);
+        
+        sidePanel.getChildren().add(itemScrollPane);
+        
         root.getChildren().add(sidePanel);
         
         ObservableList comboBoxItems = FXCollections.observableArrayList();
@@ -107,20 +147,13 @@ public class Editor extends Application {
         comboBoxMode.getSelectionModel().selectFirst();
         sidePanel.getChildren().add(comboBoxMode);
         
-        Text selectionText = new Text();
+        selectionText = new Text();
         selectionText.setLayoutX(40);
         selectionText.setLayoutY(80);
         sidePanel.getChildren().add(selectionText);
         
         CameraOrientedRenderer mapRenderer = new CameraOrientedRenderer(canvas.getGraphicsContext2D(), new Dimension(0, 0));
         mapRenderer.getCamera().setPosition(new Point2D.Double(0, 0));
-        
-        ComboBox<Sprite> comboBox = new ComboBox();
-        comboBox.setItems(ITEMS);
-        comboBox.setFocusTraversable(false);
-        comboBox.setLayoutX(50);
-        comboBox.setVisible(false);
-        root.getChildren().add(comboBox);
         
         Button buttonBack = new Button("To Back");
         buttonBack.setOnAction((action) -> {
@@ -149,6 +182,7 @@ public class Editor extends Application {
         canvas.setWidth(scene.getWidth() - sidePanel.getPrefWidth());
         canvas.setHeight(scene.getHeight());
         sidePanel.setLayoutX(canvas.getWidth());
+        itemScrollPane.setPrefHeight(scene.getHeight() - itemScrollPane.getLayoutY());
         updateMapClearDimension(mapRenderer, canvas);
         
         canvas.setOnMouseMoved((event) -> {
@@ -157,28 +191,26 @@ public class Editor extends Application {
         
         comboBoxMode.setOnAction((event) -> {
             if (comboBoxMode.getSelectionModel().getSelectedItem() == Mode.SELECT) {
-                comboBox.setVisible(false);
                 buttonBack.setVisible(true);
                 buttonFront.setVisible(true);
-                selectionText.setVisible(true);
+                itemScrollPane.setVisible(false);
             } else if (comboBoxMode.getSelectionModel().getSelectedItem() == Mode.PLACE) {
-                comboBox.setVisible(true);
                 buttonBack.setVisible(false);
                 buttonFront.setVisible(false);
-                selectionText.setVisible(false);
+                itemScrollPane.setVisible(true);
             }
         });
         
         scene.setOnKeyPressed(inputHandler);
         scene.setOnKeyReleased(inputHandler);
-        scene.setOnMouseClicked((event) -> {
+        canvas.setOnMouseClicked((event) -> {
             
             if (comboBoxMode.getSelectionModel().getSelectedItem() != null) {
                 
                 if (comboBoxMode.getSelectionModel().getSelectedItem() == Mode.PLACE) {
 
                     if (event.getButton() == MouseButton.PRIMARY) {
-                        if (comboBox.getSelectionModel().getSelectedItem() != null) {
+                        if (selection != null) {
                             if (Maths.inside(
                                     new Point2D.Double(event.getX(), event.getY()),
                                     new Point2D.Double(canvas.getLayoutX(), canvas.getLayoutY()),
@@ -186,8 +218,7 @@ public class Editor extends Application {
                                 )
                             ) {
                                 try {
-                                    System.out.println(comboBox.getSelectionModel().getSelectedItem());
-                                    Sprite sprite = comboBox.getSelectionModel().getSelectedItem().getClass()
+                                    Sprite sprite = selection.getClass()
                                         .getDeclaredConstructor(Point2D.class)
                                         .newInstance(new Point2D.Double(
                                                 mapRenderer.getCamera().getPosition().getX() + event.getX(),
@@ -209,8 +240,7 @@ public class Editor extends Application {
                     ), new Dimension(1, 1));
 
                         if (!selectedSprites.isEmpty()) {
-                            selection = selectedSprites.get(selectedSprites.size() - 1);
-                            selectionText.setText(selection.getClass().getSimpleName());
+                            select(selectedSprites.get(selectedSprites.size() - 1));
                         }
                 }
                 
@@ -229,13 +259,13 @@ public class Editor extends Application {
         scene.widthProperty().addListener((observable) -> {
             canvas.setWidth(scene.getWidth() - sidePanel.getPrefWidth());
             sidePanel.setLayoutX(canvas.getWidth());
-            comboBox.setLayoutX(canvas.getWidth() / 2 - comboBox.getWidth() / 2);
             updateMapClearDimension(mapRenderer, canvas);
             
         });
         scene.heightProperty().addListener((observable) -> {
             canvas.setHeight(scene.getHeight());
             sidePanel.setPrefHeight(scene.getHeight());
+            itemScrollPane.setPrefHeight(scene.getHeight() - itemScrollPane.getLayoutY());
             updateMapClearDimension(mapRenderer, canvas);
         });
         
@@ -257,11 +287,11 @@ public class Editor extends Application {
                     mapRenderer.getCamera().setPosition(ScreenItem.mergePoints(mapRenderer.getCamera().getPosition(), offset));
                 }
                 
-                if (comboBoxMode.getSelectionModel().getSelectedItem() == Mode.PLACE && comboBox.getSelectionModel().getSelectedItem() != null) {
-                    comboBox.getSelectionModel().getSelectedItem().setPosition(
+                if (comboBoxMode.getSelectionModel().getSelectedItem() == Mode.PLACE && selection != null) {
+                    selection.setPosition(
                             ScreenItem.mergePoints(mousePosition, mapRenderer.getCamera().getPosition())
                     );
-                    comboBox.getSelectionModel().getSelectedItem().render(mapRenderer);
+                    selection.render(mapRenderer);
                 }
             }
         }.start();
@@ -269,6 +299,11 @@ public class Editor extends Application {
         primaryStage.setTitle("Editor");
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    private void select(Sprite newSelection) {
+        selection = newSelection;
+        selectionText.setText(newSelection.getClass().getSimpleName());
     }
 
     /**

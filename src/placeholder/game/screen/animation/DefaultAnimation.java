@@ -7,6 +7,8 @@ package placeholder.game.screen.animation;
 
 import java.awt.Dimension;
 import javafx.scene.image.Image;
+import javafx.scene.image.PixelReader;
+import javafx.scene.image.WritableImage;
 
 /**
  *
@@ -100,8 +102,10 @@ public abstract class DefaultAnimation<T> implements Animation<T> {
         this.data = data;
     }
 
-    
-    
-    
+    @Override
+    public Image createPreviewImage() {
+        PixelReader reader = image.getPixelReader();
+        return new WritableImage(reader, 0, 0, (int)dimension.getWidth(), (int)dimension.getHeight());
+    }
 
 }

@@ -5,6 +5,7 @@
  */
 package placeholder.game.screen.animation;
 
+import java.awt.Dimension;
 import javafx.scene.image.Image;
 
 /**
@@ -22,5 +23,6 @@ public interface Animation<T> {
     double getSourceHeight();
     int calculateRow();
     int calculateColumn();
+    Image createPreviewImage();
     
 }

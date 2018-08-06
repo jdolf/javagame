@@ -62,7 +62,14 @@ public class CollisionalPlane extends ScreenItem implements TickUpdatable {
 
     @Override
     public void tickUpdate() {
+        if (this.getPosition() == null || this.getDimension() == null) {
+            calculateScreenItem(creator, hitboxDown, exceptions);
+        }
+        
         if (this.getPosition() != null) {
+            if (cd.getMap() == null) {
+                cd.setMap(creator.getMap());
+            }
             collisionCheck = this.cd.collidesAt(this.getPosition(), exceptions);
         }
     }

@@ -7,6 +7,7 @@ package placeholder.game.sprite;
 
 import java.awt.Dimension;
 import java.awt.geom.Point2D;
+import javafx.scene.image.Image;
 import placeholder.game.screen.TickUpdatable;
 import placeholder.game.screen.overlay.ScreenItem;
 import placeholder.game.screen.render.Renderable;
@@ -37,6 +38,7 @@ public abstract class Sprite extends ScreenItem implements Renderable, TickUpdat
         return getClass().getSimpleName();
     }
     
+    public abstract Image makePreviewImage();
     
     
 }

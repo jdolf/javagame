@@ -3,6 +3,7 @@ package placeholder.game.sprite.entity.attack;
 import java.awt.Dimension;
 import java.awt.geom.Point2D;
 import java.util.Arrays;
+import javafx.scene.image.Image;
 import placeholder.game.input.Direction;
 import placeholder.game.map.Map;
 import placeholder.game.screen.animation.Animation;
@@ -49,6 +50,7 @@ public abstract class Projectile extends AnimatedSprite implements DirectionDepe
         map.addSprite(this);
         attack.setPosition(this.getPosition());
         solid = false;
+        attack();
     }
 
     @Override
@@ -81,5 +83,7 @@ public abstract class Projectile extends AnimatedSprite implements DirectionDepe
     public void attack() {
         attack.attack();
     }
+    
+    
     
 }

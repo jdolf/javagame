@@ -20,6 +20,7 @@ import placeholder.game.sprite.collision.CollisionDetector;
 import placeholder.game.sprite.collision.CollisionalPlane;
 import placeholder.game.sprite.collision.DefaultCollisionDetector;
 import placeholder.game.sprite.entity.Entity;
+import placeholder.game.sprite.entity.mob.Mob;
 import placeholder.game.sprite.entity.player.Player;
 
 /**
@@ -104,7 +105,8 @@ public abstract class Attack extends CollisionalPlane {
         if (initialized && attackSwitch) {
             if (collisionCheck != null && collisionCheck.hasCollisionOccurrence()) {
                 for (Sprite sprite : collisionCheck.getCollisionPartners()) {
-                    if (sprite instanceof Hittable) {
+                    if (sprite instanceof Hittable &&
+                            !(attacker instanceof Mob && sprite instanceof Mob)) {
                         if (!attackInvincibilities.keySet().contains(sprite)) {
                             this.hitVictim((Hittable) sprite);
                             attackSwitch = false;

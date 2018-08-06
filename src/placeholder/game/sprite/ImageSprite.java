@@ -10,7 +10,7 @@ import placeholder.game.screen.render.Renderer;
  * @author jdolf
  */
 public class ImageSprite extends Sprite {
-
+    
     private Image image;
     
     public ImageSprite(Dimension dimension, Point2D location, Image image) {
@@ -25,5 +25,9 @@ public class ImageSprite extends Sprite {
 
     @Override
     public void tickUpdate() {}
-    
+
+    @Override
+    public Image makePreviewImage() {
+        return image;
+    }
 }
