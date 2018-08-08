@@ -16,29 +16,27 @@ import placeholder.game.sprite.resource.Resource;
  *
  * @author jdolf
  */
-public abstract class ResourceInteraction extends CollisionalPlane {
+public abstract class ResourceInteraction extends Interaction {
     
-    private boolean success;
+    private Player player;
     
     public ResourceInteraction(Player player, Tool tool, Collection<Object> exceptions) {
         super(player, tool.getHitbox(), exceptions);
+        this.player = player;
         
         super.tickUpdate();
-        
-        if (collisionCheck.hasCollisionOccurrence()) {
-            collisionCheck.getCollisionPartners().forEach((collisionPartner) -> {
-                if (isHarvestable(collisionPartner)) {
-                    ((Resource) collisionPartner).mine(player);
-                    success = true;
-                }
-            });
-        }
     }
     
     protected abstract boolean isHarvestable(Sprite collisionPartner);
 
-    public boolean hasSuccess() {
-        return success;
+    @Override
+    protected boolean requirementsMet(Sprite collisionPartner) {
+        return isHarvestable(collisionPartner);
+    }
+
+    @Override
+    protected void onRequirementsMet(Sprite collisionPartner) {
+        ((Resource) collisionPartner).mine(player);
     }
     
     

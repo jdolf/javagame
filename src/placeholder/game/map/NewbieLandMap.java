@@ -12,6 +12,7 @@ import placeholder.game.screen.ImageContainer;
 import placeholder.game.sprite.Sprite;
 import placeholder.game.sprite.entity.mob.Dummy;
 import placeholder.game.sprite.entity.mob.Goblin;
+import placeholder.game.sprite.entity.npc.PabloNPC;
 import placeholder.game.sprite.furniture.Anvil;
 import placeholder.game.sprite.furniture.Furnace;
 import placeholder.game.sprite.furniture.Workbench;
@@ -63,6 +64,7 @@ sprites.add(new placeholder.game.sprite.resource.woodcutting.DefaultTree(new Poi
 sprites.add(new placeholder.game.sprite.ambient.GrassBig(new Point2D.Double(-98.0, -1201.0)));
 sprites.add(new placeholder.game.sprite.resource.woodcutting.WillowTree(new Point2D.Double(518.0, -236.0)));
 sprites.add(new placeholder.game.sprite.resource.woodcutting.WillowTree(new Point2D.Double(105.0, -246.0)));
+sprites.add(new PabloNPC(new Point2D.Double(280.0, 214.0)));
         return sprites;
     }
     
