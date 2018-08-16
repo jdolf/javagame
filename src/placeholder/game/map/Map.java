@@ -5,8 +5,8 @@
  */
 package placeholder.game.map;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -32,7 +32,7 @@ import placeholder.game.sprite.entity.player.Player;
  */
 public abstract class Map implements Renderable, TickUpdatable {
     
-    public static final Point2D DEFAULT_START_LOCATION = new Point2D.Double(300, 250);
+    public static final Point DEFAULT_START_LOCATION = new Point(300, 250);
     // Additional sprite lists used to circumvent ConcurrentModificationException
     private List<Sprite> spritesToAdd = new ArrayList();
     private List<Sprite> spritesToDelete = new ArrayList();

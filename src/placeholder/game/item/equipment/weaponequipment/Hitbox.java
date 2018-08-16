@@ -1,7 +1,7 @@
 package placeholder.game.item.equipment.weaponequipment;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import placeholder.game.screen.overlay.ScreenItem;
 import placeholder.game.sprite.DirectionDependent;
 

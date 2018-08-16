@@ -1,6 +1,6 @@
 package placeholder.game.item.ammo;
 
-import java.awt.geom.Point2D;
+import placeholder.game.util.Point;
 import java.util.Map;
 import javafx.scene.image.Image;
 import placeholder.game.item.Item;
@@ -18,7 +18,7 @@ public class IronArrow extends Ammo {
     
     public static final String ICON_NAME = "iron_arrow_icon.png";
     
-    public IronArrow(Point2D position, int amount) {
+    public IronArrow(Point position, int amount) {
         super(position, ImageContainer.getInstance().getImage(ICON_NAME), amount);
         this.displayName = "Iron Arrow";
     }

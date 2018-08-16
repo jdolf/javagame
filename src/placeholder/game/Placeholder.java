@@ -5,8 +5,8 @@
  */
 package placeholder.game;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -36,11 +36,10 @@ import placeholder.game.sprite.entity.player.Player;
  */
 public class Placeholder extends Application {
     
-    public final static int WIDTH = 700;
-    public final static int HEIGHT = 500;
-    public static final Point2D DEFAULT_POSITION = new Point2D.Double(0, 0);
+    public static final Point DEFAULT_POSITION = new Point(0, 0);
     public static final Dimension DEFAULT_DIMENSION = new Dimension(700, 500);
     
+    private Dimension sceneDimension;
     private Player player;
     private WindowManager windowManager;
     private ContextMenuManager contextManager;
@@ -50,10 +49,22 @@ public class Placeholder extends Application {
     @Override
     public void start(Stage primaryStage) {
         StackPane root = new StackPane();
-        Canvas canvas = new Canvas(WIDTH, HEIGHT);
+        Canvas canvas = new Canvas(DEFAULT_DIMENSION.width, DEFAULT_DIMENSION.height);
         root.getChildren().add(canvas);
         
-        Scene scene = new Scene(root, WIDTH, HEIGHT);
+        Scene scene = new Scene(root, DEFAULT_DIMENSION.width, DEFAULT_DIMENSION.height);
+        
+        scene.widthProperty().addListener((observable) -> {
+            sceneDimension.setSize(scene.getWidth(), scene.getHeight());
+            canvas.setWidth(sceneDimension.width);
+        });
+        
+        scene.heightProperty().addListener((observable) -> {
+            sceneDimension.setSize(scene.getWidth(), scene.getHeight());
+            canvas.setHeight(sceneDimension.height);
+        });
+        
+        sceneDimension = new Dimension((int)scene.getWidth(), (int)scene.getHeight());
         
         InputHandler inputHandler = new DefaultInputHandler();
         scene.setOnKeyPressed(inputHandler);
@@ -67,16 +78,16 @@ public class Placeholder extends Application {
             System.out.println("Done loading images... Time (ms): " + (endTime - startTime));
         }
         
-        CameraOrientedRenderer mapRenderer = new CameraOrientedRenderer(canvas.getGraphicsContext2D(), DEFAULT_DIMENSION);
-        Renderer overlayRenderer = new OverlayRenderer(canvas.getGraphicsContext2D(), DEFAULT_DIMENSION);
+        CameraOrientedRenderer mapRenderer = new CameraOrientedRenderer(canvas.getGraphicsContext2D(), sceneDimension);
+        Renderer overlayRenderer = new OverlayRenderer(canvas.getGraphicsContext2D(), sceneDimension);
         
         contextManager = new ContextMenuManager(inputHandler);
-        windowManager = new DefaultWindowManager();
+        windowManager = new DefaultWindowManager(sceneDimension);
         player = new AbuPlayer(inputHandler, windowManager, contextManager);
         mapManager = new MapManager(player);
         overlayManager = new OverlayManager();
         
-        Overlay actionBar = new ActionBar(windowManager, contextManager, inputHandler, DEFAULT_DIMENSION, DEFAULT_POSITION, player);
+        Overlay actionBar = new ActionBar(windowManager, contextManager, inputHandler, sceneDimension, DEFAULT_POSITION, player);
         overlayManager.addOverlay(actionBar);
         
         mapRenderer.getCamera().lockOnTarget(player);

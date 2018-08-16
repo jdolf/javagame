@@ -1,7 +1,7 @@
 package placeholder.game.sprite.entity;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import javafx.scene.image.Image;
 import placeholder.game.screen.animation.Animation;
 import placeholder.game.screen.animation.DirectionAnimation;
@@ -22,7 +22,7 @@ public class AnimatedEntity<T extends SimpleAttackManager> extends Entity<T> {
     public AnimatedEntity(
             EntityAnimation animation,
             Dimension dimension,
-            Point2D location) {
+            Point location) {
         super(dimension, location);
         this.animation = animation;
         animation.setDirectionDependent(this);

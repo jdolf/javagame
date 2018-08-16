@@ -1,6 +1,6 @@
 package placeholder.game.item.material;
 
-import java.awt.geom.Point2D;
+import placeholder.game.util.Point;
 import placeholder.game.item.Item;
 import placeholder.game.screen.ImageContainer;
 
@@ -12,7 +12,7 @@ public class SteelArrowTips extends Item {
     
     public static final String ICON_NAME = "steel_arrow_tips.png";
     
-    public SteelArrowTips(Point2D position, int amount) {
+    public SteelArrowTips(Point position, int amount) {
         super(position, ImageContainer.getInstance().getImage(ICON_NAME), 999, amount);
         this.displayName = "Steel Arrow Tips";
     }

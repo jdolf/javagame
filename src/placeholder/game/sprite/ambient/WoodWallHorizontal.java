@@ -1,7 +1,7 @@
 package placeholder.game.sprite.ambient;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import javafx.scene.image.Image;
 import placeholder.game.screen.ImageContainer;
 import placeholder.game.sprite.ImageSprite;
@@ -15,7 +15,7 @@ public class WoodWallHorizontal extends ImageSprite {
     public static final String IMAGE_NAME = "wood_wall_horizontal.png";
     public static final Dimension DIMENSION = new Dimension(128, 64);
     
-    public WoodWallHorizontal(Point2D location) {
+    public WoodWallHorizontal(Point location) {
         super(DIMENSION, location, ImageContainer.getInstance().getImage(IMAGE_NAME));
     }
     

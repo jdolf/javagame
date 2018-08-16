@@ -1,6 +1,6 @@
 package placeholder.game.item.equipment.weaponequipment.range;
 
-import java.awt.geom.Point2D;
+import placeholder.game.util.Point;
 import javafx.scene.image.Image;
 import placeholder.game.item.equipment.weaponequipment.ProjectileCreator;
 import placeholder.game.item.equipment.weaponequipment.range.RangeWeapon;
@@ -18,7 +18,7 @@ public class ThrowingRocks extends RangeWeapon implements ProjectileCreator {
     public static final String ICON_NAME = "throwing_rocks_icon.png";
     public static final String ANIMATION_NAME = "throwing_rocks.png";
     
-    public ThrowingRocks(Point2D position, int amount) {
+    public ThrowingRocks(Point position, int amount) {
         super(
                 position,
                 ImageContainer.getInstance().getImage(ICON_NAME),

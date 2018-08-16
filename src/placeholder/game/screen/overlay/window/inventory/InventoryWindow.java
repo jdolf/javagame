@@ -5,8 +5,8 @@
  */
 package placeholder.game.screen.overlay.window.inventory;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import java.util.ArrayList;
 import java.util.List;
 import placeholder.game.screen.overlay.contextmenu.ContextMenuManager;
@@ -16,6 +16,7 @@ import placeholder.game.screen.render.Renderer;
 import placeholder.game.input.InputHandler;
 import placeholder.game.item.Item;
 import placeholder.game.screen.ImageContainer;
+import placeholder.game.screen.overlay.PositionChangeListener;
 import placeholder.game.sprite.entity.player.inventory.Inventory;
 import placeholder.game.sprite.entity.player.inventory.InventoryChangedListener;
 import placeholder.game.screen.overlay.slot.item.inventory.InventorySlot;
@@ -45,7 +46,7 @@ public class InventoryWindow extends ImageBackgroundWindow {
         this.contextManager = contextManager;
         slotManager = new ItemSlotManager(
                 inventory.getSlots(),
-                new Point2D.Double(this.getPosition().getX() + INVENTORY_SLOT_INIT_MARGIN.width, this.getPosition().getY() + INVENTORY_SLOT_INIT_MARGIN.height),
+                new Point(this.getPosition().getX() + INVENTORY_SLOT_INIT_MARGIN.width, this.getPosition().getY() + INVENTORY_SLOT_INIT_MARGIN.height),
                 this.dimension,
                 input
         );
@@ -75,6 +76,17 @@ public class InventoryWindow extends ImageBackgroundWindow {
     public void open() {
         super.open();
     }
+
+    @Override
+    public void recalculateMeasurements() {
+        super.recalculateMeasurements();
+        slotManager.getGrid().getPosition().setLocation(
+                this.getPosition().getX() + INVENTORY_SLOT_INIT_MARGIN.width,
+                this.getPosition().getY() + INVENTORY_SLOT_INIT_MARGIN.height
+        );
+    }
+
+    
     
     
     

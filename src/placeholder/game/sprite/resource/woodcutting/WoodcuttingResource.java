@@ -1,7 +1,7 @@
 package placeholder.game.sprite.resource.woodcutting;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import java.util.ArrayList;
 import java.util.Collection;
 import javafx.scene.image.Image;
@@ -19,7 +19,7 @@ import placeholder.game.sprite.resource.Resource;
  */
 public class WoodcuttingResource extends Resource {
     
-    public WoodcuttingResource(Image animationImage, Point2D location, Dimension dimension) {
+    public WoodcuttingResource(Image animationImage, Point location, Dimension dimension) {
         super(animationImage, location, dimension);
         this.particleClasses.add(LeafParticle.class);
     }

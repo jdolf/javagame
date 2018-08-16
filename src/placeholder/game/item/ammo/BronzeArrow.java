@@ -1,6 +1,6 @@
 package placeholder.game.item.ammo;
 
-import java.awt.geom.Point2D;
+import placeholder.game.util.Point;
 import java.util.Map;
 import javafx.scene.image.Image;
 import placeholder.game.item.Item;
@@ -19,7 +19,7 @@ public class BronzeArrow extends Ammo {
     
     public static final String ICON_NAME = "bronze_arrow_icon.png";
     
-    public BronzeArrow(Point2D position, int amount) {
+    public BronzeArrow(Point position, int amount) {
         super(position, ImageContainer.getInstance().getImage(ICON_NAME), amount);
         this.displayName = "Bronze Arrow";
     }

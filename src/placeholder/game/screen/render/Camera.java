@@ -1,20 +1,22 @@
 package placeholder.game.screen.render;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import placeholder.game.screen.overlay.PositionChangeListener;
 import placeholder.game.screen.overlay.ScreenItem;
+import placeholder.game.screen.overlay.SizeChangeListener;
 
 /**
  *
  * @author jdolf
  */
-public class Camera extends ScreenItem implements PositionChangeListener {
+public class Camera extends ScreenItem implements PositionChangeListener, SizeChangeListener {
     
     private ScreenItem target;
     
     public Camera(Dimension gameDimension) {
         super(gameDimension);
+        gameDimension.addSizeChangeListener(this);
     }
     
     public void lockOnTarget(ScreenItem target) {
@@ -30,11 +32,16 @@ public class Camera extends ScreenItem implements PositionChangeListener {
     
     private void calcPosition() {
         this.setPosition(
-                new Point2D.Double(
+                new Point(
                         target.getPosition().getX() - dimension.width / 2,
                         target.getPosition().getY() - dimension.height / 2
                 )
         );
+    }
+
+    @Override
+    public void onSizeChanged(Dimension dimension) {
+        lockOnTarget(target);
     }
     
 }

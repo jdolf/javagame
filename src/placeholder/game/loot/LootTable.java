@@ -1,6 +1,6 @@
 package placeholder.game.loot;
 
-import java.awt.geom.Point2D;
+import placeholder.game.util.Point;
 import java.util.ArrayList;
 import java.util.Collection;
 import placeholder.game.item.Item;
@@ -16,7 +16,7 @@ public class LootTable {
     /**
      * The start position of the items; leave blank if none
      */
-    private Point2D startPosition;
+    private Point startPosition;
     
     public LootTable() {
         dropManagers = new ArrayList();
@@ -46,7 +46,7 @@ public class LootTable {
         this.dropManagers.add(dropManager);
     }
     
-    public void setStartPosition(Point2D position) {
+    public void setStartPosition(Point position) {
         this.startPosition = position;
     }
     

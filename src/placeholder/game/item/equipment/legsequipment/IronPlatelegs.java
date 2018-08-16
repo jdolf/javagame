@@ -1,6 +1,6 @@
 package placeholder.game.item.equipment.legsequipment;
 
-import java.awt.geom.Point2D;
+import placeholder.game.util.Point;
 import javafx.scene.image.Image;
 import placeholder.game.screen.ImageContainer;
 
@@ -13,7 +13,7 @@ public class IronPlatelegs extends LegsEquipment {
     public static final String ICON_NAME = "iron_platelegs_icon.png";
     public static final String ANIMATION_NAME = "iron_platelegs.png";
     
-    public IronPlatelegs(Point2D position) {
+    public IronPlatelegs(Point position) {
         super(
                 position,
                 ImageContainer.getInstance().getImage(ICON_NAME),

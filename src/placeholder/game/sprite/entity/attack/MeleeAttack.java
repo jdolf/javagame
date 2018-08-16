@@ -1,7 +1,7 @@
 package placeholder.game.sprite.entity.attack;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import java.util.Arrays;
 import placeholder.game.input.Direction;
 import placeholder.game.sprite.SpriteReceiver;

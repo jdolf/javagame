@@ -5,8 +5,8 @@
  */
 package placeholder.game.sprite.resource.mining;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import javafx.scene.image.Image;
 
 /**
@@ -19,7 +19,7 @@ public abstract class Rock extends MiningResource {
 
     public Rock(
             Image animationImage,
-            Point2D location,
+            Point location,
             Dimension dimension) {
         
         super(animationImage, location, dimension);
@@ -28,7 +28,7 @@ public abstract class Rock extends MiningResource {
     
      public Rock(
              Image animationImage,
-             Point2D location) {
+             Point location) {
          
         super(animationImage, location, DEFAULT_DIMENSION);
         

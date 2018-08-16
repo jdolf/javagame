@@ -5,7 +5,7 @@
  */
 package placeholder.game.screen.animation;
 
-import java.awt.Dimension;
+import placeholder.game.util.Dimension;
 import java.util.concurrent.atomic.AtomicReference;
 import javafx.scene.image.Image;
 import placeholder.game.input.Direction;

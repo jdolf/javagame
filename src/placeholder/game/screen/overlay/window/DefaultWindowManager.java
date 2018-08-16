@@ -5,15 +5,21 @@
  */
 package placeholder.game.screen.overlay.window;
 
+import placeholder.game.util.Dimension;
+import placeholder.game.screen.overlay.SizeChangeListener;
 import placeholder.game.screen.render.Renderer;
 
 /**
  *
  * @author jdolf
  */
-public class DefaultWindowManager implements WindowManager {
+public class DefaultWindowManager implements WindowManager, SizeChangeListener {
     
     private Window window;
+    
+    public DefaultWindowManager(Dimension dimension) {
+        dimension.addSizeChangeListener(this);
+    }
 
     @Override
     public Window getWindow() {
@@ -48,6 +54,13 @@ public class DefaultWindowManager implements WindowManager {
     @Override
     public void tickUpdate() {
         window.tickUpdate();
+    }
+
+    @Override
+    public void onSizeChanged(Dimension dimension) {
+        if (hasWindow()) {
+            window.recalculateMeasurements();
+        }
     }
 
 

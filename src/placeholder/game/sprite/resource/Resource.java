@@ -5,8 +5,8 @@
  */
 package placeholder.game.sprite.resource;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -46,7 +46,7 @@ public abstract class Resource extends AnimatedSprite {
     
     public Resource(
             Image animationImage,
-            Point2D location,
+            Point location,
             Dimension dimension) {
         super(new ResourceAnimation(animationImage, dimension), dimension, location);
         this.animation.setData(this);
@@ -109,8 +109,8 @@ public abstract class Resource extends AnimatedSprite {
             Class<? extends Particle> particleClass = particleClasses.get(random.nextInt(particleClasses.size()));
             
             try {
-                map.addParticle(particleClass.getDeclaredConstructor(Point2D.class, Map.class)
-                        .newInstance(new Point2D.Double(
+                map.addParticle(particleClass.getDeclaredConstructor(Point.class, Map.class)
+                        .newInstance(new Point(
                                 getPosition().getX() + dimension.getWidth() / 2,
                                 getPosition().getY() + dimension.getHeight() / 2
                         ), map)

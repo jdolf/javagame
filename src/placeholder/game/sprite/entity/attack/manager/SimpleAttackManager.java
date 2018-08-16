@@ -1,6 +1,6 @@
 package placeholder.game.sprite.entity.attack.manager;
 
-import java.awt.Dimension;
+import placeholder.game.util.Dimension;
 import java.util.Collection;
 import placeholder.game.screen.overlay.PositionChangeListener;
 import placeholder.game.sprite.entity.attack.Attack;

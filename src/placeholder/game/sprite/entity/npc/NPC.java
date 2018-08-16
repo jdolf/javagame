@@ -1,9 +1,10 @@
 package placeholder.game.sprite.entity.npc;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import javafx.scene.image.Image;
 import placeholder.game.screen.animation.EntityAnimation;
+import placeholder.game.screen.overlay.window.dialog.DialogWindow;
 import placeholder.game.screen.render.Renderer;
 import placeholder.game.sprite.ImageSprite;
 import placeholder.game.sprite.Sprite;
@@ -20,13 +21,8 @@ public abstract class NPC extends ImageSprite implements Interactable {
     
     protected String name = "Unknown";
 
-    public NPC(Dimension dimension, Point2D location, Image image) {
+    public NPC(Dimension dimension, Point location, Image image) {
         super(dimension, location, image);
-    }
-
-    @Override
-    public void onInteraction(Player player) {
-        System.out.println("Hello");
     }
 
     

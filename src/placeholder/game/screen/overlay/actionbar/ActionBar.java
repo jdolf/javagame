@@ -5,8 +5,8 @@
  */
 package placeholder.game.screen.overlay.actionbar;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.paint.Color;
@@ -19,6 +19,7 @@ import placeholder.game.screen.overlay.slot.actionbar.InventoryActionBarSlot;
 import placeholder.game.screen.overlay.window.WindowManager;
 import placeholder.game.screen.render.Renderer;
 import placeholder.game.input.InputHandler;
+import placeholder.game.screen.overlay.SizeChangeListener;
 import placeholder.game.screen.overlay.slot.actionbar.CraftingActionBarSlot;
 import placeholder.game.screen.overlay.slot.actionbar.EquipmentActionBarSlot;
 import placeholder.game.screen.overlay.slot.actionbar.SkillsActionBarSlot;
@@ -28,7 +29,7 @@ import placeholder.game.sprite.entity.player.Player;
  *
  * @author jdolf
  */
-public class ActionBar extends Overlay {
+public class ActionBar extends Overlay implements SizeChangeListener {
     
     public static final int DEFAULT_HEIGHT = 50;
     public static final Paint DEFAULT_PAINT = Color.CORNSILK;
@@ -37,17 +38,21 @@ public class ActionBar extends Overlay {
     private InputHandler inputHandler;
     private CallableSlotManager slotManager;
     private Player player;
+    private Point gamePosition;
     
     public ActionBar (
             WindowManager windowManager,
             ContextMenuManager contextManager,
             InputHandler inputHandler,
             Dimension gameDimension,
-            Point2D gamePosition,
+            Point gamePosition,
             Player player) {
-        super(calculatePosition(gameDimension, gamePosition, DEFAULT_HEIGHT), new Dimension(gameDimension.width, DEFAULT_HEIGHT));
+        super(new Dimension(gameDimension.width, DEFAULT_HEIGHT));
+        calculatePosition(gameDimension, gamePosition, DEFAULT_HEIGHT);
+        gameDimension.addSizeChangeListener(this);
         this.inputHandler = inputHandler;
         this.player = player;
+        this.gamePosition = gamePosition;
         List<ActionBarSlot> slots = new ArrayList<>();
         slots.add(new InventoryActionBarSlot(inputHandler, contextManager, windowManager, gameDimension, this.dimension, player.getInventory()));
         slots.add(new SkillsActionBarSlot(player.getSkillManager(), windowManager, inputHandler, gameDimension, this.dimension));
@@ -62,15 +67,21 @@ public class ActionBar extends Overlay {
         slotManager.render(renderer);
     }
     
-    public static Point2D calculatePosition(Dimension gameDimension, Point2D gamePosition, int barHeight) {
+    public void calculatePosition(Dimension gameDimension, Point gamePosition, int barHeight) {
         double x = gamePosition.getX();
         double y = gamePosition.getY() + (gameDimension.height - barHeight);
-        return new Point2D.Double(x, y);
+        this.getPosition().setLocation(x, y);
     }
 
     @Override
     public void tickUpdate() {
         slotManager.tickUpdate();
+    }
+
+    @Override
+    public void onSizeChanged(Dimension dimension) {
+        calculatePosition(dimension, gamePosition, DEFAULT_HEIGHT);
+        this.dimension = new Dimension(dimension.width, DEFAULT_HEIGHT);
     }
     
 }

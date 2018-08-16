@@ -1,7 +1,7 @@
 package placeholder.game.item.equipment.weaponequipment.range.projectile;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import java.util.EnumMap;
 import java.util.Map;
 import javafx.scene.image.Image;

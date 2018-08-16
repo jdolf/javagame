@@ -1,7 +1,7 @@
 package placeholder.game.screen.overlay.window.crafting;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -10,6 +10,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import placeholder.game.crafting.CraftingRecipe;
 import placeholder.game.item.Item;
+import placeholder.game.screen.overlay.PositionChangeListener;
 import placeholder.game.screen.overlay.ScreenItem;
 import placeholder.game.screen.overlay.slot.DefaultSlotManager;
 import placeholder.game.screen.overlay.slot.item.ItemSlot;
@@ -24,15 +25,16 @@ import placeholder.game.util.SelectionChooser;
  *
  * @author jdolf
  */
-public class RecipeDisplay extends ScreenItem implements Renderable {
+public class RecipeDisplay extends ScreenItem implements Renderable, PositionChangeListener {
     
     private CraftingRecipe template;
     private TextDisplay recipeName;
     private TextDisplay materialsInfo;
     private boolean renderable = false;
     
-    public RecipeDisplay(Point2D position, Dimension dimension) {
+    public RecipeDisplay(Point position, Dimension dimension) {
         super(position, dimension);
+        this.getPosition().addPositionChangeListener(this);
     }
     
     public void setTemplate(CraftingRecipe template) {
@@ -64,7 +66,7 @@ public class RecipeDisplay extends ScreenItem implements Renderable {
         
         int itemCounter = 0;
         for (Item material : template.getMaterials()) {
-            material.setPosition(ScreenItem.merge(new Dimension(10, 80), ScreenItem.mergePoints(this.getPosition(), new Point2D.Double(itemCounter * 40, 0))));
+            material.setPosition(ScreenItem.merge(new Dimension(10, 80), ScreenItem.mergePoints(this.getPosition(), new Point(itemCounter * 40, 0))));
             itemCounter++;
         }
         
@@ -82,6 +84,11 @@ public class RecipeDisplay extends ScreenItem implements Renderable {
                 material.render(renderer);
             });
         }
+    }
+
+    @Override
+    public void onPositionChanged() {
+        update();
     }
     
 }

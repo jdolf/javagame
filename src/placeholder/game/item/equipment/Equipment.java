@@ -5,11 +5,11 @@
  */
 package placeholder.game.item.equipment;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import java.util.List;
 import java.util.Map;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Point;
 import javafx.scene.image.Image;
 import placeholder.game.screen.animation.Animation;
 import placeholder.game.screen.overlay.ScreenItem;
@@ -47,7 +47,7 @@ public abstract class Equipment extends Item implements TickUpdatable {
     protected int miningEfficiency = 0;
     protected int woodcuttingEfficiency = 0;
     
-    public Equipment(Point2D position, Image icon, Image animationImage, EquipmentAnimation animation) {
+    public Equipment(Point position, Image icon, Image animationImage, EquipmentAnimation animation) {
         super(position, icon, MAX_STACK);
         animation.setEquipment(this);
         animation.setImage(animationImage);
@@ -65,7 +65,7 @@ public abstract class Equipment extends Item implements TickUpdatable {
 
     public void render(Renderer renderer, BodyPart bodyPart) {
         renderer.renderAnimation(animation, new ScreenItem(
-                new Point2D.Double(
+                new Point(
                     player.getPosition().getX() + bodyPart.getOffsetCoordinates().getX(),
                     player.getPosition().getY() + bodyPart.getOffsetCoordinates().getY()
                 ),

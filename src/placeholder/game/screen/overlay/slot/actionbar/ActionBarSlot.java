@@ -5,7 +5,7 @@
  */
 package placeholder.game.screen.overlay.slot.actionbar;
 
-import java.awt.Dimension;
+import placeholder.game.util.Dimension;
 import javafx.scene.image.Image;
 import placeholder.game.screen.overlay.window.Window;
 import placeholder.game.screen.render.Renderer;

@@ -5,8 +5,8 @@
  */
 package placeholder.game.item.equipment.weaponequipment.melee.tool.mining;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +23,7 @@ public class IronPickaxe extends Pickaxe {
     public static final String ICON_NAME = "iron_pickaxe_icon.png";
     public static final String ANIMATION_NAME = "iron_pickaxe.png";
 
-    public IronPickaxe(Point2D position) {
+    public IronPickaxe(Point position) {
         super(
                 position,
                 ImageContainer.getInstance().getImage(ICON_NAME),

@@ -1,6 +1,6 @@
 package placeholder.game.sprite.entity.attack;
 
-import java.awt.Dimension;
+import placeholder.game.util.Dimension;
 import placeholder.game.sprite.entity.player.Player;
 
 /**

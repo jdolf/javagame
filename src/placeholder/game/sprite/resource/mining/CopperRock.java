@@ -1,6 +1,6 @@
 package placeholder.game.sprite.resource.mining;
 
-import java.awt.geom.Point2D;
+import placeholder.game.util.Point;
 import java.util.Arrays;
 import java.util.Collection;
 import placeholder.game.item.material.ore.CopperOre;
@@ -23,7 +23,7 @@ public class CopperRock extends Rock {
             new LootTableItem(CopperOre.class, 1, 1)
     );
     
-    public CopperRock(Point2D location) {
+    public CopperRock(Point location) {
         super(ImageContainer.getInstance().getImage(IMAGE), location);
         this.defaultReplenishTime = REPLENISH_TIME;
         this.defaultStability = STABILITY;

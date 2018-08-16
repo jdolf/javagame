@@ -5,8 +5,8 @@
  */
 package placeholder.game.sprite.entity.bodypart;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import java.util.concurrent.atomic.AtomicReference;
 import javafx.scene.image.Image;
 import placeholder.game.screen.animation.DirectionAnimation;
@@ -19,7 +19,7 @@ import placeholder.game.sprite.entity.player.Player;
  */
 public class HeadBodyPart extends BodyPart {
     
-    public HeadBodyPart(Image image, Point2D offsetCoordinates, Dimension dimension, Player player) {
+    public HeadBodyPart(Image image, Point offsetCoordinates, Dimension dimension, Player player) {
         super(offsetCoordinates, dimension, player, new DirectionAnimation(player, image, dimension));
     }
 

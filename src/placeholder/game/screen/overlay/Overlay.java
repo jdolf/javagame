@@ -5,8 +5,8 @@
  */
 package placeholder.game.screen.overlay;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import placeholder.game.screen.TickUpdatable;
 import placeholder.game.screen.render.Renderable;
 
@@ -18,8 +18,12 @@ public abstract class Overlay extends ScreenItem implements Renderable, TickUpda
     
     protected boolean toggledOn = true;
     
-    public Overlay(Point2D position, Dimension dimension) {
+    public Overlay(Point position, Dimension dimension) {
         super(position, dimension);
+    }
+    
+    public Overlay(Dimension dimension) {
+        super(dimension);
     }
 
     public void setToggledOn(boolean state) {

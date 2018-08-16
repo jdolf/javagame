@@ -1,9 +1,12 @@
 package placeholder.game.util;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import java.util.List;
+import placeholder.game.screen.overlay.DimensionChangeListener;
+import placeholder.game.screen.overlay.PositionChangeListener;
 import placeholder.game.screen.overlay.ScreenItem;
+import placeholder.game.screen.overlay.SizeChangeListener;
 import placeholder.game.screen.render.Renderable;
 import placeholder.game.screen.render.Renderer;
 
@@ -11,21 +14,22 @@ import placeholder.game.screen.render.Renderer;
  *
  * @author jdolf
  */
-public class Grid<T extends ScreenItem & Renderable> extends ScreenItem implements Renderable {
+public class Grid<T extends ScreenItem & Renderable> extends ScreenItem implements Renderable, PositionChangeListener {
     
     private int rows;
     private int columns;
     private List<T> items;
     private Dimension itemMargin;
     
-    public Grid(List<T> items, Dimension itemMargin, Point2D screenPosition, Dimension dimension) {
+    public Grid(List<T> items, Dimension itemMargin, Point screenPosition, Dimension dimension) {
         super(screenPosition, dimension);
         this.items = items;
         this.itemMargin = itemMargin;
+        this.getPosition().addPositionChangeListener(this);
         initialize(true);
     }
     
-    public Grid(List<T> items, int rows, int columns, Dimension itemMargin, Point2D screenPosition, Dimension dimension) {
+    public Grid(List<T> items, int rows, int columns, Dimension itemMargin, Point screenPosition, Dimension dimension) {
         super(screenPosition, dimension);
         this.items = items;
         this.itemMargin = itemMargin;
@@ -85,7 +89,7 @@ public class Grid<T extends ScreenItem & Renderable> extends ScreenItem implemen
             double itemX = (currentColumn - 1) * (item.getDimension().width + itemMargin.width) + itemMargin.width + this.getPosition().getX();
             double itemY = (currentRow - 1) * (item.getDimension().height + itemMargin.height) + itemMargin.height + this.getPosition().getY();
 
-            item.setPosition(new Point2D.Double(itemX, itemY));
+            item.setPosition(new Point(itemX, itemY));
             
             if (currentColumn >= columns) {
                 currentColumn = 1;
@@ -112,5 +116,12 @@ public class Grid<T extends ScreenItem & Renderable> extends ScreenItem implemen
         this.items = items;
         initialize(true);
     }
+
+    @Override
+    public void onPositionChanged() {
+        initialize(true);
+    }
+
+    
     
 }

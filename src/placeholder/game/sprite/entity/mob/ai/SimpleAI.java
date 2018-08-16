@@ -1,6 +1,6 @@
 package placeholder.game.sprite.entity.mob.ai;
 
-import java.awt.Dimension;
+import placeholder.game.util.Dimension;
 import placeholder.game.input.Direction;
 import placeholder.game.sprite.entity.attack.manager.AttackManager;
 import placeholder.game.sprite.entity.attack.manager.SimpleAttackManager;

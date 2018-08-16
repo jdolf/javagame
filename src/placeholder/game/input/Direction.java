@@ -5,8 +5,8 @@
  */
 package placeholder.game.input;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 
 /**
  *
@@ -18,17 +18,17 @@ public enum Direction {
     DOWN,
     LEFT;
     
-    public Point2D calculateOffsetChanges(double offset) {
+    public Point calculateOffsetChanges(double offset) {
         double x = 0;
         double y = 0;
         if (DOWN == this) y += offset;
         if (UP == this) y -= offset;
         if (LEFT == this) x -= offset;
         if (RIGHT == this) x += offset;
-        return new Point2D.Double(x, y);
+        return new Point(x, y);
     }
     
-    public Point2D calculatePointWithOffset(Dimension offsetDown, Point2D fromPosition, Dimension fromDimension) {
+    public Point calculatePointWithOffset(Dimension offsetDown, Point fromPosition, Dimension fromDimension) {
         double x = fromPosition.getX();
         double y = fromPosition.getY();
         if (null != this) switch (this) {
@@ -55,6 +55,6 @@ public enum Direction {
             default:
                 break;
         }
-        return new Point2D.Double(x, y);
+        return new Point(x, y);
     }
 }

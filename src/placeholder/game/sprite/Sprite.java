@@ -5,8 +5,8 @@
  */
 package placeholder.game.sprite;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import javafx.scene.image.Image;
 import placeholder.game.screen.TickUpdatable;
 import placeholder.game.screen.overlay.ScreenItem;
@@ -21,7 +21,7 @@ public abstract class Sprite extends ScreenItem implements Renderable, TickUpdat
     protected boolean solid = true;
     protected boolean craftingStation = false;
     
-    public Sprite(Dimension dimension, Point2D location) {
+    public Sprite(Dimension dimension, Point location) {
         super(location, dimension);
     }
     

@@ -1,7 +1,7 @@
 package placeholder.game.sprite.entity.attack;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -67,7 +67,7 @@ public abstract class Attack extends CollisionalPlane {
     
     public Attack(AttackType type,
             AttackClient attacker,
-            Point2D position,
+            Point position,
             Dimension hitbox,
             int baseDamage,
             int duration,

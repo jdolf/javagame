@@ -1,6 +1,6 @@
 package placeholder.game.item.material.log;
 
-import java.awt.geom.Point2D;
+import placeholder.game.util.Point;
 import placeholder.game.item.Item;
 import placeholder.game.screen.ImageContainer;
 
@@ -12,7 +12,7 @@ public class WillowLog extends Item {
     
     public static final String ICON_NAME = "willow_log_icon.png";
     
-    public WillowLog(Point2D position, int amount) {
+    public WillowLog(Point position, int amount) {
         super(position, ImageContainer.getInstance().getImage(ICON_NAME), 1, amount);
         this.displayName = "Willow Log";
     }

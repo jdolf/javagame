@@ -1,7 +1,7 @@
 package placeholder.game.item.equipment.weaponequipment.melee.tool.woodcutting;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import java.util.Arrays;
 import javafx.scene.image.Image;
 import placeholder.game.item.equipment.weaponequipment.melee.tool.Tool;
@@ -14,7 +14,7 @@ import placeholder.game.sprite.collision.WoodcuttingInteraction;
  */
 public class WoodcuttingTool extends Tool {
     
-    public WoodcuttingTool(Point2D position, Image icon, Image animationImage, Dimension hitbox) {
+    public WoodcuttingTool(Point position, Image icon, Image animationImage, Dimension hitbox) {
         super(position, icon, animationImage, hitbox);
     }
 

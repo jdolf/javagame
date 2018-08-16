@@ -5,8 +5,8 @@
  */
 package placeholder.game.screen.overlay.window;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -16,12 +16,13 @@ import placeholder.game.screen.render.Renderable;
 import placeholder.game.screen.render.Renderer;
 import placeholder.game.input.InputHandler;
 import placeholder.game.input.Key;
+import placeholder.game.screen.overlay.Overlay;
 
 /**
  *
  * @author jdolf
  */
-public abstract class Window extends ScreenItem implements Renderable, TickUpdatable {
+public abstract class Window extends Overlay implements Renderable, TickUpdatable {
     
     public static final int DEFAULT_WIDTH_PERCENT = 75;
     public static final int DEFAULT_HEIGHT_PERCENT = 60;
@@ -36,39 +37,19 @@ public abstract class Window extends ScreenItem implements Renderable, TickUpdat
     private boolean closeWindow = false;
     protected InputHandler input;
     protected WindowManager windowManager;
+    private Dimension gameDimension;
+    private Dimension barDimension;
+    private Dimension specificScreenDimension;
     
-    private static Dimension calculateScreenDimension(Dimension gameDimension, Dimension barDimension, int widthPercentage, int heightPercentage) {
-        int windowWidth = gameDimension.width * widthPercentage / 100;
-        int windowHeight = (gameDimension.height - barDimension.height) * heightPercentage / 100;
-        return new Dimension(windowWidth, windowHeight);
-    }
-    
-    private static Point2D calculateScreenPosition(Dimension gameDimension, Dimension barDimension, int widthPercentage, int heightPercentage) {
-        int windowX = gameDimension.width * (100 - widthPercentage) / 2 / 100;
-        int windowY = (gameDimension.height - barDimension.height) * (100 - heightPercentage) / 2 / 100;
-        return new Point2D.Double(windowX, windowY);
-    }
-    
-    private static Point2D calculateScreenPosition(Dimension gameDimension, Dimension barDimension, Dimension screenDimension) {
+    private static Point calculateScreenPosition(Dimension gameDimension, Dimension barDimension, Dimension screenDimension) {
         int windowX = (gameDimension.width - screenDimension.width) / 2;
         int windowY = ((gameDimension.height - barDimension.height) - screenDimension.height) / 2;
-        return new Point2D.Double(windowX, windowY);
+        return new Point(windowX, windowY);
     }
     
-    public Window(WindowManager manager, InputHandler input, Dimension gameDimension, Dimension barDimension) {
-        super(calculateScreenPosition(gameDimension, barDimension, DEFAULT_WIDTH_PERCENT, DEFAULT_HEIGHT_PERCENT),
-                calculateScreenDimension(gameDimension, barDimension, DEFAULT_WIDTH_PERCENT, DEFAULT_HEIGHT_PERCENT));
-        this.windowManager = manager;
-        this.input = input;
-        this.initialized = true;
-    }
-    
-    public Window(WindowManager manager, InputHandler input, Dimension gameDimension, Dimension barDimension, int widthPercentage, int heightPercentage) {
-        super(calculateScreenPosition(gameDimension, barDimension, widthPercentage, heightPercentage),
-                calculateScreenDimension(gameDimension, barDimension, widthPercentage, heightPercentage));
-        this.windowManager = manager;
-        this.input = input;
-        this.initialized = true;
+    public void recalculateMeasurements() {
+        Point newPosition = calculateScreenPosition(gameDimension, barDimension, specificScreenDimension);
+        this.getPosition().setLocation(newPosition);
     }
     
     public Window(WindowManager manager, InputHandler input, Dimension gameDimension, Dimension barDimension, Dimension screenDimension) {
@@ -76,6 +57,9 @@ public abstract class Window extends ScreenItem implements Renderable, TickUpdat
         this.windowManager = manager;
         this.input = input;
         this.initialized = true;
+        this.gameDimension = gameDimension;
+        this.barDimension = barDimension;
+        this.specificScreenDimension = screenDimension;
     }
 
     public void open() {
@@ -105,6 +89,7 @@ public abstract class Window extends ScreenItem implements Renderable, TickUpdat
 
     @Override
     public void render(Renderer renderer) {
+        System.out.println(this.getPosition());
         renderer.renderRoundRect(DEFAULT_PAINT, DEFAULT_BORDER_ARC_DIMENSION, this);
         renderer.renderRoundRectStroke(DEFAULT_BORDER_PAINT, DEFAULT_BORDER_THICKNESS, DEFAULT_BORDER_ARC_DIMENSION, this);
     }

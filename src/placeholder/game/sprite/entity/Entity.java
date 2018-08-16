@@ -6,8 +6,8 @@
 package placeholder.game.sprite.entity;
 
 import placeholder.game.sprite.entity.attack.manager.AttackManager;
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -65,7 +65,7 @@ public abstract class Entity<T extends AttackManager> extends Sprite implements 
     
     public Entity(
             Dimension dimension,
-            Point2D location) {
+            Point location) {
         super(dimension, location);
         lootTable.setStartPosition(location);
     }
@@ -137,15 +137,15 @@ public abstract class Entity<T extends AttackManager> extends Sprite implements 
 
     public void tryMove(Direction direction) {
         setDirection(direction);
-        Point2D offset = direction.calculateOffsetChanges(walkSpeed);
-        Point2D testLocation = ScreenItem.mergePoints(offset, this.getPosition());
+        Point offset = direction.calculateOffsetChanges(walkSpeed);
+        Point testLocation = ScreenItem.mergePoints(offset, this.getPosition());
         
         if (!cd.collidesAt(testLocation).hasCollisionOccurrence()) {
             this.move(testLocation);
         }
     }
     
-    public void move(Point2D target) {
+    public void move(Point target) {
         moving = true;
         this.setPosition(target);
     }

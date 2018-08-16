@@ -1,7 +1,7 @@
 package placeholder.game.sprite.resource.woodcutting;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import java.util.Arrays;
 import java.util.Collection;
 import placeholder.game.item.material.log.JungleLog;
@@ -24,7 +24,7 @@ public class JungleTree extends WoodcuttingResource {
             new LootTableItem(JungleLog.class, 1, 1)
     );
     
-    public JungleTree(Point2D location) {
+    public JungleTree(Point location) {
         super(ImageContainer.getInstance().getImage(IMAGE), location, DIMENSION);
         this.defaultReplenishTime = REPLENISH_TIME;
         this.defaultStability = STABILITY;

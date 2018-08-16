@@ -5,12 +5,12 @@
  */
 package placeholder.game.item;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Point;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -34,7 +34,7 @@ public class Item extends ScreenItem implements ContextMenuEntryCreator {
     public static final Font AMOUNT_FONT = new Font(10);
     public static final Paint AMOUNT_PAINT = Color.BLACK;
     
-    private Point2D amountTextPosition;
+    private Point amountTextPosition;
     protected Image icon;
     private int amount;
     private int maxStack;
@@ -46,7 +46,7 @@ public class Item extends ScreenItem implements ContextMenuEntryCreator {
      */
     protected Inventory inventory;
     
-    public Item(Point2D position, Image icon, int maxStack) {
+    public Item(Point position, Image icon, int maxStack) {
         super(position, DEFAULT_DIMENSION);
         this.icon = icon;
         this.maxStack = maxStack;
@@ -55,7 +55,7 @@ public class Item extends ScreenItem implements ContextMenuEntryCreator {
         if (maxStack > 1) this.stackable = true;
     }
     
-    public Item(Point2D position, Image icon, int maxStack, int amount) {
+    public Item(Point position, Image icon, int maxStack, int amount) {
         super(position, DEFAULT_DIMENSION);
         this.icon = icon;
         this.maxStack = maxStack;
@@ -187,11 +187,11 @@ public class Item extends ScreenItem implements ContextMenuEntryCreator {
     }
     
     private void calculateAmountTextPosition() {
-        this.amountTextPosition = new Point2D.Double(dimension.width + this.getPosition().getX() + 3, this.getPosition().getY() - 3);
+        this.amountTextPosition = new Point(dimension.width + this.getPosition().getX() + 3, this.getPosition().getY() - 3);
     }
 
     @Override
-    public void setPosition(Point2D position) {
+    public void setPosition(Point position) {
         super.setPosition(position);
         if (dimension != null) {
             if (renderAmountText) {

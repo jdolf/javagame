@@ -1,6 +1,6 @@
 package placeholder.game.crafting;
 
-import java.awt.Dimension;
+import placeholder.game.util.Dimension;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;

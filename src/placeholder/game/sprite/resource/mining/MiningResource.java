@@ -5,8 +5,8 @@
  */
 package placeholder.game.sprite.resource.mining;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import java.util.ArrayList;
 import java.util.Collection;
 import javafx.scene.image.Image;
@@ -27,7 +27,7 @@ public abstract class MiningResource extends Resource {
     
     public MiningResource(
             Image animationImage,
-            Point2D location,
+            Point location,
             Dimension dimension) {
         super(animationImage, location, dimension);
         this.particleClasses.add(StoneParticle.class);

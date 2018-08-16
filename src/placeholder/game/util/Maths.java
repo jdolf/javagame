@@ -5,8 +5,8 @@
  */
 package placeholder.game.util;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 
 /**
  *
@@ -15,8 +15,8 @@ import java.awt.geom.Point2D;
 public class Maths {
     
     public static boolean inside (
-            Point2D testPoint,
-            Point2D targetPoint,
+            Point testPoint,
+            Point targetPoint,
             Dimension targetDimension) {
         
         if (testPoint.getX() >= targetPoint.getX() &&
@@ -32,9 +32,9 @@ public class Maths {
     }
     
     public static boolean overlapping (
-            Point2D testPoint,
+            Point testPoint,
             Dimension testDimension,
-            Point2D targetPoint,
+            Point targetPoint,
             Dimension targetDimension) {
         
         // Test if they are NOT overlapping (Simplest way)

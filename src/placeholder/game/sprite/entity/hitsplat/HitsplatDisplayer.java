@@ -1,7 +1,7 @@
 package placeholder.game.sprite.entity.hitsplat;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import java.util.ArrayList;
 import java.util.Collection;
 import javafx.scene.paint.Color;
@@ -40,7 +40,7 @@ public class HitsplatDisplayer implements HealthChangedListener, Renderable, Tic
         double newPositionY = parent.getPosition().getY() - parent.getDimension().height;
         hitsplats.add(new Hitsplat(
                 this,
-                ScreenItem.merge(new Dimension(newDimensionWidth, newDimensionHeight), new Point2D.Double(newPositionX, newPositionY)),
+                ScreenItem.merge(new Dimension(newDimensionWidth, newDimensionHeight), new Point(newPositionX, newPositionY)),
                 amount)
         );
     }

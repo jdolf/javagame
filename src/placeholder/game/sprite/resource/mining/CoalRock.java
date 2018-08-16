@@ -1,6 +1,6 @@
 package placeholder.game.sprite.resource.mining;
 
-import java.awt.geom.Point2D;
+import placeholder.game.util.Point;
 import java.util.Arrays;
 import java.util.Collection;
 import placeholder.game.item.material.ore.CoalOre;
@@ -22,7 +22,7 @@ public class CoalRock extends Rock {
             new LootTableItem(CoalOre.class, 1, 1)
     );
     
-    public CoalRock(Point2D location) {
+    public CoalRock(Point location) {
         super(ImageContainer.getInstance().getImage(IMAGE), location);
         this.defaultReplenishTime = REPLENISH_TIME;
         this.defaultStability = STABILITY;

@@ -5,7 +5,7 @@
  */
 package placeholder.game.screen.animation;
 
-import java.awt.Dimension;
+import placeholder.game.util.Dimension;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;

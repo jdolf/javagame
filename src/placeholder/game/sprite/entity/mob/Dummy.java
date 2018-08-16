@@ -1,7 +1,7 @@
 package placeholder.game.sprite.entity.mob;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import java.util.Arrays;
 import java.util.Collection;
 import placeholder.game.item.ammo.WoodArrow;
@@ -31,7 +31,7 @@ public class Dummy extends Mob<SimpleAttackManager> {
             new LootTableItem(Feather.class, 1.5, 10, 60)
     );
 
-    public Dummy(Point2D location) {
+    public Dummy(Point location) {
         super(
                 new EntityAnimation(ImageContainer.getInstance().getImage(ANIMATION_NAME), DIMENSION),
                 DIMENSION,

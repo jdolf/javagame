@@ -5,7 +5,7 @@
  */
 package placeholder.game.screen.overlay.contextmenu;
 
-import java.awt.geom.Point2D;
+import placeholder.game.util.Point;
 import java.util.Collection;
 import java.util.List;
 import placeholder.game.screen.overlay.contextmenu.entry.ContextMenuEntry;
@@ -16,7 +16,7 @@ import placeholder.game.screen.overlay.contextmenu.entry.ContextMenuEntry;
  */
 public class StandardContextMenu extends ContextMenu {
     
-    public StandardContextMenu(ContextMenuManager contextManager, List<ContextMenuEntry> entries, Point2D position) {
+    public StandardContextMenu(ContextMenuManager contextManager, List<ContextMenuEntry> entries, Point position) {
         super(contextManager, entries, position);
     }
     

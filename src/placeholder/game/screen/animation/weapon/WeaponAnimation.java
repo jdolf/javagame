@@ -1,6 +1,6 @@
 package placeholder.game.screen.animation.weapon;
 
-import java.awt.Dimension;
+import placeholder.game.util.Dimension;
 import javafx.scene.image.Image;
 import placeholder.game.item.equipment.weaponequipment.WeaponEquipment;
 import placeholder.game.screen.animation.EquipmentAnimation;

@@ -1,6 +1,6 @@
 package placeholder.game.sprite.collision;
 
-import java.awt.Dimension;
+import placeholder.game.util.Dimension;
 import java.util.Collection;
 import placeholder.game.sprite.Sprite;
 import placeholder.game.sprite.entity.player.Player;

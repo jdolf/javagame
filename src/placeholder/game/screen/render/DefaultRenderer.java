@@ -5,7 +5,7 @@
  */
 package placeholder.game.screen.render;
 
-import java.awt.Dimension;
+import placeholder.game.util.Dimension;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Paint;

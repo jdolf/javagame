@@ -6,7 +6,7 @@
 package placeholder.game.screen.overlay.slot.actionbar;
 
 import placeholder.game.screen.overlay.slot.actionbar.ActionBarSlot;
-import java.awt.Dimension;
+import placeholder.game.util.Dimension;
 import javafx.scene.input.KeyCode;
 import placeholder.game.screen.ImageContainer;
 import placeholder.game.screen.overlay.contextmenu.ContextMenuManager;

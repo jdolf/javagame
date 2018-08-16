@@ -1,7 +1,7 @@
 package placeholder.game.sprite.entity.hitsplat;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -36,7 +36,7 @@ public class Hitsplat extends ScreenItem implements TickUpdatable, Renderable {
     private int duration = HITSPLAT_TIME;
     private Image hitsplatImage;
 
-    public Hitsplat(Unregisterable unregisterable, Point2D position, int amount) {
+    public Hitsplat(Unregisterable unregisterable, Point position, int amount) {
         super(position, DIMENSION);
         if (amount < 0) {
             font = DAMAGE_FONT;
@@ -47,7 +47,7 @@ public class Hitsplat extends ScreenItem implements TickUpdatable, Renderable {
         }
         this.amount = Math.abs(amount);
         this.unregisterable = unregisterable;
-        backgroundSplat = new ScreenItem(new Point2D.Double(position.getX() - this.dimension.width / 2, position.getY()), this.dimension);
+        backgroundSplat = new ScreenItem(new Point(position.getX() - this.dimension.width / 2, position.getY()), this.dimension);
         hitsplatImage = ImageContainer.getInstance().getImage(HITSPLAT_NAME);
     }
     
@@ -57,7 +57,7 @@ public class Hitsplat extends ScreenItem implements TickUpdatable, Renderable {
         
         if (duration >= HITSPLAT_TIME / 4 * 3) {
             this.getPosition().setLocation(getPosition().getX(), getPosition().getY() - VELOCITY);
-            backgroundSplat = new ScreenItem(new Point2D.Double(getPosition().getX() - this.dimension.width / 2, getPosition().getY()), this.dimension);
+            backgroundSplat = new ScreenItem(new Point(getPosition().getX() - this.dimension.width / 2, getPosition().getY()), this.dimension);
         }
         
         if (duration <= 0) {

@@ -1,6 +1,6 @@
 package placeholder.game.crafting;
 
-import java.awt.geom.Point2D;
+import placeholder.game.util.Point;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -36,7 +36,7 @@ public class CraftingRecipe {
         try {
             inserted = player.getInventory().insertItem(
                     recipeTemplate.getClass()
-                    .getDeclaredConstructor(Point2D.class, int.class)
+                    .getDeclaredConstructor(Point.class, int.class)
                     .newInstance(null, recipeTemplate.getAmount()));
 
         } catch (Exception ex) {}
@@ -45,7 +45,7 @@ public class CraftingRecipe {
             try {
                 inserted = player.getInventory().insertItem(
                         recipeTemplate.getClass()
-                        .getDeclaredConstructor(Point2D.class)
+                        .getDeclaredConstructor(Point.class)
                         .newInstance((Object)null));
 
             } catch (Exception ex) {}

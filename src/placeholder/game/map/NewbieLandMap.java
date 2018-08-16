@@ -5,7 +5,7 @@
  */
 package placeholder.game.map;
 
-import java.awt.geom.Point2D;
+import placeholder.game.util.Point;
 import java.util.ArrayList;
 import java.util.List;
 import placeholder.game.screen.ImageContainer;
@@ -37,34 +37,34 @@ public class NewbieLandMap extends Map {
     @Override
     protected List<Sprite> createSprites() {
         List<Sprite> sprites = new ArrayList();
-        sprites.add(new placeholder.game.sprite.ambient.GrassBig(new Point2D.Double(-101.0, -63.0)));
-sprites.add(new placeholder.game.sprite.ambient.WoodWallHorizontal(new Point2D.Double(336.0, -12.0)));
-sprites.add(new placeholder.game.sprite.ambient.WoodWallHorizontal(new Point2D.Double(463.0, -12.0)));
-sprites.add(new placeholder.game.sprite.ambient.WoodWallHorizontal(new Point2D.Double(589.0, -12.0)));
-sprites.add(new placeholder.game.sprite.ambient.WoodWallVertical(new Point2D.Double(336.0, 3.0)));
-sprites.add(new placeholder.game.sprite.ambient.WoodWallVertical(new Point2D.Double(701.0, 3.0)));
-sprites.add(new placeholder.game.sprite.ambient.WoodWallVertical(new Point2D.Double(701.0, 65.0)));
-sprites.add(new placeholder.game.sprite.ambient.WoodWallVertical(new Point2D.Double(701.0, 128.0)));
-sprites.add(new placeholder.game.sprite.ambient.WoodFloor(new Point2D.Double(352.0, 52.0)));
-sprites.add(new placeholder.game.sprite.ambient.WoodFloor(new Point2D.Double(480.0, 52.0)));
-sprites.add(new placeholder.game.sprite.ambient.WoodFloor(new Point2D.Double(573.0, 52.0)));
-sprites.add(new placeholder.game.sprite.ambient.WoodFloor(new Point2D.Double(351.0, 100.0)));
-sprites.add(new placeholder.game.sprite.ambient.WoodFloor(new Point2D.Double(573.0, 101.0)));
-sprites.add(new placeholder.game.sprite.ambient.WoodWallHorizontal(new Point2D.Double(590.0, 192.0)));
-sprites.add(new placeholder.game.sprite.ambient.WoodFloor(new Point2D.Double(462.0, 100.0)));
-sprites.add(new placeholder.game.sprite.ambient.WoodWallVertical(new Point2D.Double(336.0, 128.0)));
-sprites.add(new placeholder.game.sprite.ambient.WoodWallVertical(new Point2D.Double(336.0, 65.0)));
-sprites.add(new placeholder.game.sprite.ambient.WoodWallHorizontal(new Point2D.Double(336.0, 192.0)));
-sprites.add(new placeholder.game.sprite.furniture.Workbench(new Point2D.Double(626.0, 67.0)));
-sprites.add(new placeholder.game.sprite.ambient.NaturalStoneWall(new Point2D.Double(-96.0, -185.0)));
-sprites.add(new placeholder.game.sprite.ambient.NaturalStoneWall(new Point2D.Double(414.0, -180.0)));
-sprites.add(new placeholder.game.sprite.resource.woodcutting.DefaultTree(new Point2D.Double(390.0, -88.0)));
-sprites.add(new placeholder.game.sprite.resource.woodcutting.DefaultTree(new Point2D.Double(770.0, -83.0)));
-sprites.add(new placeholder.game.sprite.resource.woodcutting.DefaultTree(new Point2D.Double(-17.0, -51.0)));
-sprites.add(new placeholder.game.sprite.ambient.GrassBig(new Point2D.Double(-98.0, -1201.0)));
-sprites.add(new placeholder.game.sprite.resource.woodcutting.WillowTree(new Point2D.Double(518.0, -236.0)));
-sprites.add(new placeholder.game.sprite.resource.woodcutting.WillowTree(new Point2D.Double(105.0, -246.0)));
-sprites.add(new PabloNPC(new Point2D.Double(280.0, 214.0)));
+        sprites.add(new placeholder.game.sprite.ambient.GrassBig(new Point(-101.0, -63.0)));
+sprites.add(new placeholder.game.sprite.ambient.WoodWallHorizontal(new Point(336.0, -12.0)));
+sprites.add(new placeholder.game.sprite.ambient.WoodWallHorizontal(new Point(463.0, -12.0)));
+sprites.add(new placeholder.game.sprite.ambient.WoodWallHorizontal(new Point(589.0, -12.0)));
+sprites.add(new placeholder.game.sprite.ambient.WoodWallVertical(new Point(336.0, 3.0)));
+sprites.add(new placeholder.game.sprite.ambient.WoodWallVertical(new Point(701.0, 3.0)));
+sprites.add(new placeholder.game.sprite.ambient.WoodWallVertical(new Point(701.0, 65.0)));
+sprites.add(new placeholder.game.sprite.ambient.WoodWallVertical(new Point(701.0, 128.0)));
+sprites.add(new placeholder.game.sprite.ambient.WoodFloor(new Point(352.0, 52.0)));
+sprites.add(new placeholder.game.sprite.ambient.WoodFloor(new Point(480.0, 52.0)));
+sprites.add(new placeholder.game.sprite.ambient.WoodFloor(new Point(573.0, 52.0)));
+sprites.add(new placeholder.game.sprite.ambient.WoodFloor(new Point(351.0, 100.0)));
+sprites.add(new placeholder.game.sprite.ambient.WoodFloor(new Point(573.0, 101.0)));
+sprites.add(new placeholder.game.sprite.ambient.WoodWallHorizontal(new Point(590.0, 192.0)));
+sprites.add(new placeholder.game.sprite.ambient.WoodFloor(new Point(462.0, 100.0)));
+sprites.add(new placeholder.game.sprite.ambient.WoodWallVertical(new Point(336.0, 128.0)));
+sprites.add(new placeholder.game.sprite.ambient.WoodWallVertical(new Point(336.0, 65.0)));
+sprites.add(new placeholder.game.sprite.ambient.WoodWallHorizontal(new Point(336.0, 192.0)));
+sprites.add(new placeholder.game.sprite.furniture.Workbench(new Point(626.0, 67.0)));
+sprites.add(new placeholder.game.sprite.ambient.NaturalStoneWall(new Point(-96.0, -185.0)));
+sprites.add(new placeholder.game.sprite.ambient.NaturalStoneWall(new Point(414.0, -180.0)));
+sprites.add(new placeholder.game.sprite.resource.woodcutting.DefaultTree(new Point(390.0, -88.0)));
+sprites.add(new placeholder.game.sprite.resource.woodcutting.DefaultTree(new Point(770.0, -83.0)));
+sprites.add(new placeholder.game.sprite.resource.woodcutting.DefaultTree(new Point(-17.0, -51.0)));
+sprites.add(new placeholder.game.sprite.ambient.GrassBig(new Point(-98.0, -1201.0)));
+sprites.add(new placeholder.game.sprite.resource.woodcutting.WillowTree(new Point(518.0, -236.0)));
+sprites.add(new placeholder.game.sprite.resource.woodcutting.WillowTree(new Point(105.0, -246.0)));
+sprites.add(new PabloNPC(new Point(280.0, 214.0)));
         return sprites;
     }
     

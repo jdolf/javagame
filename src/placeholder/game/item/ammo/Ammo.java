@@ -1,6 +1,6 @@
 package placeholder.game.item.ammo;
 
-import java.awt.geom.Point2D;
+import placeholder.game.util.Point;
 import javafx.scene.image.Image;
 import javafx.scene.text.TextAlignment;
 import placeholder.game.item.Item;
@@ -17,7 +17,7 @@ public abstract class Ammo extends Item implements ProjectileCreator {
     
     public static final int MAX_STACK_AMOUNT = 64;
     
-    public Ammo(Point2D position, Image icon, int amount) {
+    public Ammo(Point position, Image icon, int amount) {
         super(position, icon, MAX_STACK_AMOUNT, amount);
     }
     

@@ -1,6 +1,6 @@
 package placeholder.game.sprite.resource.mining;
 
-import java.awt.geom.Point2D;
+import placeholder.game.util.Point;
 import java.util.Arrays;
 import java.util.Collection;
 import placeholder.game.item.material.ore.GoldOre;
@@ -22,7 +22,7 @@ public class GoldRock extends Rock {
             new LootTableItem(GoldOre.class, 1, 1)
     );
     
-    public GoldRock(Point2D location) {
+    public GoldRock(Point location) {
         super(ImageContainer.getInstance().getImage(IMAGE), location);
         this.defaultReplenishTime = REPLENISH_TIME;
         this.defaultStability = STABILITY;

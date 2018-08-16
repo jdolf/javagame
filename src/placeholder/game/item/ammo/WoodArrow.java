@@ -1,6 +1,6 @@
 package placeholder.game.item.ammo;
 
-import java.awt.geom.Point2D;
+import placeholder.game.util.Point;
 import java.util.Map;
 import javafx.scene.image.Image;
 import placeholder.game.item.Item;
@@ -17,7 +17,7 @@ public class WoodArrow extends Ammo {
     
     public static final String ICON_NAME = "wood_arrow_icon.png";
     
-    public WoodArrow(Point2D position, int amount) {
+    public WoodArrow(Point position, int amount) {
         super(position, ImageContainer.getInstance().getImage(ICON_NAME), amount);
         this.displayName = "Wooden Arrow";
     }

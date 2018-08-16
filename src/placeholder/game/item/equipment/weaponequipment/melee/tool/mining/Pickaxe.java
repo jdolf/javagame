@@ -5,8 +5,8 @@
  */
 package placeholder.game.item.equipment.weaponequipment.melee.tool.mining;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import java.util.Map;
 import javafx.scene.image.Image;
 
@@ -16,7 +16,7 @@ import javafx.scene.image.Image;
  */
 public abstract class Pickaxe extends MiningTool {
     
-    public Pickaxe(Point2D position, Image icon, Image animationImage, Dimension hitbox) {
+    public Pickaxe(Point position, Image icon, Image animationImage, Dimension hitbox) {
         super(position, icon, animationImage, hitbox);
     }
     

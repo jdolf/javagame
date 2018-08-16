@@ -1,7 +1,7 @@
 package placeholder.game.screen.overlay.window.equipment;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
@@ -63,12 +63,16 @@ public class EquipmentWindow extends ImageBackgroundWindow implements EquipmentC
         this.equipmentManager = equipmentManager;
         this.slotManager = new SelectableSlotManager<EquipmentSlot>(
                 equipmentManager.getEquipmentSlots(),
-                new Point2D.Double(this.getPosition().getX() + DISPLAY_INIT_MARGIN.width, this.getPosition().getY() + DISPLAY_INIT_MARGIN.height),
+                new Point(this.getPosition().getX() + DISPLAY_INIT_MARGIN.width, this.getPosition().getY() + DISPLAY_INIT_MARGIN.height),
                 this.dimension
         );
         this.cm = cm;
         slotManager.setInputHandler(input);
         equipmentManager.addEquipmentChangedListener(this);
+        createTextDisplays(equipmentManager);
+    }
+
+    private void createTextDisplays(EquipmentManager equipmentManager1) {
         meleeStrengthInfo = new TextDisplay(
                 "Melee Strength:",
                 TextAlignment.LEFT,
@@ -101,38 +105,10 @@ public class EquipmentWindow extends ImageBackgroundWindow implements EquipmentC
                 ScreenItem.merge(new Dimension(125, 270), this.getPosition()),
                 dimension
         );
-        meleeStrength = new TextDisplay(
-                String.valueOf(equipmentManager.calculateMeleeStrengthImpact()),
-                TextAlignment.RIGHT,
-                SMALL_INFO_PAINT,
-                SMALL_INFO_FONT,
-                ScreenItem.merge(new Dimension(225, 175), this.getPosition()),
-                dimension
-        );
-        rangeStrength = new TextDisplay(
-                String.valueOf(equipmentManager.calculateRangeStrengthImpact()),
-                TextAlignment.RIGHT,
-                SMALL_INFO_PAINT,
-                SMALL_INFO_FONT,
-                ScreenItem.merge(new Dimension(225, 205), this.getPosition()),
-                dimension
-        );
-        magicStrength = new TextDisplay(
-                String.valueOf(equipmentManager.calculateMagicStrengthImpact()),
-                TextAlignment.RIGHT,
-                SMALL_INFO_PAINT,
-                SMALL_INFO_FONT,
-                ScreenItem.merge(new Dimension(225, 235), this.getPosition()),
-                dimension
-        );
-        weaponCooldown = new TextDisplay(
-                String.valueOf(equipmentManager.calculateCooldownPercentage()) + " %",
-                TextAlignment.RIGHT,
-                SMALL_INFO_PAINT,
-                SMALL_INFO_FONT,
-                ScreenItem.merge(new Dimension(375, 270), this.getPosition()),
-                dimension
-        );
+        meleeStrength = new TextDisplay(String.valueOf(equipmentManager1.calculateMeleeStrengthImpact()), TextAlignment.RIGHT, SMALL_INFO_PAINT, SMALL_INFO_FONT, ScreenItem.merge(new Dimension(225, 175), this.getPosition()), dimension);
+        rangeStrength = new TextDisplay(String.valueOf(equipmentManager1.calculateRangeStrengthImpact()), TextAlignment.RIGHT, SMALL_INFO_PAINT, SMALL_INFO_FONT, ScreenItem.merge(new Dimension(225, 205), this.getPosition()), dimension);
+        magicStrength = new TextDisplay(String.valueOf(equipmentManager1.calculateMagicStrengthImpact()), TextAlignment.RIGHT, SMALL_INFO_PAINT, SMALL_INFO_FONT, ScreenItem.merge(new Dimension(225, 235), this.getPosition()), dimension);
+        weaponCooldown = new TextDisplay(String.valueOf(equipmentManager1.calculateCooldownPercentage()) + " %", TextAlignment.RIGHT, SMALL_INFO_PAINT, SMALL_INFO_FONT, ScreenItem.merge(new Dimension(375, 270), this.getPosition()), dimension);
         meleeDefenseInfo = new TextDisplay(
                 "Melee Defense:",
                 TextAlignment.LEFT,
@@ -157,30 +133,9 @@ public class EquipmentWindow extends ImageBackgroundWindow implements EquipmentC
                 ScreenItem.merge(new Dimension(275, 235), this.getPosition()),
                 dimension
         );
-        meleeDefense = new TextDisplay(
-                String.valueOf(equipmentManager.calculateMeleeDefenseImpact()),
-                TextAlignment.RIGHT,
-                SMALL_INFO_PAINT,
-                SMALL_INFO_FONT,
-                ScreenItem.merge(new Dimension(425, 175), this.getPosition()),
-                dimension
-        );
-        rangeDefense = new TextDisplay(
-                String.valueOf(equipmentManager.calculateRangeDefenseImpact()),
-                TextAlignment.RIGHT,
-                SMALL_INFO_PAINT,
-                SMALL_INFO_FONT,
-                ScreenItem.merge(new Dimension(425, 205), this.getPosition()),
-                dimension
-        );
-        magicDefense = new TextDisplay(
-                String.valueOf(equipmentManager.calculateMagicDefenseImpact()),
-                TextAlignment.RIGHT,
-                SMALL_INFO_PAINT,
-                SMALL_INFO_FONT,
-                ScreenItem.merge(new Dimension(425, 235), this.getPosition()),
-                dimension
-        );
+        meleeDefense = new TextDisplay(String.valueOf(equipmentManager1.calculateMeleeDefenseImpact()), TextAlignment.RIGHT, SMALL_INFO_PAINT, SMALL_INFO_FONT, ScreenItem.merge(new Dimension(425, 175), this.getPosition()), dimension);
+        rangeDefense = new TextDisplay(String.valueOf(equipmentManager1.calculateRangeDefenseImpact()), TextAlignment.RIGHT, SMALL_INFO_PAINT, SMALL_INFO_FONT, ScreenItem.merge(new Dimension(425, 205), this.getPosition()), dimension);
+        magicDefense = new TextDisplay(String.valueOf(equipmentManager1.calculateMagicDefenseImpact()), TextAlignment.RIGHT, SMALL_INFO_PAINT, SMALL_INFO_FONT, ScreenItem.merge(new Dimension(425, 235), this.getPosition()), dimension);
         playerSpeedPercentageInfo = new TextDisplay(
                 "Player Speed Increase:",
                 TextAlignment.LEFT,
@@ -189,14 +144,7 @@ public class EquipmentWindow extends ImageBackgroundWindow implements EquipmentC
                 ScreenItem.merge(new Dimension(125, 300), this.getPosition()),
                 dimension
         );
-        playerSpeedPercentage = new TextDisplay(
-                String.valueOf(equipmentManager.calculateSpeedPercentage() + " %"),
-                TextAlignment.RIGHT,
-                SMALL_INFO_PAINT,
-                SMALL_INFO_FONT,
-                ScreenItem.merge(new Dimension(375, 300), this.getPosition()),
-                dimension
-        );
+        playerSpeedPercentage = new TextDisplay(String.valueOf(equipmentManager1.calculateSpeedPercentage() + " %"), TextAlignment.RIGHT, SMALL_INFO_PAINT, SMALL_INFO_FONT, ScreenItem.merge(new Dimension(375, 300), this.getPosition()), dimension);
     }
     
     private void updateDisplays() {
@@ -249,6 +197,16 @@ public class EquipmentWindow extends ImageBackgroundWindow implements EquipmentC
     @Override
     public void onEquipmentChanged() {
         updateDisplays();
+    }
+    
+    @Override
+    public void recalculateMeasurements() {
+        super.recalculateMeasurements();
+        slotManager.getGrid().getPosition().setLocation(
+                this.getPosition().getX() + DISPLAY_INIT_MARGIN.width,
+                this.getPosition().getY() + DISPLAY_INIT_MARGIN.height
+        );
+        createTextDisplays(equipmentManager);
     }
     
 }

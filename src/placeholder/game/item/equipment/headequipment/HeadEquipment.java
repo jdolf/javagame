@@ -5,8 +5,8 @@
  */
 package placeholder.game.item.equipment.headequipment;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import java.util.Map;
 import javafx.scene.image.Image;
 import placeholder.game.item.equipment.Equipment;
@@ -20,7 +20,7 @@ import placeholder.game.sprite.entity.player.Player;
  */
 public abstract class HeadEquipment extends Equipment {
 
-    public HeadEquipment(Point2D position, Image icon, Image animationImage) {
+    public HeadEquipment(Point position, Image icon, Image animationImage) {
         super(position, icon, animationImage, new EquipmentAnimation());
     }
 

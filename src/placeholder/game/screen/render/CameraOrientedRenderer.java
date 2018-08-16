@@ -5,8 +5,8 @@
  */
 package placeholder.game.screen.render;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Paint;
@@ -14,6 +14,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import placeholder.game.screen.animation.Animation;
 import placeholder.game.screen.overlay.ScreenItem;
+import placeholder.game.screen.overlay.SizeChangeListener;
 
 /**
  *

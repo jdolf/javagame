@@ -1,6 +1,6 @@
 package placeholder.game.loot;
 
-import java.awt.geom.Point2D;
+import placeholder.game.util.Point;
 import java.util.Random;
 import placeholder.game.item.Item;
 
@@ -55,7 +55,7 @@ public class LootTableItem<T extends Item> {
     private T tryWithAmountConstructor() {
         try {
             return itemClass
-            .getDeclaredConstructor(Point2D.class, int.class)
+            .getDeclaredConstructor(Point.class, int.class)
             .newInstance(null, minQuantity + random.nextInt(maxQuantity - minQuantity + 1));
         } catch (Exception ex) {
             return null;
@@ -65,7 +65,7 @@ public class LootTableItem<T extends Item> {
     private T tryWithoutAmountConstructor() {
         try {
             return itemClass
-            .getDeclaredConstructor(Point2D.class)
+            .getDeclaredConstructor(Point.class)
             .newInstance((Object) null);
         } catch (Exception ex) {
             return null;

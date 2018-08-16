@@ -5,7 +5,7 @@
  */
 package placeholder.game.screen.overlay.contextmenu.entry;
 
-import java.awt.Dimension;
+import placeholder.game.util.Dimension;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;

@@ -1,7 +1,7 @@
 package placeholder.game.sprite.entity.mob.ai;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import java.util.List;
 import placeholder.game.input.Direction;
 import placeholder.game.screen.overlay.ScreenItem;

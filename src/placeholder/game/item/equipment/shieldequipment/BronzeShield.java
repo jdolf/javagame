@@ -1,6 +1,6 @@
 package placeholder.game.item.equipment.shieldequipment;
 
-import java.awt.geom.Point2D;
+import placeholder.game.util.Point;
 import javafx.scene.image.Image;
 import placeholder.game.screen.ImageContainer;
 
@@ -13,7 +13,7 @@ public class BronzeShield extends ShieldEquipment {
     public static final String ICON_NAME = "bronze_shield_icon.png";
     public static final String ANIMATION_NAME = "bronze_shield.png";
     
-    public BronzeShield(Point2D position) {
+    public BronzeShield(Point position) {
         super(
                 position,
                 ImageContainer.getInstance().getImage(ICON_NAME),

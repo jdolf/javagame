@@ -1,7 +1,7 @@
 package placeholder.game.sprite;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import javafx.scene.image.Image;
 import placeholder.game.screen.render.Renderer;
 
@@ -13,7 +13,7 @@ public class ImageSprite extends Sprite {
     
     private Image image;
     
-    public ImageSprite(Dimension dimension, Point2D location, Image image) {
+    public ImageSprite(Dimension dimension, Point location, Image image) {
         super(dimension, location);
         this.image = image;
     }

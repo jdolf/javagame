@@ -1,7 +1,7 @@
 package placeholder.game.screen.overlay.window.skills;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import java.util.Collection;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -67,7 +67,7 @@ public class SkillDisplay extends Display<Skill> implements SkillExperienceChang
     }
 
     @Override
-    public void setPosition(Point2D position) {
+    public void setPosition(Point position) {
         super.setPosition(position);
         setDisplays();
     }

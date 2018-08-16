@@ -1,6 +1,6 @@
 package placeholder.game.item.equipment.weaponequipment.range.projectile;
 
-import java.awt.Dimension;
+import placeholder.game.util.Dimension;
 import javafx.scene.image.Image;
 import placeholder.game.screen.ImageContainer;
 import placeholder.game.sprite.entity.attack.AttackClient;

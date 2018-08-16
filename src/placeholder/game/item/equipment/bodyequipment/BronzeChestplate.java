@@ -1,6 +1,6 @@
 package placeholder.game.item.equipment.bodyequipment;
 
-import java.awt.geom.Point2D;
+import placeholder.game.util.Point;
 import javafx.scene.image.Image;
 import placeholder.game.item.equipment.Equipment;
 import placeholder.game.screen.ImageContainer;
@@ -15,7 +15,7 @@ public class BronzeChestplate extends BodyEquipment {
     public static final String ICON_NAME = "bronze_chestplate_icon.png";
     public static final String ANIMATION_NAME = "bronze_chestplate.png";
     
-    public BronzeChestplate(Point2D position) {
+    public BronzeChestplate(Point position) {
         super(
                 position,
                 ImageContainer.getInstance().getImage(ICON_NAME),

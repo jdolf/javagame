@@ -1,6 +1,6 @@
 package placeholder.game.sprite.entity.mob.ai;
 
-import java.awt.Dimension;
+import placeholder.game.util.Dimension;
 import java.util.List;
 import placeholder.game.input.Direction;
 import placeholder.game.screen.TickUpdatable;

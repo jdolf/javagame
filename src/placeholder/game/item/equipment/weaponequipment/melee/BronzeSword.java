@@ -1,7 +1,7 @@
 package placeholder.game.item.equipment.weaponequipment.melee;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import java.util.EnumMap;
 import java.util.Map;
 import javafx.scene.image.Image;
@@ -18,7 +18,7 @@ public class BronzeSword extends MeleeWeapon {
     public static final String ANIMATION_NAME = "bronze_sword.png";
     public static final Dimension HITBOX = new Dimension(30, 30);
     
-    public BronzeSword(Point2D position) {
+    public BronzeSword(Point position) {
         super(
                 position,
                 ImageContainer.getInstance().getImage(ICON_NAME),

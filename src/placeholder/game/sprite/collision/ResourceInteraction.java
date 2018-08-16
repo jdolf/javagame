@@ -1,6 +1,6 @@
 package placeholder.game.sprite.collision;
 
-import java.awt.Dimension;
+import placeholder.game.util.Dimension;
 import java.util.Collection;
 import placeholder.game.input.Direction;
 import placeholder.game.item.equipment.weaponequipment.melee.tool.Tool;

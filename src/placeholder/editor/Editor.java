@@ -1,15 +1,13 @@
 package placeholder.editor;
 
-import java.awt.Dimension;
-import java.awt.Point;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import java.util.List;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
@@ -22,14 +20,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.TilePane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import static placeholder.game.Placeholder.HEIGHT;
-import static placeholder.game.Placeholder.WIDTH;
+import placeholder.game.Placeholder;
 import placeholder.game.input.DefaultInputHandler;
 import placeholder.game.input.InputHandler;
 import placeholder.game.map.Map;
@@ -46,7 +41,6 @@ import placeholder.game.sprite.ambient.StoneMudBig;
 import placeholder.game.sprite.ambient.WoodFloor;
 import placeholder.game.sprite.ambient.WoodWallHorizontal;
 import placeholder.game.sprite.ambient.WoodWallVertical;
-import placeholder.game.sprite.entity.mob.Dummy;
 import placeholder.game.sprite.entity.mob.Goblin;
 import placeholder.game.sprite.furniture.Anvil;
 import placeholder.game.sprite.furniture.Furnace;
@@ -153,7 +147,7 @@ public class Editor extends Application {
         sidePanel.getChildren().add(selectionText);
         
         CameraOrientedRenderer mapRenderer = new CameraOrientedRenderer(canvas.getGraphicsContext2D(), new Dimension(0, 0));
-        mapRenderer.getCamera().setPosition(new Point2D.Double(0, 0));
+        mapRenderer.getCamera().setPosition(new Point(0, 0));
         
         Button buttonBack = new Button("To Back");
         buttonBack.setOnAction((action) -> {
@@ -177,7 +171,7 @@ public class Editor extends Application {
         buttonFront.setLayoutY(160);
         sidePanel.getChildren().add(buttonFront);
         
-        Scene scene = new Scene(root, WIDTH, HEIGHT);
+        Scene scene = new Scene(root, Placeholder.DEFAULT_DIMENSION.width, Placeholder.DEFAULT_DIMENSION.height);
         sidePanel.setPrefHeight(scene.getHeight());
         canvas.setWidth(scene.getWidth() - sidePanel.getPrefWidth());
         canvas.setHeight(scene.getHeight());
@@ -212,15 +206,15 @@ public class Editor extends Application {
                     if (event.getButton() == MouseButton.PRIMARY) {
                         if (selection != null) {
                             if (Maths.inside(
-                                    new Point2D.Double(event.getX(), event.getY()),
-                                    new Point2D.Double(canvas.getLayoutX(), canvas.getLayoutY()),
+                                    new Point(event.getX(), event.getY()),
+                                    new Point(canvas.getLayoutX(), canvas.getLayoutY()),
                                     new Dimension((int)canvas.getWidth(), (int)canvas.getHeight())
                                 )
                             ) {
                                 try {
                                     Sprite sprite = selection.getClass()
-                                        .getDeclaredConstructor(Point2D.class)
-                                        .newInstance(new Point2D.Double(
+                                        .getDeclaredConstructor(Point.class)
+                                        .newInstance(new Point(
                                                 mapRenderer.getCamera().getPosition().getX() + event.getX(),
                                                 mapRenderer.getCamera().getPosition().getY() + event.getY())
                                         );
@@ -234,7 +228,7 @@ public class Editor extends Application {
                     }
                 } else if (comboBoxMode.getSelectionModel().getSelectedItem() == Mode.SELECT) {
 
-                    List<Sprite> selectedSprites = map.getSpriteReceiver().getAt(new Point2D.Double(
+                    List<Sprite> selectedSprites = map.getSpriteReceiver().getAt(new Point(
                             mapRenderer.getCamera().getPosition().getX() + event.getX(),
                             mapRenderer.getCamera().getPosition().getY() + event.getY()
                     ), new Dimension(1, 1));
@@ -245,7 +239,7 @@ public class Editor extends Application {
                 }
                 
                 if (event.getButton() == MouseButton.SECONDARY) {
-                    List<Sprite> selectedSprites = map.getSpriteReceiver().getAt(new Point2D.Double(
+                    List<Sprite> selectedSprites = map.getSpriteReceiver().getAt(new Point(
                              mapRenderer.getCamera().getPosition().getX() + event.getX(),  mapRenderer.getCamera().getPosition().getY() + event.getY()
                     ), new Dimension(1, 1));
 
@@ -277,11 +271,11 @@ public class Editor extends Application {
                 map.tickUpdate();
                 map.render(mapRenderer);
                 
-                Point2D offset = null;
-                if (inputHandler.getKey(KeyCode.A).isBeingPressed()) offset = new Point2D.Double(-5, 0);
-                if (inputHandler.getKey(KeyCode.D).isBeingPressed()) offset = new Point2D.Double(5, 0);
-                if (inputHandler.getKey(KeyCode.S).isBeingPressed()) offset = new Point2D.Double(0, 5);
-                if (inputHandler.getKey(KeyCode.W).isBeingPressed()) offset = new Point2D.Double(0, -5);
+                Point offset = null;
+                if (inputHandler.getKey(KeyCode.A).isBeingPressed()) offset = new Point(-5, 0);
+                if (inputHandler.getKey(KeyCode.D).isBeingPressed()) offset = new Point(5, 0);
+                if (inputHandler.getKey(KeyCode.S).isBeingPressed()) offset = new Point(0, 5);
+                if (inputHandler.getKey(KeyCode.W).isBeingPressed()) offset = new Point(0, -5);
                 
                 if (offset != null) {
                     mapRenderer.getCamera().setPosition(ScreenItem.mergePoints(mapRenderer.getCamera().getPosition(), offset));
@@ -315,7 +309,7 @@ public class Editor extends Application {
     
     public void output() {
         map.getSprites().forEach((sprite) -> {
-            String output = String.format("sprites.add(new %s(new Point2D.Double(%s, %s)));",
+            String output = String.format("sprites.add(new %s(new Point(%s, %s)));",
                     sprite.getClass().getName(),
                     String.valueOf(sprite.getPosition().getX()),
                     String.valueOf(sprite.getPosition().getY()));

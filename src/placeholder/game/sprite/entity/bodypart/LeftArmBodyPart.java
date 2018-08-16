@@ -5,8 +5,8 @@
  */
 package placeholder.game.sprite.entity.bodypart;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import java.util.concurrent.atomic.AtomicReference;
 import javafx.scene.image.Image;
 import placeholder.game.input.Direction;
@@ -21,7 +21,7 @@ import placeholder.game.sprite.entity.player.Player;
  */
 public class LeftArmBodyPart extends BodyPart {
 
-    public LeftArmBodyPart(Image image, Point2D offsetCoordinates, Dimension dimension, Player player) {
+    public LeftArmBodyPart(Image image, Point offsetCoordinates, Dimension dimension, Player player) {
         super(offsetCoordinates, dimension, player, new LeftArmAnimation(player, image, dimension));
     }
 

@@ -5,8 +5,7 @@
  */
 package placeholder.game.util;
 
-import java.awt.Point;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Point;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -26,7 +25,7 @@ public class MatrixSelectionChooser implements SelectionChooser {
         itemMatrix = new Selectable[numRows][numColumns];
         
         createMatrix(items, numColumns);
-        trySelect(currentSelection.y, currentSelection.x);
+        trySelect((int)currentSelection.y, (int)currentSelection.x);
     }
     
     @Override
@@ -53,7 +52,7 @@ public class MatrixSelectionChooser implements SelectionChooser {
         Selectable target = null;
         
         try {
-            target = itemMatrix[currentSelection.y + relativeRow][currentSelection.x + relativeColumn];
+            target = itemMatrix[((int)currentSelection.y) + relativeRow][((int)currentSelection.x) + relativeColumn];
         } catch (ArrayIndexOutOfBoundsException ex) {
             // Don't bother
         }
@@ -95,7 +94,7 @@ public class MatrixSelectionChooser implements SelectionChooser {
 
     @Override
     public void choose() {
-        itemMatrix[currentSelection.y][currentSelection.x].choose();
+        itemMatrix[((int)currentSelection.y)][((int)currentSelection.x)].choose();
     }
     
     private void notifySelectionChangedListeners() {
@@ -107,9 +106,8 @@ public class MatrixSelectionChooser implements SelectionChooser {
     public void addSelectionChangedListener(SelectionChangedListener listener) {
         this.listener.add(listener);
     }
-    
-    public void onGridItemsChanged() {
-        
-    }
+
+    @Override
+    public void onGridItemsChanged() {}
     
 }

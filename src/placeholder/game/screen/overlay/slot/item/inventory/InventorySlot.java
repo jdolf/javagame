@@ -5,7 +5,7 @@
  */
 package placeholder.game.screen.overlay.slot.item.inventory;
 
-import java.awt.Dimension;
+import placeholder.game.util.Dimension;
 import java.util.List;
 import placeholder.game.screen.overlay.contextmenu.ContextMenu;
 import placeholder.game.screen.overlay.contextmenu.ContextMenuManager;

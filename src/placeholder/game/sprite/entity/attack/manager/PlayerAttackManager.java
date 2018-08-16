@@ -1,6 +1,6 @@
 package placeholder.game.sprite.entity.attack.manager;
 
-import java.awt.Dimension;
+import placeholder.game.util.Dimension;
 import java.util.Map;
 import placeholder.game.item.equipment.weaponequipment.Hitbox;
 import placeholder.game.item.equipment.weaponequipment.WeaponEquipment;

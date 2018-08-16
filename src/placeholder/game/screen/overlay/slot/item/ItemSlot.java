@@ -5,8 +5,8 @@
  */
 package placeholder.game.screen.overlay.slot.item;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import java.util.List;
 import javafx.scene.image.Image;
 import javafx.scene.text.TextAlignment;
@@ -106,7 +106,7 @@ public abstract class ItemSlot<T extends Item> extends SelectableSlot {
     }
 
     @Override
-    public void setPosition(Point2D position) {
+    public void setPosition(Point position) {
         super.setPosition(position);
         // Update item position if an item exists in this slot
         if (!this.isEmpty()) {

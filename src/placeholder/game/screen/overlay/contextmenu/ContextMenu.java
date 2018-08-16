@@ -5,8 +5,8 @@
  */
 package placeholder.game.screen.overlay.contextmenu;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -29,7 +29,7 @@ public abstract class ContextMenu extends ScreenItem implements Renderable, Tick
     protected SelectableSlotManager<ContextMenuEntrySlot> slotManager;
     protected ContextMenuManager contextManager;
     
-    public ContextMenu(ContextMenuManager contextManager, List<ContextMenuEntry> entries, Point2D position) {
+    public ContextMenu(ContextMenuManager contextManager, List<ContextMenuEntry> entries, Point position) {
         super(position, calculateDimension(entries));
         // Reverse the order of entries; most specific entries come first
         Collections.reverse(entries);
@@ -50,12 +50,12 @@ public abstract class ContextMenu extends ScreenItem implements Renderable, Tick
         return newDimension;
     }
     
-    public static void setEntriesPosition(List<ContextMenuEntry> entries, Point2D contextMenuPosition) {
+    public static void setEntriesPosition(List<ContextMenuEntry> entries, Point contextMenuPosition) {
         for (int i = 0; i < entries.size(); i++) {
             ContextMenuEntry target = entries.get(i);
             double x = contextMenuPosition.getX();
             double y = contextMenuPosition.getY() + i * target.getDimension().height;
-            target.setPosition(new Point2D.Double(x, y));
+            target.setPosition(new Point(x, y));
         }
     }
     

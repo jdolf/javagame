@@ -1,6 +1,6 @@
 package placeholder.game.item.equipment.weaponequipment.range;
 
-import java.awt.geom.Point2D;
+import placeholder.game.util.Point;
 import java.util.List;
 import java.util.Map;
 import javafx.scene.image.Image;
@@ -26,7 +26,7 @@ public class RangeWeapon extends WeaponEquipment {
     
     protected int ammoTimeToLive = 1;
 
-    public RangeWeapon(Point2D position, Image icon, Image animationImage) {
+    public RangeWeapon(Point position, Image icon, Image animationImage) {
         super(position, icon, animationImage, new RangeWeaponAnimation());
         leftArmAnimationColumns = BOWPULL_LEFT_ARM_COLUMNS;
         rightArmAnimationColumns = BOWPULL_RIGHT_ARM_COLUMNS;

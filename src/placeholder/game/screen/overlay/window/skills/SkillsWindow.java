@@ -1,7 +1,7 @@
 package placeholder.game.screen.overlay.window.skills;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -11,6 +11,7 @@ import javafx.scene.text.Font;
 import javax.swing.text.Position;
 import placeholder.game.input.InputHandler;
 import placeholder.game.screen.ImageContainer;
+import placeholder.game.screen.overlay.PositionChangeListener;
 import placeholder.game.screen.overlay.ScreenItem;
 import placeholder.game.screen.overlay.util.ImageDisplay;
 import placeholder.game.screen.overlay.util.TextDisplay;
@@ -26,7 +27,7 @@ import placeholder.game.util.Grid;
  *
  * @author jdolf
  */
-public class SkillsWindow extends ImageBackgroundWindow {
+public class SkillsWindow extends ImageBackgroundWindow implements PositionChangeListener {
     
     public static final Dimension SCREEN_DIMENSION = new Dimension(500, 350);
     public static final String BACKGROUND_IMAGE = "window_skills.png";
@@ -44,6 +45,7 @@ public class SkillsWindow extends ImageBackgroundWindow {
     public SkillsWindow(SkillManager sm, WindowManager manager, InputHandler input, Dimension gameDimension, Dimension barDimension) {
         super(manager, input, gameDimension, barDimension, SCREEN_DIMENSION, BACKGROUND_IMAGE);
         this.skillManager = sm;
+        this.getPosition().addPositionChangeListener(this);
         createSkillDisplays();
         skillDisplayGrid = new Grid<>(
                 skillDisplays,
@@ -63,6 +65,13 @@ public class SkillsWindow extends ImageBackgroundWindow {
     public void render(Renderer renderer) {
         super.render(renderer);
         skillDisplayGrid.render(renderer);
+    }
+
+    @Override
+    public void onPositionChanged() {
+        Point newPosition = ScreenItem.merge(SKILL_DISPLAY_INIT_MARGIN, this.getPosition());
+        skillDisplayGrid.getPosition().setLocation(newPosition.x, newPosition.y);
+        System.out.println(newPosition);
     }
     
 }

@@ -1,7 +1,7 @@
 package placeholder.game.screen.particle;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import java.util.Random;
 import javafx.scene.image.Image;
 import placeholder.game.map.Map;
@@ -23,7 +23,7 @@ public abstract class Particle extends ScreenItem implements Renderable, TickUpd
     private Random random = new Random();
     private Image image;
     
-    public Particle(Point2D initLocation, Dimension dimension, Image image, Map map) {
+    public Particle(Point initLocation, Dimension dimension, Image image, Map map) {
         super(initLocation, dimension);
         int degrees = random.nextInt(361);
         velocityX = Math.cos(degrees);
@@ -43,7 +43,7 @@ public abstract class Particle extends ScreenItem implements Renderable, TickUpd
             map.removeParticle(this);
         }
         
-        this.getPosition().setLocation(ScreenItem.mergePoints(this.getPosition(), new Point2D.Double(velocityX, velocityY)));
+        this.getPosition().setLocation(ScreenItem.mergePoints(this.getPosition(), new Point(velocityX, velocityY)));
         duration--;
     }
     

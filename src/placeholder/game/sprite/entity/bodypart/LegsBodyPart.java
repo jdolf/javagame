@@ -5,8 +5,8 @@
  */
 package placeholder.game.sprite.entity.bodypart;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import javafx.scene.image.Image;
 import placeholder.game.screen.animation.PlayerMoveAnimation;
 import placeholder.game.sprite.entity.Entity;
@@ -18,7 +18,7 @@ import placeholder.game.sprite.entity.player.Player;
  */
 public class LegsBodyPart extends BodyPart {
 
-    public LegsBodyPart(Image image, Point2D offsetCoordinates, Dimension dimension, Player player) {
+    public LegsBodyPart(Image image, Point offsetCoordinates, Dimension dimension, Player player) {
         super(offsetCoordinates, dimension, player, new PlayerMoveAnimation(player, image, dimension));
     }
 

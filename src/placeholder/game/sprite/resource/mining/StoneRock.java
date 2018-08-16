@@ -5,7 +5,7 @@
  */
 package placeholder.game.sprite.resource.mining;
 
-import java.awt.geom.Point2D;
+import placeholder.game.util.Point;
 import java.util.Arrays;
 import java.util.Collection;
 import placeholder.game.item.material.ore.Stone;
@@ -27,7 +27,7 @@ public class StoneRock extends Rock {
             new LootTableItem(Stone.class, 1, 1)
     );
     
-    public StoneRock(Point2D location) {
+    public StoneRock(Point location) {
         super(ImageContainer.getInstance().getImage(IMAGE), location);
         this.defaultReplenishTime = REPLENISH_TIME;
         this.defaultStability = STABILITY;

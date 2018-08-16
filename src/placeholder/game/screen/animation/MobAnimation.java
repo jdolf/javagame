@@ -1,6 +1,6 @@
 package placeholder.game.screen.animation;
 
-import java.awt.Dimension;
+import placeholder.game.util.Dimension;
 import javafx.scene.image.Image;
 import placeholder.game.sprite.entity.attack.manager.SimpleAttackManager;
 import placeholder.game.sprite.entity.mob.Mob;

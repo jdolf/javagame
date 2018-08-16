@@ -1,6 +1,6 @@
 package placeholder.game.screen.overlay.slot.item.crafting;
 
-import java.awt.Dimension;
+import placeholder.game.util.Dimension;
 import java.util.ArrayList;
 import java.util.List;
 import placeholder.game.crafting.CraftingRecipe;

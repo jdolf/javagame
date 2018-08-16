@@ -1,6 +1,6 @@
 package placeholder.game.screen.overlay.slot.actionbar;
 
-import java.awt.Dimension;
+import placeholder.game.util.Dimension;
 import javafx.scene.input.KeyCode;
 import placeholder.game.input.InputHandler;
 import placeholder.game.item.equipment.EquipmentManager;

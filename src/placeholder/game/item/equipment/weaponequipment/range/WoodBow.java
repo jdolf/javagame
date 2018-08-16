@@ -1,6 +1,6 @@
 package placeholder.game.item.equipment.weaponequipment.range;
 
-import java.awt.geom.Point2D;
+import placeholder.game.util.Point;
 import javafx.scene.image.Image;
 import placeholder.game.screen.ImageContainer;
 
@@ -13,7 +13,7 @@ public class WoodBow extends RangeWeapon {
     public static final String ICON_NAME = "wood_bow_icon.png";
     public static final String ANIMATION_NAME = "wood_bow.png";
     
-    public WoodBow(Point2D position) {
+    public WoodBow(Point position) {
         super(position,
                 ImageContainer.getInstance().getImage(ICON_NAME),
                 ImageContainer.getInstance().getImage(ANIMATION_NAME));

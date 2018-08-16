@@ -5,8 +5,8 @@
  */
 package placeholder.game.item.equipment.weaponequipment.melee.tool;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import java.util.Arrays;
 import java.util.Map;
 import javafx.scene.image.Image;
@@ -23,7 +23,7 @@ import placeholder.game.sprite.entity.player.Player;
  */
 public abstract class Tool extends MeleeWeapon {
     
-    public Tool(Point2D position, Image icon, Image animationImage, Dimension hitbox) {
+    public Tool(Point position, Image icon, Image animationImage, Dimension hitbox) {
         super(position, icon, animationImage, hitbox);
     }
 

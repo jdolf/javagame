@@ -1,6 +1,6 @@
 package placeholder.game.screen.overlay;
 
-import java.awt.geom.Point2D;
+import placeholder.game.util.Point;
 
 /**
  *

@@ -5,9 +5,10 @@
  */
 package placeholder.game.sprite.entity.player;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import javafx.scene.image.Image;
@@ -41,6 +42,7 @@ import placeholder.game.item.material.ore.Stone;
 import placeholder.game.map.Map;
 import placeholder.game.skill.util.SkillLevelChangedListener;
 import placeholder.game.skill.util.SkillManager;
+import placeholder.game.sprite.collision.GenericInteraction;
 import placeholder.game.sprite.entity.Entity;
 import placeholder.game.sprite.entity.attack.manager.PlayerAttackManager;
 import placeholder.game.sprite.entity.bodypart.BodyBodyPart;
@@ -61,15 +63,15 @@ public abstract class Player extends Entity<PlayerAttackManager> implements Equi
     
     public static final Dimension DEFAULT_DIMENSION = new Dimension(20, 32);
     public static final Dimension DEFAULT_HEAD_DIMENSION = new Dimension(20, 13);
-    public static final Point2D DEFAULT_HEAD_OFFSET = new Point2D.Double(0, 0);
+    public static final Point DEFAULT_HEAD_OFFSET = new Point(0, 0);
     public static final Dimension DEFAULT_BODY_DIMENSION = new Dimension(20, 10);
-    public static final Point2D DEFAULT_BODY_OFFSET = new Point2D.Double(0, 13);
+    public static final Point DEFAULT_BODY_OFFSET = new Point(0, 13);
     public static final Dimension DEFAULT_LEGS_DIMENSION = new Dimension(20, 9);
-    public static final Point2D DEFAULT_LEGS_OFFSET = new Point2D.Double(0, 23);
+    public static final Point DEFAULT_LEGS_OFFSET = new Point(0, 23);
     public static final Dimension DEFAULT_LEFT_ARM_DIMENSION = new Dimension(20, 16);
-    public static final Point2D DEFAULT_LEFT_ARM_OFFSET = new Point2D.Double(-6, 10);
+    public static final Point DEFAULT_LEFT_ARM_OFFSET = new Point(-6, 10);
     public static final Dimension DEFAULT_RIGHT_ARM_DIMENSION = new Dimension(20, 16);
-    public static final Point2D DEFAULT_RIGHT_ARM_OFFSET = new Point2D.Double(6, 10);
+    public static final Point DEFAULT_RIGHT_ARM_OFFSET = new Point(6, 10);
     public static final double BASE_WALK_SPEED = 3;
     
     protected InputHandler input;
@@ -183,8 +185,15 @@ public abstract class Player extends Entity<PlayerAttackManager> implements Equi
             if (input.getKey(KeyCode.RIGHT).isBeingPressed()) {
                 tryMove(Direction.RIGHT);
             }
+
             if (input.getKey(KeyCode.SPACE).isBeingPressed()) {
-                attack();
+                if (!new GenericInteraction(this, Arrays.asList(this)).hasSuccess()) {
+                    attack();
+                }
+            }
+
+            if (input.getKey(KeyCode.SPACE).isActivatedByRelease()) {
+                // if in a dialog then next step on it
             }
         }
         

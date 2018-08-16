@@ -1,7 +1,7 @@
 package placeholder.game.screen.overlay.window.crafting;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import java.util.ArrayList;
 import java.util.List;
 import placeholder.game.crafting.CraftableRecipesChangedListener;
@@ -88,7 +88,7 @@ public class CraftingWindow extends ImageBackgroundWindow implements CraftableRe
             } else {
                 slotManager = new SelectableSlotManager<CraftingSlot>(
                     createSlots(),
-                    new Point2D.Double(this.getPosition().getX() + SLOTS_INIT_MARGIN.width, this.getPosition().getY() + SLOTS_INIT_MARGIN.height),
+                    new Point(this.getPosition().getX() + SLOTS_INIT_MARGIN.width, this.getPosition().getY() + SLOTS_INIT_MARGIN.height),
                     new Dimension(this.dimension.width - RECIPE_DISPLAY_DIMENSION.width, this.dimension.height - RECIPE_DISPLAY_DIMENSION.height)
                 );
                 slotManager.setInputHandler(input);
@@ -117,6 +117,22 @@ public class CraftingWindow extends ImageBackgroundWindow implements CraftableRe
 
     public void onSelectionChanged(CraftingRecipe recipe) {
         recipeDisplay.setTemplate(recipe);
+    }
+    
+    @Override
+    public void recalculateMeasurements() {
+        super.recalculateMeasurements();
+        slotManager.getGrid().getPosition().setLocation(
+                this.getPosition().getX() + SLOTS_INIT_MARGIN.width,
+                this.getPosition().getY() + SLOTS_INIT_MARGIN.height
+        );
+        Point newPosition = ScreenItem.merge(
+                new Dimension(
+                        this.dimension.width - RECIPE_DISPLAY_DIMENSION.width,
+                        RECIPE_DISPLAY_DIMENSION.height
+                ), this.getPosition()
+        );
+        recipeDisplay.getPosition().setLocation(newPosition.x, newPosition.y);
     }
     
     

@@ -5,7 +5,7 @@
  */
 package placeholder.game.screen.overlay.slot;
 
-import java.awt.Dimension;
+import placeholder.game.util.Dimension;
 
 /**
  *

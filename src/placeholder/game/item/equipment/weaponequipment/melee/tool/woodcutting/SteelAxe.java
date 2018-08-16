@@ -1,7 +1,7 @@
 package placeholder.game.item.equipment.weaponequipment.melee.tool.woodcutting;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import javafx.scene.image.Image;
 import placeholder.game.screen.ImageContainer;
 
@@ -15,7 +15,7 @@ public class SteelAxe extends WoodcuttingTool {
     public static final String ICON_NAME = "steel_axe_icon.png";
     public static final String ANIMATION_NAME = "steel_axe.png";
     
-    public SteelAxe(Point2D position) {
+    public SteelAxe(Point position) {
         super(
                 position,
                 ImageContainer.getInstance().getImage(ICON_NAME),

@@ -5,8 +5,8 @@
  */
 package placeholder.game.sprite;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import java.util.ArrayList;
 import java.util.List;
 import placeholder.game.map.Map;
@@ -25,11 +25,11 @@ public abstract class Receiver<T2 extends ScreenItem> {
         this.map = map;
     }
 
-    public List<T2> getAt(Point2D Point2D, Dimension area) {
+    public List<T2> getAt(Point Point, Dimension area) {
         List<T2> sprites = new ArrayList();
         
         for (T2 sprite : getItems()) {
-            if (Maths.overlapping(Point2D, area, sprite.getPosition(), sprite.getDimension())) {
+            if (Maths.overlapping(Point, area, sprite.getPosition(), sprite.getDimension())) {
                 sprites.add(sprite);
             }
         }

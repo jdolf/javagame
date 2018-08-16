@@ -1,7 +1,7 @@
 package placeholder.game.sprite.collision;
 
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import placeholder.game.util.Dimension;
+import placeholder.game.util.Point;
 import java.util.Arrays;
 import java.util.Collection;
 import javafx.scene.paint.Color;
@@ -26,7 +26,7 @@ public class CollisionalPlane extends ScreenItem implements TickUpdatable {
     protected CollisionCheck collisionCheck;
     protected Collection<Object> exceptions;
     
-    private static Point2D calculateInitPosition(Dimension hitboxDown, CollisionalPlaneCreator creator) {
+    private static Point calculateInitPosition(Dimension hitboxDown, CollisionalPlaneCreator creator) {
         return creator.getDirection().calculatePointWithOffset(hitboxDown, creator.getPosition(), creator.getDimension());
     }
     
